@@ -11,7 +11,7 @@ const Pdf = dynamic(() => import('react-notion-x/build/third-party/pdf'))
 const Modal = dynamic(() => import('react-notion-x/build/third-party/modal'))
 
 const pageMap = {
-  about: 'YOUR_NOTION_PAGE_ID_FOR_ABOUT',
+  about: '1d07b43e0a0c807794d4e4f2c8609794',
   vision: 'YOUR_NOTION_PAGE_ID_FOR_VISION',
   contact: 'YOUR_NOTION_PAGE_ID_FOR_CONTACT'
 }
