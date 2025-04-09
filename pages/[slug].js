@@ -1,3 +1,4 @@
+// pages/[slug].js
 import React from 'react'
 import { NotionRenderer } from 'react-notion-x'
 import dynamic from 'next/dynamic'
@@ -32,11 +33,7 @@ const Page = ({ recordMap }) => {
 
 export async function getStaticPaths() {
   return {
-    paths: [
-      { params: { slug: 'about' } },
-      { params: { slug: 'vision' } },
-      { params: { slug: 'contact' } }
-    ],
+    paths: Object.keys(pageMap).map((slug) => ({ params: { slug } })),
     fallback: false
   }
 }
