@@ -34,6 +34,7 @@ const Page = ({ recordMap }) => {
 export async function getStaticPaths() {
   return {
     paths: [
+      { params: { slug: 'index' } },
       { params: { slug: 'about' } },
       { params: { slug: 'vision' } },
       { params: { slug: 'contact' } }
