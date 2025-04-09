@@ -12,7 +12,7 @@ const Modal = dynamic(() => import('react-notion-x/build/third-party/modal'))
 
 const pageMap = {
   about: '1d07b43e0a0c807794d4e4f2c8609794',
-  vision: 'YOUR_NOTION_PAGE_ID_FOR_VISION',
+  vision: '1d07b43e0a0c805dbc03dd2d7a3b40b5',
   contact: 'YOUR_NOTION_PAGE_ID_FOR_CONTACT'
 }
 
