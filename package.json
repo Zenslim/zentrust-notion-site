@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "next start"
   },
-  "dependencies": {
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-notion-x": "latest",
-    "notion-client": "latest",
-    "prismjs": "latest"
-  }
+"dependencies": {
+  "next": "latest",
+  "react": "latest",
+  "react-dom": "latest",
+  "react-notion-x": "latest",
+  "notion-client": "latest",
+  "prismjs": "latest",
+  "tailwindcss": "^3.4.1",
+  "postcss": "^8.4.38",
+  "autoprefixer": "^10.4.17"
 }
