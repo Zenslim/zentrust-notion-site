@@ -19,6 +19,14 @@ export default function Home() {
         <a href="/contact" className="px-6 py-3 text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl font-semibold transition">
           📬 Connect
         </a>
+    <a
+  href="https://blog.zentrust.world"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-6 py-3 text-white bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition"
+>
+  ✍️ Read Blog
+</a>
       </div>
       <p className="mt-10 text-sm text-gray-500">
         "Reclaiming trust in the soil, the soul, and the sacred web of life."
