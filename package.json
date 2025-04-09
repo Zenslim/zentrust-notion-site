@@ -1,7 +1,6 @@
 {
   "name": "zentrust-notion-site",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,11 +10,13 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-notion-x": "latest",
-    "notion-client": "latest",
-    "prismjs": "latest",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.17"
+    "notion-client": "^4.13.2",
+    "react-notion-x": "^7.3.0",
+    "prismjs": "^1.29.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.2"
   }
 }

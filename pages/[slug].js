@@ -1,4 +1,3 @@
-// pages/[slug].js
 import React from 'react'
 import { NotionRenderer } from 'react-notion-x'
 import dynamic from 'next/dynamic'
