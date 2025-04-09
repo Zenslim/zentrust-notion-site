@@ -1,6 +1,7 @@
 import React from 'react'
 import { NotionRenderer } from 'react-notion-x'
 import dynamic from 'next/dynamic'
+import { NotionAPI } from 'notion-client'
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 
@@ -41,8 +42,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { getPage } = await import('notion-client')
-  const recordMap = await getPage(pageMap[params.slug])
+  const api = new NotionAPI()
+  const recordMap = await api.getPage(pageMap[params.slug])
   return {
     props: { recordMap },
     revalidate: 60
