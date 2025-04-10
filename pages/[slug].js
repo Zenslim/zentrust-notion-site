@@ -1,4 +1,3 @@
-// pages/[slug].js
 import React from 'react'
 import { NotionRenderer } from 'react-notion-x'
 import dynamic from 'next/dynamic'
@@ -27,15 +26,25 @@ const Page = ({ recordMap }) => {
         fullPage={false}
         darkMode={false}
       />
+      <div className="mt-12 text-center">
+        <a
+          href="/"
+          className="inline-block text-sm text-emerald-600 hover:underline"
+        >
+          ← Back to Home
+        </a>
+      </div>
     </div>
   )
 }
 
 export async function getStaticPaths() {
   return {
-    paths: Object.keys(pageMap).map((slug) => ({
-      params: { slug }
-    })),
+    paths: [
+      { params: { slug: 'about' } },
+      { params: { slug: 'vision' } },
+      { params: { slug: 'contact' } }
+    ],
     fallback: false
   }
 }
