@@ -24,7 +24,7 @@ const Page = ({ recordMap }) => {
       <NotionRenderer
         recordMap={recordMap}
         components={{ Code, Collection, Equation, Pdf, Modal }}
-        fullPage={true}
+        fullPage={false}
         darkMode={false}
       />
     </div>
