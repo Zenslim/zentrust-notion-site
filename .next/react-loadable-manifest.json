@@ -1,0 +1,46 @@
+{
+  "node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 57,
+    "files": [
+      "static/chunks/57.268c8c590d7f2802.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 4100,
+    "files": [
+      "static/chunks/100.4e4209ea0fc171d4.js"
+    ]
+  },
+  "pages\\[slug].js -> react-notion-x/build/third-party/code": {
+    "id": 8632,
+    "files": [
+      "static/chunks/632.8ed42bd122b77c32.js"
+    ]
+  },
+  "pages\\[slug].js -> react-notion-x/build/third-party/collection": {
+    "id": 8585,
+    "files": [
+      "static/chunks/b74f88eb.7f183756c9be06e0.js"
+    ]
+  },
+  "pages\\[slug].js -> react-notion-x/build/third-party/equation": {
+    "id": 4918,
+    "files": [
+      "static/chunks/2bd9703c.2baef5b64589b0c7.js",
+      "static/chunks/918.488ab25a72ecf408.js"
+    ]
+  },
+  "pages\\[slug].js -> react-notion-x/build/third-party/modal": {
+    "id": 6490,
+    "files": [
+      "static/chunks/490.9c5e4835703f3a19.js"
+    ]
+  },
+  "pages\\[slug].js -> react-notion-x/build/third-party/pdf": {
+    "id": 1326,
+    "files": [
+      "static/chunks/fcd35612.49154a9e513c515b.js",
+      "static/chunks/170.264bdff00ae3783a.js"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/third-party/modal.tsx"],"sourcesContent":["import Modal from 'react-modal'\n\nModal.setAppElement('.notion-frame')\n\nexport { default as Modal } from 'react-modal'\n"],"mappings":";AAAA,OAAO,WAAW;AAIlB,SAAoB,WAAXA,gBAAwB;AAFjC,MAAM,cAAc,eAAe;","names":["default"]}
