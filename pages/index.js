@@ -20,9 +20,17 @@ export default function Home() {
           📬 Connect
         </a>
       </div>
-      <p className="mt-10 text-sm text-gray-500">
-        "Reclaiming trust in the soil, the soul, and the sacred web of life."
-      </p>
+    <p className="text-center text-blue-400 italic mt-6">
+  "Reclaiming trust in the soil, the soul, and the sacred web of life."
+</p>
+<div className="flex justify-center mt-4">
+  <a
+    href="/signin"
+    className="mt-4 px-6 py-2 rounded-xl bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition shadow-lg"
+  >
+    Begin Your Journey
+  </a>
+</div>
     </main>
   )
 }
