@@ -14,25 +14,27 @@ export default function Home() {
       {/* CTA Buttons */}
       <div className="flex flex-wrap justify-center gap-4">
         <a
-          href="/about"
+          href="/why"
           className="px-5 py-2 rounded-xl bg-white text-black font-medium flex items-center gap-2 hover:bg-gray-100 transition"
         >
           🌱 Why We Exist
         </a>
         <a
-          href="/vision"
+          href="/how"
           className="px-5 py-2 rounded-xl bg-black border border-white font-medium flex items-center gap-2 hover:bg-white hover:text-black transition"
         >
           🛠 How We Work
         </a>
         <a
-          href="/offer"
+          href="/what"
           className="px-5 py-2 rounded-xl bg-emerald-600 text-white font-medium flex items-center gap-2 hover:bg-emerald-700 transition"
         >
           🌍 What We Offer
         </a>
         <a
-          href="/blog"
+          href="https://blog.zentrust.world"
+          target="_blank"
+          rel="noopener noreferrer"
           className="px-5 py-2 rounded-xl bg-purple-600 text-white font-medium flex items-center gap-2 hover:bg-purple-700 transition"
         >
           ✍️ Read Blog
@@ -52,5 +54,5 @@ export default function Home() {
         🧘 Begin Your Journey
       </a>
     </div>
-  )
+  );
 }
