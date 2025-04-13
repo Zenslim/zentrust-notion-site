@@ -1,6 +1,4 @@
-// hooks/useUserData.js
-
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from '../firebase';
 
@@ -9,15 +7,8 @@ export function useUserData() {
 
   useEffect(() => {
     const auth = getAuth(app);
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
+    const unsub = onAuthStateChanged(auth, (u) => setUser(u || null));
+    return () => unsub();
   }, []);
 
   return user;
