@@ -1,23 +1,22 @@
 // components/ZenJoystick/PulseRing.jsx
 
 export default function PulseRing({ bp }) {
-  const total = Object.values(bp).reduce((a, b) => a + b, 0);
-  const state = total >= 12 ? 'Aligned' : total >= 6 ? 'Drifting' : 'Low';
+  const total =
+    bp.spiritual + bp.psycho + bp.bio + bp.social || 0;
+
+  const intensity = Math.min(total / 400, 1); // Normalize (0–1)
+  const glowSize = 300 + intensity * 200; // 300–500px
 
   return (
-    <div className="relative">
-      <div
-        className={`w-40 h-40 rounded-full border-4 ${
-          state === 'Aligned'
-            ? 'border-green-400'
-            : state === 'Drifting'
-            ? 'border-yellow-400'
-            : 'border-red-400'
-        } animate-pulse opacity-70`}
-      />
-      <div className="absolute top-0 left-0 w-40 h-40 flex items-center justify-center text-xl font-bold">
-        {state}
-      </div>
-    </div>
+    <div
+      className="absolute rounded-full bg-pink-600 blur-3xl opacity-30 animate-pulse -z-10"
+      style={{
+        width: `${glowSize}px`,
+        height: `${glowSize}px`,
+        top: `calc(50% - ${glowSize / 2}px)`,
+        left: `calc(50% - ${glowSize / 2}px)`,
+        transition: 'all 0.8s ease-in-out',
+      }}
+    />
   );
 }
