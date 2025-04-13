@@ -53,9 +53,18 @@ export async function getStaticProps({ params }) {
 export default function NotionPage({ recordMap }) {
   return (
     <div className="bg-white text-black min-h-screen px-4 md:px-12 py-8 space-y-8">
-      
+
+      {/* Logo */}
+      <div className="flex justify-center">
+        <img
+          src="/zentrust-logo.png"
+          alt="ZenTrust Logo"
+          className="h-10 md:h-14 w-auto mb-2"
+        />
+      </div>
+
       {/* Back to Home - Top */}
-      <div>
+      <div className="text-center">
         <Link href="/" className="text-blue-600 hover:underline text-sm">
           ← Back to Home
         </Link>
@@ -78,7 +87,7 @@ export default function NotionPage({ recordMap }) {
       />
 
       {/* Back to Home - Bottom */}
-      <div>
+      <div className="text-center">
         <Link href="/" className="text-blue-600 hover:underline text-sm">
           ← Back to Home
         </Link>
