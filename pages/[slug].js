@@ -61,16 +61,7 @@ export default function NotionPage({ recordMap }) {
           alt="ZenTrust Logo"
           className="h-10 md:h-14 w-auto mb-2"
         />
-      </div>
-
-      {/* Back to Home - Top */}
-      <div className="text-center">
-        <Link href="/" className="text-blue-600 hover:underline text-sm">
-          ← Back to Home
-        </Link>
-      </div>
-
-      {/* Notion Page Content */}
+           {/* Notion Page Content */}
       <NotionRenderer
         recordMap={recordMap}
         fullPage={true}
