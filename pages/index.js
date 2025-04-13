@@ -4,7 +4,7 @@ export default function Home() {
       
       {/* Logo */}
       <img
-        src="/zentrust-logo.png"
+        src="/zentrust-logo white.png"
         alt="ZenTrust Logo"
         className="h-12 md:h-16 w-auto"
       />
