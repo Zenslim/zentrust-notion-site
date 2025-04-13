@@ -13,9 +13,9 @@ const Pdf = dynamic(() => import('react-notion-x/build/third-party/pdf'))
 const Modal = dynamic(() => import('react-notion-x/build/third-party/modal'))
 
 const pageMap = {
-  about: '1d07b43e0a0c807794d4e4f2c8609794',
-  vision: '1d07b43e0a0c805dbc03dd2d7a3b40b5',
-  contact: '1d07b43e0a0c8022a676c23f1b7810d2'
+ why: '1d17b43e0a0c80caa37ff56c1c9943be',  // WHY - Why We Exist
+  how: '1d17b43e0a0c805a9676ec69cb7a5bf2',  // HOW - The ZenTrust Way
+  what: '1d07b43e0a0c80448e3fd83b044656a8'  // WHAT WE OFFER
 }
 
 const Page = ({ recordMap }) => {
