@@ -4,12 +4,12 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.appspot.com',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: 'AIzaSyD5...real_key',
+  authDomain: 'zentrust-e647d.firebaseapp.com',
+  projectId: 'zentrust-e647d',
+  storageBucket: 'zentrust-e647d.appspot.com',
+  messagingSenderId: '7350...',
+  appId: '1:7350...:web:abc123def456',
 };
 
 const app = initializeApp(firebaseConfig);
