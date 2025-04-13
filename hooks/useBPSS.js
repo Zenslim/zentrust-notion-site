@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { app } from '@/lib/firebase';
+import { app } from '../firebase';
 
 const db = getFirestore(app);
 
