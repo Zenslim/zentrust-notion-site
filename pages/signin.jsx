@@ -28,7 +28,7 @@ export default function Signin() {
           .then(() => {
             localStorage.removeItem("emailForSignIn")
             setMessage("Signed in with magic link!")
-            router.push("/dashboard") // ⬅️ Optional redirect
+            router.push("/zenboard") // ⬅️ Optional redirect
           })
           .catch(() => setMessage("Magic link sign-in failed"))
       }
