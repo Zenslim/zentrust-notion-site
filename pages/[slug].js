@@ -1,6 +1,7 @@
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import 'react-notion-x/src/styles.css'
 
 const Code = dynamic(() =>
@@ -51,7 +52,16 @@ export async function getStaticProps({ params }) {
 
 export default function NotionPage({ recordMap }) {
   return (
-    <div className="bg-white text-black min-h-screen p-4 md:p-12">
+    <div className="bg-white text-black min-h-screen px-4 md:px-12 py-8 space-y-8">
+      
+      {/* Back to Home - Top */}
+      <div>
+        <Link href="/" className="text-blue-600 hover:underline text-sm">
+          ← Back to Home
+        </Link>
+      </div>
+
+      {/* Notion Page Content */}
       <NotionRenderer
         recordMap={recordMap}
         fullPage={true}
@@ -66,6 +76,13 @@ export default function NotionPage({ recordMap }) {
           Modal
         }}
       />
+
+      {/* Back to Home - Bottom */}
+      <div>
+        <Link href="/" className="text-blue-600 hover:underline text-sm">
+          ← Back to Home
+        </Link>
+      </div>
     </div>
   )
 }
