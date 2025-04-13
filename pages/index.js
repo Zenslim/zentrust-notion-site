@@ -1,6 +1,14 @@
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 py-12 space-y-8">
+      
+      {/* Logo */}
+      <img
+        src="/zentrust-logo.png"
+        alt="ZenTrust Logo"
+        className="h-12 md:h-16 w-auto"
+      />
+
       {/* Main Quote */}
       <h1 className="text-4xl sm:text-5xl font-extrabold text-center leading-tight max-w-4xl">
         "What if the future grew from <span className="text-green-500">trust</span> instead of fear?"
@@ -54,5 +62,5 @@ export default function Home() {
         🧘 Begin Your Journey
       </a>
     </div>
-  );
+  )
 }
