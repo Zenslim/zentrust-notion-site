@@ -62,7 +62,7 @@ export default function Signin() {
   const handleGuestLogin = async () => {
     try {
       await signInAnonymously(auth)
-      router.push("/dashboard")
+      router.push("/zenboard")
     } catch (err) {
       console.error(err)
       setMessage("Guest access failed")
