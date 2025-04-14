@@ -6,7 +6,7 @@ const firebaseConfig = {
   apiKey: 'AIzaSyCCGnzc1tNWcwinLnqQXKZCbcvqNn2vFfU',
   authDomain: 'zentrust-e647d.firebaseapp.com',
   projectId: 'zentrust-e647d',
-  storageBucket: 'zentrust-e647d.firebasestorage.app',
+  storageBucket: 'zentrust-e647d.appspot.com',
   messagingSenderId: '423431319301',
   appId: '1:423431319301:web:918835e910f35d5be3916c',
 };
