@@ -80,49 +80,64 @@ export default function Signin() {
           <div className="space-y-4">
             <button
               onClick={() => setView("email")}
-              className="w-full py-2 px-4 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700"
+              className="w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow-lg flex items-center justify-center space-x-3"
             >
-              📧 Sign in with Email
+              <span>📧</span>
+              <span>Sign in with Email</span>
             </button>
+
             <button
               onClick={() => setView("guest")}
-              className="w-full py-2 px-4 rounded-xl bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
+              className="w-full py-3 px-4 rounded-xl bg-yellow-100 text-yellow-900 font-semibold hover:bg-yellow-200 shadow-md flex items-center justify-center space-x-3"
             >
-              🌿 Explore First (Guest Access)
+              <span>🌿</span>
+              <span>Explore First (Guest Access)</span>
             </button>
-            <hr className="border-t" />
-            <div className="flex flex-col space-y-2">
+
+            <hr className="border-t my-2" />
+
+            <div className="flex flex-col space-y-3">
               <button
                 onClick={() => handleProviderLogin(googleProvider)}
-                className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
+                className="w-full py-3 px-4 rounded-xl bg-white border text-gray-800 hover:bg-gray-100 flex items-center justify-center space-x-3 shadow"
               >
-                🔑 Continue with Google
+                <span>🔑</span>
+                <span>Continue with Google</span>
               </button>
+
               <button
                 onClick={() => handleProviderLogin(appleProvider)}
-                className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
+                className="w-full py-3 px-4 rounded-xl bg-white border text-gray-800 hover:bg-gray-100 flex items-center justify-center space-x-3 shadow"
               >
-                🍎 Continue with Apple
+                <span>🍎</span>
+                <span>Continue with Apple</span>
               </button>
+
               <button
                 onClick={() => handleProviderLogin(facebookProvider)}
-                className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
+                className="w-full py-3 px-4 rounded-xl bg-white border text-gray-800 hover:bg-gray-100 flex items-center justify-center space-x-3 shadow"
               >
-                👤 Continue with Facebook
+                <span>👤</span>
+                <span>Continue with Facebook</span>
               </button>
+
               <button
                 onClick={() => handleProviderLogin(twitterProvider)}
-                className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
+                className="w-full py-3 px-4 rounded-xl bg-white border text-gray-800 hover:bg-gray-100 flex items-center justify-center space-x-3 shadow"
               >
-                🐦 Continue with Twitter
+                <span>🐦</span>
+                <span>Continue with Twitter</span>
               </button>
+
               <button
                 onClick={() => alert("Web3 login coming soon.")}
-                className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
+                className="w-full py-3 px-4 rounded-xl bg-white border text-indigo-700 hover:bg-indigo-50 flex items-center justify-center space-x-3 shadow"
               >
-                🧬 Connect Wallet (Web3)
+                <span>🧬</span>
+                <span>Connect Wallet (Web3)</span>
               </button>
             </div>
+
             {message && (
               <p className="text-sm text-green-600 text-center pt-2">{message}</p>
             )}
