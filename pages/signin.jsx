@@ -2,9 +2,9 @@ import { useState, useEffect } from "react"
 import {
   auth,
   googleProvider,
-  githubProvider,
   facebookProvider,
   twitterProvider,
+  appleProvider,
   signInWithPopup,
   sendSignInLinkToEmail,
   isSignInWithEmailLink,
@@ -27,8 +27,8 @@ export default function Signin() {
         signInWithEmailLink(auth, storedEmail, window.location.href)
           .then(() => {
             localStorage.removeItem("emailForSignIn")
-            setMessage("Signed in with magic link!")
-            router.push("/zenboard") // ⬅️ Optional redirect
+            setMessage("Signed in with magic link! Redirecting...")
+            router.push("/zenboard")
           })
           .catch(() => setMessage("Magic link sign-in failed"))
       }
@@ -43,10 +43,10 @@ export default function Signin() {
     try {
       await sendSignInLinkToEmail(auth, email, actionCodeSettings)
       localStorage.setItem("emailForSignIn", email)
-      setMessage("Magic link sent! Check your email ✨")
+      setMessage("Check your inbox for a magic link ✨")
     } catch (err) {
       console.error(err)
-      setMessage("Error sending magic link.")
+      setMessage("Could not send magic link.")
     }
   }
 
@@ -82,13 +82,13 @@ export default function Signin() {
               onClick={() => setView("email")}
               className="w-full py-2 px-4 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700"
             >
-              Sign in with Email
+              📧 Sign in with Email
             </button>
             <button
               onClick={() => setView("guest")}
               className="w-full py-2 px-4 rounded-xl bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
             >
-              Explore First (Guest Access)
+              🌿 Explore First (Guest Access)
             </button>
             <hr className="border-t" />
             <div className="flex flex-col space-y-2">
@@ -99,10 +99,10 @@ export default function Signin() {
                 🔑 Continue with Google
               </button>
               <button
-                onClick={() => handleProviderLogin(githubProvider)}
+                onClick={() => handleProviderLogin(appleProvider)}
                 className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
               >
-                👨‍💻 Continue with GitHub
+                🍎 Continue with Apple
               </button>
               <button
                 onClick={() => handleProviderLogin(facebookProvider)}
@@ -117,10 +117,10 @@ export default function Signin() {
                 🐦 Continue with Twitter
               </button>
               <button
-                onClick={() => alert("LinkedIn login not implemented yet")}
+                onClick={() => alert("Web3 login coming soon.")}
                 className="py-2 px-4 rounded-xl bg-white border hover:bg-gray-100"
               >
-                💼 Continue with LinkedIn
+                🧬 Connect Wallet (Web3)
               </button>
             </div>
             {message && (
@@ -143,7 +143,7 @@ export default function Signin() {
               onClick={handleMagicLink}
               className="w-full py-2 px-4 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700"
             >
-              Send me a magic link ✨
+              ✨ Send Magic Link
             </button>
             <button
               onClick={() => setView("choose")}
@@ -160,8 +160,7 @@ export default function Signin() {
         {view === "guest" && (
           <div className="space-y-4 text-center">
             <p className="text-gray-600">
-              You’re entering as a guest. You can explore freely, but some
-              features may require full sign-in later.
+              You’re entering as a guest. Some features may be limited.
             </p>
             <button
               onClick={handleGuestLogin}
