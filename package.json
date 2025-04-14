@@ -13,7 +13,8 @@
     "prismjs": "^1.29.0",
     "react": "latest",
     "react-dom": "latest",
-    "react-notion-x": "^7.3.0"
+    "react-notion-x": "^7.3.0",
+    "framer-motion": "^11.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
