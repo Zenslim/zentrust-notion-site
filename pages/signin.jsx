@@ -53,7 +53,7 @@ export default function Signin() {
   const handleProviderLogin = async (provider) => {
     try {
       await signInWithPopup(auth, provider)
-      router.push("/dashboard")
+      router.push("/zenboard")
     } catch {
       setMessage("Social login failed")
     }
