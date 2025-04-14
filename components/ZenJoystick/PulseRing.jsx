@@ -1,20 +1,50 @@
+
+import { motion } from "framer-motion"
+
 export default function PulseRing({ bp }) {
-  const total = Object.values(bp).reduce((a, b) => a + b, 0);
-  const state = total >= 12 ? 'Aligned' : total >= 6 ? 'Drifting' : 'Low';
-  const colors = {
-    Aligned: 'border-green-500 bg-green-500/10',
-    Drifting: 'border-yellow-400 bg-yellow-400/10',
-    Low: 'border-red-400 bg-red-400/10',
-  };
+  const glowConfig = {
+    bio: { color: "#facc15", x: -100, y: 0 },       // Yellow (left)
+    psycho: { color: "#ef4444", x: 0, y: 100 },     // Red (bottom)
+    social: { color: "#10b981", x: 100, y: 0 },     // Green (right)
+    spiritual: { color: "#8b5cf6", x: 0, y: -100 }, // Violet (top)
+  }
 
   return (
-    <div className="relative">
-      <div
-        className={`w-44 h-44 rounded-full border-4 blur-2xl animate-pulse transition-all duration-1000 ${colors[state]} absolute top-0 left-0 -z-10`}
-      />
-      <div className={`w-44 h-44 rounded-full border-4 ${colors[state].split(' ')[0]} flex items-center justify-center text-xl font-bold`}>
-        {state}
-      </div>
-    </div>
-  );
+    <>
+      {Object.entries(glowConfig).map(([zone, { color, x, y }]) => {
+        const level = bp?.[zone] || 0
+        if (level === 0) return null
+
+        const scale = 0.8 + 0.2 * level
+        const opacity = 0.1 + 0.15 * level
+        const blur = 40 + 10 * level
+
+        return (
+          <motion.div
+            key={zone}
+            className="absolute rounded-full"
+            style={{
+              backgroundColor: color,
+              x,
+              y,
+              width: 200,
+              height: 200,
+              filter: `blur(${blur}px)`,
+              opacity,
+              zIndex: -1
+            }}
+            animate={{
+              scale: [scale, scale + 0.2, scale],
+              opacity: [opacity, opacity + 0.05, opacity]
+            }}
+            transition={{
+              duration: 4 + level * 0.3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        )
+      })}
+    </>
+  )
 }
