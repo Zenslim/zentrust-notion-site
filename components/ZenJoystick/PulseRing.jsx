@@ -3,15 +3,15 @@ import { motion } from "framer-motion"
 
 export default function PulseRing({ bp }) {
   const glowConfig = {
-    bio: { color: "#facc15", x: -100, y: 0 },       // Yellow (left)
-    psycho: { color: "#ef4444", x: 0, y: 100 },     // Red (bottom)
-    social: { color: "#10b981", x: 100, y: 0 },     // Green (right)
-    spiritual: { color: "#8b5cf6", x: 0, y: -100 }, // Violet (top)
+    bio:    { color: "#facc15", position: "left-0 top-1/2 -translate-y-1/2" },       // Yellow
+    psycho: { color: "#ef4444", position: "bottom-0 left-1/2 -translate-x-1/2" },     // Red
+    social: { color: "#10b981", position: "right-0 top-1/2 -translate-y-1/2" },       // Green
+    spiritual: { color: "#8b5cf6", position: "top-0 left-1/2 -translate-x-1/2" }      // Violet
   }
 
   return (
     <>
-      {Object.entries(glowConfig).map(([zone, { color, x, y }]) => {
+      {Object.entries(glowConfig).map(([zone, { color, position }]) => {
         const level = bp?.[zone] || 0
         if (level === 0) return null
 
@@ -22,14 +22,10 @@ export default function PulseRing({ bp }) {
         return (
           <motion.div
             key={zone}
-            className="absolute rounded-full"
+            className={\`absolute w-32 h-32 rounded-full \${position}\`}
             style={{
               backgroundColor: color,
-              x,
-              y,
-              width: 200,
-              height: 200,
-              filter: `blur(${blur}px)`,
+              filter: \`blur(\${blur}px)\`,
               opacity,
               zIndex: -1
             }}
