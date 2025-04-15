@@ -23,31 +23,27 @@ export default function ChakraGlow({ bpss }) {
   }, [bpss]);
 
   return (
-    <div className={styles.orbitContainer}>
-      <div className={styles.chakraOrbit}>
-        {chakras.map((chakra, i) => {
-          const angle = (360 / chakras.length) * i;
-          const radius = 38;
-          const x = radius * Math.cos((angle * Math.PI) / 180);
-          const y = radius * Math.sin((angle * Math.PI) / 180);
+    <div className={styles.chakraOrbit}>
+      {chakras.map((chakra, i) => {
+        const angle = (360 / chakras.length) * i - 90;
+        const radius = 120;
+        const x = radius * Math.cos((angle * Math.PI) / 180);
+        const y = radius * Math.sin((angle * Math.PI) / 180);
 
-          return (
-            <motion.div
-              key={chakra.id}
-              className={`${styles.chakraOrb} ${styles[chakra.color]} ${highlight === chakra.id ? styles.highlight : ''}`}
-              style={{
-                left: `${50 + x}%`,
-                top: `${50 + y}%`,
-                transform: 'translate(-50%, -50%)',
-              }}
-              animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.1, 1] }}
-              transition={{ duration: 8, repeat: Infinity }}
-            >
-              <span className={styles.chakraLabel}>{chakra.label}</span>
-            </motion.div>
-          );
-        })}
-      </div>
+        return (
+          <motion.div
+            key={chakra.id}
+            className={`${styles.chakraOrb} ${styles[chakra.color]} ${highlight === chakra.id ? styles.highlight : ''}`}
+            style={{ transform: `translate(${x}px, ${y}px)` }}
+            animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.15, 1] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          >
+            <span className={styles.chakraLabel} style={{ top: y > 0 ? '100%' : '-140%', left: '50%', transform: 'translateX(-50%)' }}>
+              {chakra.label}
+            </span>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

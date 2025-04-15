@@ -1,41 +1,37 @@
-.orbitContainer {
-  position: relative;
-  width: 90vw;
-  max-width: 360px;
-  aspect-ratio: 1 / 1;
-  margin: 0 auto;
-}
-
 .chakraOrbit {
   position: relative;
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .chakraOrb {
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-  color: white;
-  font-weight: bold;
-  font-size: 0.7rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .chakraLabel {
   position: absolute;
-  top: 110%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
+  color: white;
+  text-align: center;
   white-space: nowrap;
-  text-shadow: 0 0 3px black;
+}
+
+.highlight {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+  transform: scale(1.25) !important;
+  z-index: 2;
 }
 
 .orbRed { background-color: #e53935; }
@@ -45,8 +41,3 @@
 .orbBlue { background-color: #1e88e5; }
 .orbIndigo { background-color: #5e35b1; }
 .orbViolet { background-color: #8e24aa; }
-
-.highlight {
-  box-shadow: 0 0 30px 6px rgba(255, 255, 255, 0.7);
-  z-index: 2;
-}
