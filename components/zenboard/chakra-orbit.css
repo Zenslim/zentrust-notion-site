@@ -1,0 +1,38 @@
+.chakra-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.chakra-orb {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  filter: blur(4px);
+  opacity: 0.85;
+}
+.chakra-label {
+  position: absolute;
+  top: 28px;
+  left: -25px;
+  width: 70px;
+  text-align: center;
+  font-size: 0.65rem;
+  color: white;
+}
+.highlight {
+  box-shadow: 0 0 30px white;
+  transform: scale(1.4) !important;
+  z-index: 2;
+}
+.orb-red { background-color: #e53e3e; }
+.orb-orange { background-color: #dd6b20; }
+.orb-yellow { background-color: #d69e2e; }
+.orb-green { background-color: #38a169; }
+.orb-blue { background-color: #3182ce; }
+.orb-indigo { background-color: #5a67d8; }
+.orb-violet { background-color: #805ad5; }

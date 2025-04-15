@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import './chakra-orbit.css';
 
 const chakras = [
-  { id: 'root', label: 'Root', color: 'red-glow', position: 'bottom-12 left-1/2 -translate-x-1/2' },
-  { id: 'sacral', label: 'Sacral', color: 'orange-glow', position: 'bottom-24 left-1/3' },
-  { id: 'solar', label: 'Solar Plexus', color: 'yellow-glow', position: 'bottom-24 right-1/3' },
-  { id: 'heart', label: 'Heart', color: 'green-glow', position: 'bottom-36 left-1/2 -translate-x-1/2' },
-  { id: 'throat', label: 'Throat', color: 'blue-glow', position: 'bottom-48 left-1/2 -translate-x-1/2' },
-  { id: 'third_eye', label: 'Third Eye', color: 'indigo-glow', position: 'bottom-60 left-1/2 -translate-x-1/2' },
-  { id: 'crown', label: 'Crown', color: 'violet-glow', position: 'bottom-72 left-1/2 -translate-x-1/2' },
+  { id: 'root', label: 'Root', color: 'red' },
+  { id: 'sacral', label: 'Sacral', color: 'orange' },
+  { id: 'solar', label: 'Solar Plexus', color: 'yellow' },
+  { id: 'heart', label: 'Heart', color: 'green' },
+  { id: 'throat', label: 'Throat', color: 'blue' },
+  { id: 'third_eye', label: 'Third Eye', color: 'indigo' },
+  { id: 'crown', label: 'Crown', color: 'violet' },
 ];
 
 export default function ChakraGlow({ bpss }) {
@@ -22,17 +23,25 @@ export default function ChakraGlow({ bpss }) {
   }, [bpss]);
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-10">
-      {chakras.map((chakra, index) => (
-        <motion.div
-          key={chakra.id}
-          className={`chakra-orb ${chakra.color} ${chakra.position} ${highlight === chakra.id ? 'pulse-highlight' : ''}`}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.8, 1, 0.8] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        >
-          <span className="chakra-label">{chakra.label}</span>
-        </motion.div>
-      ))}
+    <div className="chakra-orbit">
+      {chakras.map((chakra, i) => {
+        const angle = (360 / chakras.length) * i;
+        const radius = 130;
+        const x = radius * Math.cos((angle * Math.PI) / 180);
+        const y = radius * Math.sin((angle * Math.PI) / 180);
+
+        return (
+          <motion.div
+            key={chakra.id}
+            className={\`chakra-orb orb-\${chakra.color} \${highlight === chakra.id ? 'highlight' : ''}\`}
+            style={{ transform: \`translate(\${x}px, \${y}px)\` }}
+            animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.1, 1] }}
+            transition={{ duration: 8, repeat: Infinity }}
+          >
+            <span className="chakra-label">{chakra.label}</span>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
