@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import './chakra-orbit.css';
 
 const chakras = [
   { id: 'root', label: 'Root', color: 'red' },
