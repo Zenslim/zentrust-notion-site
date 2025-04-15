@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { Radar } from 'react-chartjs-2'
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js'
@@ -31,11 +32,7 @@ export default function RadarDrawer({ open, onClose }) {
   }, [bp])
 
   return (
-    <div className={\`
-      fixed top-0 right-0 w-full md:w-[500px] h-full bg-zinc-900 text-white
-      transform transition-transform duration-300 z-40 p-6
-      \${open ? 'translate-x-0' : 'translate-x-full'}
-    \`}>
+    <div className={`fixed top-0 right-0 w-full md:w-[500px] h-full bg-zinc-900 text-white transform transition-transform duration-300 z-40 p-6 \${open ? 'translate-x-0' : 'translate-x-full'}\`}>
       <h2 className="text-xl font-bold mb-4">🕸 BPSS Radar</h2>
       {data ? (
         <Radar
