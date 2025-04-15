@@ -1,13 +1,7 @@
-import { motion } from "framer-motion";
+import React from "react"
 
 export default function BreathingOrb() {
   return (
-    <motion.div
-      initial={{ opacity: 0.6, scale: 1 }}
-      animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.08, 1] }}
-      transition={{ duration: 6, repeat: Infinity }}
-      className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-500/20 via-pink-500/10 to-purple-500/20 blur-3xl pointer-events-none"
-      style={{ zIndex: 0 }}
-    />
-  );
+    <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-900 opacity-25 blur-3xl animate-pulse-slow" />
+  )
 }
