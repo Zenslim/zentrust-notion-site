@@ -27,7 +27,7 @@ export default function ChakraGlow({ bpss }) {
       {chakras.map((chakra, index) => (
         <motion.div
           key={chakra.id}
-          className={\`chakra-orb \${chakra.color} \${chakra.position} \${highlight === chakra.id ? 'pulse-highlight' : ''}\`}
+          className={`chakra-orb ${chakra.color} ${chakra.position} ${highlight === chakra.id ? 'pulse-highlight' : ''}`}
           animate={{ scale: [1, 1.15, 1], opacity: [0.8, 1, 0.8] }}
           transition={{ duration: 6, repeat: Infinity }}
         >
