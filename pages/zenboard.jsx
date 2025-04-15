@@ -2,12 +2,10 @@
 import { useState } from "react"
 import { useUserData } from '@/hooks/useUserData'
 import { useBPSS } from '@/hooks/useBPSS'
-import PulseRing from '@/components/ZenJoystick/PulseRing'
-import NudgeArc from '@/components/ZenJoystick/NudgeArc'
-import IkigaiCenter from '@/components/ZenJoystick/IkigaiCenter'
-import NextStepButton from '@/components/ZenJoystick/NextStepButton'
 import BreathingOrb from '@/components/ZenJoystick/BreathingOrb'
 import BPSSDrawer from '@/components/ZenJoystick/BPSSDrawer'
+import NextStepButton from '@/components/ZenJoystick/NextStepButton'
+import BPSSCompass from '@/components/ZenJoystick/BPSSCompass'
 
 export default function Zenboard() {
   const user = useUserData()
@@ -21,15 +19,8 @@ export default function Zenboard() {
       {/* Ambient breathing orb */}
       <BreathingOrb />
 
-      {/* Chakra visualization with prompts */}
-      <div className="relative w-[300px] h-[300px] mt-8">
-        <PulseRing bp={bp} />
-        <NudgeArc direction="top" label="Spiritual" prompt="What brings meaning?" level={bp.spiritual} />
-        <NudgeArc direction="bottom" label="Psycho" prompt="What sparks your mind?" level={bp.psycho} />
-        <NudgeArc direction="left" label="Bio" prompt="What energizes your body?" level={bp.bio} />
-        <NudgeArc direction="right" label="Social" prompt="Who needs your presence?" level={bp.social} />
-        <IkigaiCenter ikigai={ikigai} />
-      </div>
+      {/* BPSS Compass with Ikigai Center */}
+      <BPSSCompass bp={bp} ikigaiScore={ikigai?.score || 3} />
 
       {/* Floating journal toggle */}
       <button
@@ -41,7 +32,7 @@ export default function Zenboard() {
 
       {/* BPSS Drawer with quadrant input */}
       <BPSSDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} zone="BPSS" />
-      
+
       {/* Optional CTA */}
       <NextStepButton bp={bp} ikigai={ikigai} />
     </div>
