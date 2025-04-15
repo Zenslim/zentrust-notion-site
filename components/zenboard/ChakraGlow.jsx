@@ -26,7 +26,7 @@ export default function ChakraGlow({ bpss }) {
     <div className={styles.chakraOrbit}>
       {chakras.map((chakra, i) => {
         const angle = (360 / chakras.length) * i;
-        const radius = 130;
+        const radius = 120;
         const x = radius * Math.cos((angle * Math.PI) / 180);
         const y = radius * Math.sin((angle * Math.PI) / 180);
 
@@ -34,7 +34,7 @@ export default function ChakraGlow({ bpss }) {
           <motion.div
             key={chakra.id}
             className={`${styles.chakraOrb} ${styles[chakra.color]} ${highlight === chakra.id ? styles.highlight : ''}`}
-            style={{ transform: \`translate(\${x}px, \${y}px)\` }}
+            style={{ transform: `translate(${x}px, ${y}px)` }}
             animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.1, 1] }}
             transition={{ duration: 8, repeat: Infinity }}
           >
