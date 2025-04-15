@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import './chakra-aura.css';
 
 const chakras = [
   { id: 'root', label: 'Root', color: 'red-glow', position: 'bottom-12 left-1/2 -translate-x-1/2' },
