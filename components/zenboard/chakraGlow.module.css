@@ -1,43 +1,50 @@
+
 .chakraOrbit {
   position: relative;
   width: 100%;
-  height: 260px;
+  height: 360px;
+  margin-top: 30px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  pointer-events: none;
 }
 
 .chakraOrb {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.25);
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: all 0.3s ease-in-out;
+  align-items: center;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: bold;
+  pointer-events: none;
+  text-align: center;
 }
 
 .chakraLabel {
   position: absolute;
+  top: 110%;
+  width: max-content;
+  transform: translateX(-50%);
   font-size: 0.75rem;
-  color: white;
-  text-align: center;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .highlight {
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-  transform: scale(1.25) !important;
-  z-index: 2;
+  box-shadow: 0 0 25px 8px rgba(255, 255, 255, 0.6);
 }
 
-.orbRed { background-color: #e53935; }
+.orbRed    { background-color: #e53935; }
 .orbOrange { background-color: #fb8c00; }
 .orbYellow { background-color: #fdd835; }
-.orbGreen { background-color: #43a047; }
-.orbBlue { background-color: #1e88e5; }
+.orbGreen  { background-color: #43a047; }
+.orbBlue   { background-color: #1e88e5; }
 .orbIndigo { background-color: #5e35b1; }
 .orbViolet { background-color: #8e24aa; }
