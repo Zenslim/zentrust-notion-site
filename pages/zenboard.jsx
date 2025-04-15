@@ -6,11 +6,13 @@ import BreathingOrb from '@/components/ZenJoystick/BreathingOrb'
 import BPSSDrawer from '@/components/ZenJoystick/BPSSDrawer'
 import NextStepButton from '@/components/ZenJoystick/NextStepButton'
 import BPSSCompass from '@/components/ZenJoystick/BPSSCompass'
+import TimelineDrawer from '@/components/ZenJoystick/TimelineDrawer'
 
 export default function Zenboard() {
   const user = useUserData()
   const { bp, ikigai, loading } = useBPSS(user?.uid)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [timelineOpen, setTimelineOpen] = useState(false)
 
   if (!user || loading) return <div className="text-white p-12">Loading...</div>
 
@@ -30,8 +32,19 @@ export default function Zenboard() {
         📝 Journal
       </button>
 
-      {/* BPSS Drawer with quadrant input */}
+      {/* Floating timeline toggle */}
+      <button
+        className="fixed bottom-6 left-6 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full shadow-lg z-50"
+        onClick={() => setTimelineOpen(true)}
+      >
+        🕰️ Timeline
+      </button>
+
+      {/* BPSS Drawer */}
       <BPSSDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} zone="BPSS" />
+
+      {/* Timeline Drawer */}
+      <TimelineDrawer open={timelineOpen} onClose={() => setTimelineOpen(false)} uid={user.uid} />
 
       {/* Optional CTA */}
       <NextStepButton bp={bp} ikigai={ikigai} />
