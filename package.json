@@ -16,6 +16,9 @@
     "react-notion-x": "^7.3.0",
     "framer-motion": "^11.0.1",
     "dayjs": "^1.11.10"
+    "chart.js": "^4.4.1",
+"react-chartjs-2": "^5.2.0"
+
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
