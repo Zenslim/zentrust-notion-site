@@ -13,7 +13,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   font-size: 10px;
   font-weight: bold;
   color: white;
@@ -26,7 +25,9 @@
   top: 120%;
   left: 50%;
   transform: translateX(-50%);
+  font-size: 0.65rem;
   white-space: nowrap;
+  color: white;
 }
 
 .orbRed { background-color: #e53935; }
