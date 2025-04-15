@@ -33,8 +33,8 @@ export default function ChakraGlow({ bpss }) {
         return (
           <motion.div
             key={chakra.id}
-            className={`${styles.chakraOrb} ${styles[chakra.color]} ${highlight === chakra.id ? styles.highlight : ''}`}
-            style={{ transform: `translate(${x}px, ${y}px)` }}
+            className={\`\${styles.chakraOrb} \${styles[chakra.color]} \${highlight === chakra.id ? styles.highlight : ''}\`}
+            style={{ transform: \`translate(\${x}px, \${y}px)\` }}
             animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.1, 1] }}
             transition={{ duration: 8, repeat: Infinity }}
           >
