@@ -1,4 +1,5 @@
 // pages/_app.jsx
+import '@/components/zenboard/chakra-aura.css'
 import '../styles/globals.css'
 import { useEffect } from 'react'
 import { auth } from '../firebase'
