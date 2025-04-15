@@ -3,6 +3,7 @@ import '@/components/zenboard/chakra-aura.css'
 import '../styles/globals.css'
 import { useEffect } from 'react'
 import { auth } from '../firebase'
+import '@/components/zenboard/chakra-orbit.css'
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
