@@ -1,38 +1,37 @@
-.orbitWrapper {
+.chakraOrbit {
   position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
+  width: 100%;
+  height: 320px;
+  margin-top: 20px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .chakraOrb {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 9999px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  align-items: center;
 }
 
-.label {
+.chakraLabel {
   position: absolute;
-  top: 50px;
-  width: max-content;
-  white-space: nowrap;
-  font-size: 0.8rem;
+  top: 60px;
+  font-size: 0.75rem;
   color: white;
   text-align: center;
-  transform: translateX(-50%);
-  left: 50%;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
-/* Chakra colors */
+.highlight {
+  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.4);
+}
+
 .orbRed { background-color: #e53935; }
 .orbOrange { background-color: #fb8c00; }
 .orbYellow { background-color: #fdd835; }
@@ -40,7 +39,3 @@
 .orbBlue { background-color: #1e88e5; }
 .orbIndigo { background-color: #5e35b1; }
 .orbViolet { background-color: #8e24aa; }
-
-.highlight {
-  box-shadow: 0 0 25px 8px rgba(255, 255, 255, 0.7);
-}
