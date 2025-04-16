@@ -7,34 +7,35 @@
 
 .chakraCircle {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #0d1117, #000);
+  background: radial-gradient(circle at center, #0e0f1a 20%, #000000 100%);
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
   animation: breathe 6s ease-in-out infinite;
 }
 
 .chakra {
   position: absolute;
   text-align: center;
+  font-size: 0.85rem;
   color: white;
-  font-size: 0.9rem;
   width: 100px;
 }
 
-.spiritual { top: -20px; left: 100px; }
-.bio       { top: 100px; left: -10px; }
-.psycho    { bottom: -20px; left: 100px; }
-.social    { top: 100px; right: -10px; }
+.spiritual { top: -20px; left: 50%; transform: translateX(-50%); }
+.bio       { top: 50%; left: -20px; transform: translateY(-50%); }
+.psycho    { bottom: -20px; left: 50%; transform: translateX(-50%); }
+.social    { top: 50%; right: -20px; transform: translateY(-50%); }
 
 .ikigai {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
   color: #ff69b4;
   font-size: 1.2rem;
+  text-align: center;
 }
 
 @keyframes breathe {
