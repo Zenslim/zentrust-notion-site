@@ -31,28 +31,27 @@ export default function Zenboard() {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
       <BreathingOrb />
-
-      <div className="w-full max-w-4xl px-2 sm:px-4 mt-6 sm:mt-12">
+      <div className="w-full max-w-5xl px-4 mt-6 z-10">
         <ChakraGlow bpss={chakraBPSS} />
       </div>
 
-      <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] mt-10 sm:mt-16">
+      <div className="relative w-[300px] h-[300px] mt-12 md:mt-16 z-10">
         <PulseRing bp={bp} />
         <NudgeArc direction="top" label="Spiritual" prompt="Why do I exist?" level={bp.spiritual} icon="🕊️" />
+        <NudgeArc direction="right" label="Social" prompt="Who needs me?" level={bp.social} icon="🤝" />
         <NudgeArc direction="bottom" label="Psycho" prompt="What inspires me?" level={bp.psycho} icon="🧠" />
         <NudgeArc direction="left" label="Bio" prompt="What energizes me?" level={bp.bio} icon="🌞" />
-        <NudgeArc direction="right" label="Social" prompt="Who needs me?" level={bp.social} icon="🤝" />
         <IkigaiCenter ikigai={ikigai} />
       </div>
 
       <NextStepButton bp={bp} ikigai={ikigai} />
 
-      <div className="fixed bottom-6 flex flex-wrap justify-center items-center gap-3 px-4">
-        <button onClick={() => setDrawer('timeline')} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full">🧘‍♂️ Timeline</button>
-        <button onClick={() => setDrawer('journal')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full">📘 Journal</button>
-        <button onClick={() => setDrawer('radar')} className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-full">🕸 Radar</button>
+      <div className="flex gap-4 mt-6 fixed bottom-6 z-20">
+        <button onClick={() => setDrawer('timeline')} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
+        <button onClick={() => setDrawer('journal')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
+        <button onClick={() => setDrawer('radar')} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
       </div>
 
       <BPSSDrawer open={drawer === 'journal'} onClose={() => setDrawer(null)} zone="BPSS" />
