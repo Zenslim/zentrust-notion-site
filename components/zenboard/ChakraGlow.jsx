@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import styles from './chakraGlow.module.css'
+
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import styles from './chakraGlow.module.css';
 
 const chakras = [
   { id: 'root', label: 'Root', color: 'orbRed' },
@@ -10,25 +11,25 @@ const chakras = [
   { id: 'throat', label: 'Throat', color: 'orbBlue' },
   { id: 'third_eye', label: 'Third Eye', color: 'orbIndigo' },
   { id: 'crown', label: 'Crown', color: 'orbViolet' },
-]
+];
 
 export default function ChakraGlow({ bpss }) {
-  const [highlight, setHighlight] = useState(null)
+  const [highlight, setHighlight] = useState(null);
 
   useEffect(() => {
     if (bpss) {
-      const active = Object.entries(bpss).sort((a, b) => b[1] - a[1])[0]?.[0]
-      setHighlight(active)
+      const active = Object.entries(bpss).sort((a, b) => b[1] - a[1])[0]?.[0];
+      setHighlight(active);
     }
-  }, [bpss])
+  }, [bpss]);
 
   return (
     <div className={styles.chakraOrbit}>
       {chakras.map((chakra, i) => {
-        const angle = (Math.PI * 2 * i) / chakras.length - Math.PI / 2
-        const radius = 120
-        const x = radius * Math.cos(angle)
-        const y = radius * Math.sin(angle)
+        const angle = (2 * Math.PI * i) / chakras.length;
+        const radius = 140;
+        const x = radius * Math.cos(angle);
+        const y = radius * Math.sin(angle);
 
         return (
           <motion.div
@@ -37,13 +38,13 @@ export default function ChakraGlow({ bpss }) {
               highlight === chakra.id ? styles.highlight : ''
             }`}
             style={{ transform: `translate(${x}px, ${y}px)` }}
-            animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.1, 1] }}
+            animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.12, 1] }}
             transition={{ duration: 6, repeat: Infinity }}
           >
             <span className={styles.chakraLabel}>{chakra.label}</span>
           </motion.div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }

@@ -1,37 +1,35 @@
+
 .chakraOrbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform: translate(-50%, -50%);
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 .chakraOrb {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  border-radius: 9999px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 18px 6px rgba(255, 255, 255, 0.25);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
 .chakraLabel {
-  position: absolute;
-  top: 58px;
   font-size: 0.75rem;
-  text-align: center;
+  font-weight: bold;
   color: white;
+  position: absolute;
+  top: 60px;
+  width: max-content;
   white-space: nowrap;
+  text-align: center;
 }
 
 .highlight {
-  box-shadow: 0 0 22px 10px rgba(255, 255, 255, 0.5);
-  transform: scale(1.15) !important;
-  z-index: 2;
+  box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.6);
 }
 
 .orbRed { background-color: #e53935; }
