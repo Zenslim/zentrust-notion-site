@@ -1,4 +1,2 @@
-// pages/zenboard.jsx
-
-import Zenboard from '../components/zenboard'; // match casing
+import Zenboard from '../components/Zenboard';
 export default Zenboard;
