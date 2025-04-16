@@ -23,22 +23,22 @@ export default function ChakraGlow({ bpss }) {
   }, [bpss]);
 
   return (
-    <div className={styles.orbitWrapper}>
+    <div className={styles.chakraOrbit}>
       {chakras.map((chakra, i) => {
-        const angle = (2 * Math.PI * i) / chakras.length;
-        const radius = 140;
-        const x = radius * Math.cos(angle);
-        const y = radius * Math.sin(angle);
+        const angle = (360 / chakras.length) * i - 90; // start from top
+        const radius = 120;
+        const x = radius * Math.cos((angle * Math.PI) / 180);
+        const y = radius * Math.sin((angle * Math.PI) / 180);
 
         return (
           <motion.div
             key={chakra.id}
             className={`${styles.chakraOrb} ${styles[chakra.color]} ${highlight === chakra.id ? styles.highlight : ''}`}
             style={{ transform: `translate(${x}px, ${y}px)` }}
-            animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.1, 1] }}
+            animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.1, 1] }}
             transition={{ duration: 6, repeat: Infinity }}
           >
-            <div className={styles.label}>{chakra.label}</div>
+            <span className={styles.chakraLabel}>{chakra.label}</span>
           </motion.div>
         );
       })}
