@@ -1,3 +1,5 @@
+// components/zenboard.jsx
+
 import ChakraGlow from './ChakraGlow';
 import styles from '../styles/zenboard.module.css';
 import Link from 'next/link';
