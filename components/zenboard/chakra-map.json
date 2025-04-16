@@ -1,9 +1,0 @@
-[
-  {"id": "root", "color": "red", "label": "Root"},
-  {"id": "sacral", "color": "orange", "label": "Sacral"},
-  {"id": "solar", "color": "yellow", "label": "Solar Plexus"},
-  {"id": "heart", "color": "green", "label": "Heart"},
-  {"id": "throat", "color": "blue", "label": "Throat"},
-  {"id": "third_eye", "color": "indigo", "label": "Third Eye"},
-  {"id": "crown", "color": "violet", "label": "Crown"}
-]
