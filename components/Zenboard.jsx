@@ -4,9 +4,6 @@ import { useState } from "react";
 import { useUserData } from '@/hooks/useUserData';
 import { useBPSS } from '@/hooks/useBPSS';
 import BreathingOrb from './ZenJoystick/BreathingOrb';
-import PulseRing from './ZenJoystick/PulseRing';
-import NudgeArc from './ZenJoystick/NudgeArc';
-import IkigaiCenter from './ZenJoystick/IkigaiCenter';
 import BPSSDrawer from './ZenJoystick/BPSSDrawer';
 import TimelineDrawer from './ZenJoystick/TimelineDrawer';
 import RadarDrawer from './ZenJoystick/RadarDrawer';
@@ -33,17 +30,10 @@ export default function Zenboard() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
       <BreathingOrb />
+      
+      {/* ✅ Only ChakraGlow now — no duplicate orbs */}
       <div className="w-full max-w-5xl px-4 mt-6 z-10">
-        <ChakraGlow bpss={chakraBPSS} />
-      </div>
-
-      <div className="relative w-[300px] h-[300px] mt-12 md:mt-16 z-10">
-        <PulseRing bp={bp} />
-        <NudgeArc direction="top" label="Spiritual" prompt="Why do I exist?" level={bp.spiritual} icon="🕊️" />
-        <NudgeArc direction="right" label="Social" prompt="Who needs me?" level={bp.social} icon="🤝" />
-        <NudgeArc direction="bottom" label="Psycho" prompt="What inspires me?" level={bp.psycho} icon="🧠" />
-        <NudgeArc direction="left" label="Bio" prompt="What energizes me?" level={bp.bio} icon="🌞" />
-        <IkigaiCenter ikigai={ikigai} />
+        <ChakraGlow bpss={chakraBPSS} ikigai={ikigai} />
       </div>
 
       <NextStepButton bp={bp} ikigai={ikigai} />
