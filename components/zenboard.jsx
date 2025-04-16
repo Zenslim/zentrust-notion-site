@@ -1,20 +1,33 @@
 // components/zenboard.jsx
 
+import { useState } from 'react';
 import ChakraGlow from './ChakraGlow';
+import TimelineDrawer from './ZenJoystick/TimelineDrawer';
+import BPSSDrawer from './ZenJoystick/BPSSDrawer';
 import styles from '../styles/zenboard.module.css';
-import Link from 'next/link';
 
 export default function Zenboard() {
+  const [drawer, setDrawer] = useState(null);
+
   return (
     <div className={styles.zenboardWrapper}>
       <ChakraGlow />
+
       <div className={styles.nextStep}>
         🧘‍♂️ Next Step → Go for a mindful walk in nature.
       </div>
+
       <div className={styles.bottomButtons}>
-        <Link href="/timeline"><button className={styles.timelineButton}>👤 Timeline</button></Link>
-        <Link href="/journal"><button className={styles.journalButton}>📓 Journal</button></Link>
+        <button onClick={() => setDrawer('timeline')} className={styles.timelineButton}>
+          👤 Timeline
+        </button>
+        <button onClick={() => setDrawer('journal')} className={styles.journalButton}>
+          📓 Journal
+        </button>
       </div>
+
+      <TimelineDrawer open={drawer === 'timeline'} onClose={() => setDrawer(null)} />
+      <BPSSDrawer open={drawer === 'journal'} onClose={() => setDrawer(null)} zone="BPSS" />
     </div>
   );
 }
