@@ -1,0 +1,43 @@
+.glowContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4rem;
+}
+
+.chakraCircle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #0d1117, #000);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.chakra {
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: 0.9rem;
+  width: 100px;
+}
+
+.spiritual { top: -20px; left: 100px; }
+.bio { top: 100px; left: -10px; }
+.psycho { bottom: -20px; left: 100px; }
+.social { top: 100px; right: -10px; }
+
+.ikigai {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ff69b4;
+  font-size: 1.2rem;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
