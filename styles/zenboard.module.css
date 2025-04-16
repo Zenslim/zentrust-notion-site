@@ -1,6 +1,6 @@
 .zenboardWrapper {
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+  background: radial-gradient(circle at center, #0f2027 10%, #203a43 70%, #2c5364 100%);
   color: white;
   display: flex;
   flex-direction: column;
@@ -18,17 +18,23 @@
   position: fixed;
   bottom: 2rem;
   display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 400px;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .timelineButton,
 .journalButton {
   background-color: #7c3aed;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
   font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.timelineButton:hover,
+.journalButton:hover {
+  background-color: #5b21b6;
 }
