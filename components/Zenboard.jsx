@@ -1,14 +1,17 @@
+// File: components/Zenboard.jsx
+
 import { useState } from "react";
 import { useUserData } from '@/hooks/useUserData';
 import { useBPSS } from '@/hooks/useBPSS';
-import BreathingOrb from '@/components/ZenJoystick/BreathingOrb';
-import PulseRing from '@/components/ZenJoystick/PulseRing';
-import NudgeArc from '@/components/ZenJoystick/NudgeArc';
-import IkigaiCenter from '@/components/ZenJoystick/IkigaiCenter';
-import BPSSDrawer from '@/components/ZenJoystick/BPSSDrawer';
-import TimelineDrawer from '@/components/ZenJoystick/TimelineDrawer';
-import NextStepButton from '@/components/ZenJoystick/NextStepButton';
-import ChakraGlow from '@/components/ChakraGlow';
+import BreathingOrb from './ZenJoystick/BreathingOrb';
+import PulseRing from './ZenJoystick/PulseRing';
+import NudgeArc from './ZenJoystick/NudgeArc';
+import IkigaiCenter from './ZenJoystick/IkigaiCenter';
+import BPSSDrawer from './ZenJoystick/BPSSDrawer';
+import TimelineDrawer from './ZenJoystick/TimelineDrawer';
+import RadarDrawer from './ZenJoystick/RadarDrawer';
+import NextStepButton from './ZenJoystick/NextStepButton';
+import ChakraGlow from './ChakraGlow';
 
 export default function Zenboard() {
   const user = useUserData();
@@ -45,9 +48,11 @@ export default function Zenboard() {
       <div className="flex gap-3 mt-6 fixed bottom-6">
         <button onClick={() => setDrawer('timeline')} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full">🧘‍♂️ Timeline</button>
         <button onClick={() => setDrawer('journal')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full">📘 Journal</button>
+        <button onClick={() => setDrawer('radar')} className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-full">🕸 Radar</button>
       </div>
       <BPSSDrawer open={drawer === 'journal'} onClose={() => setDrawer(null)} zone="BPSS" />
       <TimelineDrawer open={drawer === 'timeline'} onClose={() => setDrawer(null)} />
+      <RadarDrawer open={drawer === 'radar'} onClose={() => setDrawer(null)} bp={bp} />
     </div>
   );
 }
