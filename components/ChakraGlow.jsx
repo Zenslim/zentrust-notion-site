@@ -12,10 +12,14 @@ export default function ChakraGlow({ bpss = {}, ikigai }) {
     { key: 'third_eye', label: '🕊️ Spiritual', prompt: 'Why do I exist?', style: styles.spiritual },
   ];
 
-  const glowScale = (val) => 0.4 + (val / 5) * 0.6;
+  const glowScale = (val) => 0.5 + (val / 5) * 0.5; // scale from 0.5 to 1.0
 
   return (
     <div className={styles.glowContainer}>
+      {/* Central aura breathing orb */}
+      <div className={styles.breathingOrb} />
+
+      {/* Chakra placement and glow animation */}
       <div className={styles.chakraCircle}>
         {chakraList.map((chakra) => (
           <motion.div
@@ -23,11 +27,11 @@ export default function ChakraGlow({ bpss = {}, ikigai }) {
             className={`${styles.chakra} ${chakra.style}`}
             animate={{
               scale: [1, glowScale(bpss[chakra.key] ?? 0), 1],
-              opacity: [0.6, 1, 0.6],
+              opacity: [0.7, 1, 0.7],
             }}
             transition={{
               repeat: Infinity,
-              duration: 2 + (bpss[chakra.key] ?? 0) * 0.2,
+              duration: 3,
               ease: 'easeInOut',
             }}
           >
@@ -35,12 +39,13 @@ export default function ChakraGlow({ bpss = {}, ikigai }) {
           </motion.div>
         ))}
 
+        {/* Ikigai center with flower icon */}
         <motion.div
           className={styles.ikigai}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.9, 1, 0.9] }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.85, 1, 0.85] }}
           transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
         >
-          <span>🌸<br /><strong className="text-pink-400 text-xl">Ikigai</strong></span>
+          <div className="text-pink-400 text-xl font-bold">🌸 Ikigai</div>
         </motion.div>
       </div>
     </div>
