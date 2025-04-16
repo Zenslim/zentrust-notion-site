@@ -23,9 +23,9 @@
 }
 
 .spiritual { top: -20px; left: 100px; }
-.bio { top: 100px; left: -10px; }
-.psycho { bottom: -20px; left: 100px; }
-.social { top: 100px; right: -10px; }
+.bio       { top: 100px; left: -10px; }
+.psycho    { bottom: -20px; left: 100px; }
+.social    { top: 100px; right: -10px; }
 
 .ikigai {
   position: absolute;
