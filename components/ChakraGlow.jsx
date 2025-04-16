@@ -1,5 +1,4 @@
 import styles from '../styles/chakraGlow.module.css';
-
 export default function ChakraGlow() {
   return (
     <div className={styles.glowContainer}>
