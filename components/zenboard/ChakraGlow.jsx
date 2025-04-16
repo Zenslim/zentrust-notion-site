@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './chakraGlow.module.css';
@@ -23,19 +24,15 @@ export default function ChakraGlow({ bpss }) {
   }, [bpss]);
 
   return (
-    <div className={styles.chakraOrbit}>
+    <div className={styles.wrapper}>
       {chakras.map((chakra, i) => {
-        const angle = (360 / chakras.length) * i - 90; // start from top
-        const radius = 120;
-        const x = radius * Math.cos((angle * Math.PI) / 180);
-        const y = radius * Math.sin((angle * Math.PI) / 180);
-
+        const angle = (360 / chakras.length) * i;
         return (
           <motion.div
             key={chakra.id}
             className={`${styles.chakraOrb} ${styles[chakra.color]} ${highlight === chakra.id ? styles.highlight : ''}`}
-            style={{ transform: `translate(${x}px, ${y}px)` }}
-            animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.1, 1] }}
+            style={{ transform: `rotate(${angle}deg) translateY(-8rem) rotate(-${angle}deg)` }}
+            animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.1, 1] }}
             transition={{ duration: 6, repeat: Infinity }}
           >
             <span className={styles.chakraLabel}>{chakra.label}</span>
