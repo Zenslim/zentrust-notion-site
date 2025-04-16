@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useUserData } from '@/hooks/useUserData';
 import { useBPSS } from '@/hooks/useBPSS';
-import BreathingOrb from './ZenJoystick/BreathingOrb';
-import PulseRing from './ZenJoystick/PulseRing';
-import NudgeArc from './ZenJoystick/NudgeArc';
-import IkigaiCenter from './ZenJoystick/IkigaiCenter';
-import BPSSDrawer from './ZenJoystick/BPSSDrawer';
-import TimelineDrawer from './ZenJoystick/TimelineDrawer';
-import NextStepButton from './ZenJoystick/NextStepButton';
-import ChakraGlow from './ChakraGlow';
+import BreathingOrb from '@/components/ZenJoystick/BreathingOrb';
+import PulseRing from '@/components/ZenJoystick/PulseRing';
+import NudgeArc from '@/components/ZenJoystick/NudgeArc';
+import IkigaiCenter from '@/components/ZenJoystick/IkigaiCenter';
+import BPSSDrawer from '@/components/ZenJoystick/BPSSDrawer';
+import TimelineDrawer from '@/components/ZenJoystick/TimelineDrawer';
+import NextStepButton from '@/components/ZenJoystick/NextStepButton';
+import ChakraGlow from '@/components/ChakraGlow';
 
 export default function Zenboard() {
   const user = useUserData();
@@ -28,13 +28,12 @@ export default function Zenboard() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-black to-gray-800 text-white relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white relative overflow-hidden">
       <BreathingOrb />
-      <div className="w-full max-w-5xl px-4 mt-6 z-10">
+      <div className="w-full max-w-5xl px-4 mt-6">
         <ChakraGlow bpss={chakraBPSS} />
       </div>
-
-      <div className="relative w-[300px] h-[300px] mt-12 md:mt-16 z-20">
+      <div className="relative w-[300px] h-[300px] mt-12 md:mt-16">
         <PulseRing bp={bp} />
         <NudgeArc direction="top" label="Spiritual" prompt="Why do I exist?" level={bp.spiritual} icon="🕊️" />
         <NudgeArc direction="bottom" label="Psycho" prompt="What inspires me?" level={bp.psycho} icon="🧠" />
@@ -42,14 +41,11 @@ export default function Zenboard() {
         <NudgeArc direction="right" label="Social" prompt="Who needs me?" level={bp.social} icon="🤝" />
         <IkigaiCenter ikigai={ikigai} />
       </div>
-
       <NextStepButton bp={bp} ikigai={ikigai} />
-
-      <div className="flex gap-3 mt-6 fixed bottom-6 z-50">
+      <div className="flex gap-3 mt-6 fixed bottom-6">
         <button onClick={() => setDrawer('timeline')} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full">🧘‍♂️ Timeline</button>
         <button onClick={() => setDrawer('journal')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full">📘 Journal</button>
       </div>
-
       <BPSSDrawer open={drawer === 'journal'} onClose={() => setDrawer(null)} zone="BPSS" />
       <TimelineDrawer open={drawer === 'timeline'} onClose={() => setDrawer(null)} />
     </div>
