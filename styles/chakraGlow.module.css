@@ -1,4 +1,6 @@
 
+/* File: styles/chakraGlow.module.css */
+
 .glowContainer {
   display: flex;
   justify-content: center;
@@ -7,28 +9,37 @@
   position: relative;
 }
 
+.breathingOrb {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(165, 89, 255, 0.2) 0%, rgba(0, 0, 0, 0) 80%);
+  animation: auraGlow 6s ease-in-out infinite;
+  filter: blur(100px);
+  z-index: 0;
+}
+
 .chakraCircle {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 360px;
+  height: 360px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #0e0f1a 20%, #000000 100%);
-  box-shadow: 0 0 80px rgba(255, 255, 255, 0.05);
+  background: radial-gradient(circle at center, #0e0f1a 30%, #000000 100%);
   z-index: 1;
 }
 
 .chakra {
   position: absolute;
   text-align: center;
-  font-size: 0.9rem;
   color: white;
   width: 100px;
 }
 
-.spiritual { top: -20px; left: 50%; transform: translateX(-50%); }
-.bio       { top: 50%; left: -20px; transform: translateY(-50%); }
-.psycho    { bottom: -20px; left: 50%; transform: translateX(-50%); }
-.social    { top: 50%; right: -20px; transform: translateY(-50%); }
+.spiritual { top: -30px; left: 50%; transform: translateX(-50%); }
+.bio       { top: 50%; left: -30px; transform: translateY(-50%); }
+.psycho    { bottom: -30px; left: 50%; transform: translateX(-50%); }
+.social    { top: 50%; right: -30px; transform: translateY(-50%); }
 
 .ikigai {
   position: absolute;
@@ -39,4 +50,9 @@
   font-size: 1.4rem;
   text-align: center;
   z-index: 2;
+}
+
+@keyframes auraGlow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
 }
