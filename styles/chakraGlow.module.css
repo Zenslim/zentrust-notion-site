@@ -75,6 +75,15 @@
   transform: translateX(-50%);
   z-index: 10;
 }
+.buttons {
+  position: absolute;
+  top: calc(50% + 220px); /* below Next Step */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
 /* Animation */
 @keyframes pulse {
   0%, 100% {
