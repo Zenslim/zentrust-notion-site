@@ -81,7 +81,7 @@
     transform: translate(-50%, -50%) scale(1);
     box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.15);
   }
-  50 {
+  50% {
     transform: translate(-50%, -50%) scale(1.1);
     box-shadow: 0 0 30px 12px rgba(255, 255, 255, 0.3);
   }
