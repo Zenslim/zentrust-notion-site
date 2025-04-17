@@ -29,21 +29,23 @@ export default function Zenboard() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
-      <BreathingOrb />
       
-      {/* ✅ Only ChakraGlow now — no duplicate orbs */}
-      <div className="w-full max-w-5xl px-4 mt-6 z-10">
+      {/* ✅ Layered aura + chakra animation */}
+      <div className="relative w-full max-w-5xl px-4 mt-6 z-10">
+        <BreathingOrb />
         <ChakraGlow bpss={chakraBPSS} ikigai={ikigai} />
       </div>
 
       <NextStepButton bp={bp} ikigai={ikigai} />
 
+      {/* ✅ Drawer buttons */}
       <div className="flex gap-4 mt-6 fixed bottom-6 z-20">
         <button onClick={() => setDrawer('timeline')} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
         <button onClick={() => setDrawer('journal')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
         <button onClick={() => setDrawer('radar')} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
       </div>
 
+      {/* ✅ Drawers */}
       <BPSSDrawer open={drawer === 'journal'} onClose={() => setDrawer(null)} zone="BPSS" />
       <TimelineDrawer open={drawer === 'timeline'} onClose={() => setDrawer(null)} />
       <RadarDrawer open={drawer === 'radar'} onClose={() => setDrawer(null)} bp={bp} />
