@@ -1,26 +1,16 @@
 .cosmic {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background: black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* CENTER the chakra system vertically */
-  padding-bottom: 160px;   /* Enough space for bottom buttons */
+  justify-content: center;
+  background: black;
+  padding-top: 60px;
+  padding-bottom: 100px;
+  min-height: 100vh;
+  position: relative;
 }
 
-.ikigai {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  color: #ff66b2;
-  text-align: center;
-  z-index: 10;
-}
-
+/* Chakra core */
 .chakra {
   position: absolute;
   width: 100px;
@@ -47,46 +37,51 @@
   line-height: 1.2;
 }
 
-/* Orb positioning */
+.ikigai {
+  font-size: 1.5rem;
+  color: #ff66b2;
+  text-align: center;
+  margin: 180px 0 160px; /* vertical space for orbs above and below */
+  z-index: 10;
+}
+
+/* Positions of orbs using absolute layout */
 .spiritual {
   top: calc(50% - 120px);
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 .bio {
   top: 50%;
   left: calc(50% - 120px);
   transform: translate(-50%, -50%);
 }
-
 .social {
   top: 50%;
   left: calc(50% + 120px);
   transform: translate(-50%, -50%);
 }
-
 .psycho {
   top: calc(50% + 120px);
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* NEXT STEP fixed just under chakra system */
+/* CTA */
 .nextStep {
-  margin-top: 260px; /* AFTER Psycho */
-  z-index: 10;
+  margin-top: 40px;
+  z-index: 5;
 }
 
-/* Button row below that */
+/* Bottom buttons */
 .buttons {
   margin-top: 24px;
   display: flex;
   gap: 1rem;
-  z-index: 10;
+  z-index: 5;
 }
 
-/* Chakra Pulse */
+/* Pulse Animation */
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
