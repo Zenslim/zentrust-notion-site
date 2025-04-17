@@ -31,8 +31,7 @@ export default function Zenboard() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
       
       {/* ✅ Layered aura + chakra animation */}
-      <div className="relative w-full max-w-5xl px-4 mt-6 z-10">
-        <BreathingOrb />
+              <BreathingOrb />
         <ChakraGlow bpss={chakraBPSS} ikigai={ikigai} />
       </div>
 
