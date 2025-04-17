@@ -1,6 +1,3 @@
-
-// File: components/ChakraGlow.jsx
-
 import styles from '../styles/chakraGlow.module.css';
 import NextStepButton from './ZenJoystick/NextStepButton';
 
@@ -26,9 +23,14 @@ const ChakraGlow = ({ bp, ikigai }) => {
         </div>
       ))}
 
-      {/* Render Next Step Button below orbs for perfect alignment */}
       <div className={styles.nextStep}>
         <NextStepButton bp={bp} ikigai={ikigai} />
+      </div>
+
+      <div className={styles.buttons}>
+        <button className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
+        <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
       </div>
     </div>
   );
