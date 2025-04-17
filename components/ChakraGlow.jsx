@@ -1,37 +1,59 @@
-// File: components/ChakraGlow.jsx
-
-import styles from '../styles/chakraGlow.module.css';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
+import styles from '../styles/chakraGlow.module.css';
 
 export default function ChakraGlow({ bpss = {}, ikigai }) {
+  const chakraList = [
+    { key: 'root', label: 'Bio', prompt: 'What energizes me?', emoji: '🌞', style: styles.bio },
+    { key: 'sacral', label: 'Social', prompt: 'Who needs me?', emoji: '🤝', style: styles.social },
+    { key: 'solar', label: 'Psycho', prompt: 'What inspires me?', emoji: '🧠', style: styles.psycho },
+    { key: 'third_eye', label: 'Spiritual', prompt: 'Why do I exist?', emoji: '🧘', style: styles.spiritual },
+  ];
+
+  const glowScale = (val) => 1 + (val ?? 1) * 0.05;
+
   return (
     <div className={styles.glowContainer}>
-      {/* 🔮 Breathing aura inside the circle */}
-      <div className={styles.breathingOrb} />
-
-      {/* 🧿 Core chakra visualization */}
       <div className={styles.chakraCircle}>
-        <div className={`${styles.chakra} ${styles.spiritual}`}>
-          <span>🕊️ Spiritual<br /><small>Why do I exist?</small></span>
-        </div>
-        <div className={`${styles.chakra} ${styles.bio}`}>
-          <span>🌞 Bio<br /><small>What energizes me?</small></span>
-        </div>
-        <div className={`${styles.chakra} ${styles.psycho}`}>
-          <span>🧠 Psycho<br /><small>What inspires me?</small></span>
-        </div>
-        <div className={`${styles.chakra} ${styles.social}`}>
-          <span>🤝 Social<br /><small>Who needs me?</small></span>
-        </div>
-        <div className={styles.ikigai}>
-          <span>💗 <strong>Ikigai</strong></span>
-        </div>
+        {chakraList.map((chakra) => (
+          <motion.div
+            key={chakra.key}
+            className={`${styles.chakra} ${chakra.style}`}
+            animate={{
+              scale: [1, glowScale(bpss[chakra.key]), 1],
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <span>{chakra.emoji} <strong>{chakra.label}</strong><br />
+              <small>{chakra.prompt}</small>
+            </span>
+          </motion.div>
+        ))}
+        <motion.div
+          className={styles.ikigai}
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.8, 1, 0.8],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        >
+          <span>💖 <strong>Ikigai</strong></span>
+        </motion.div>
       </div>
     </div>
   );
 }
 
 ChakraGlow.propTypes = {
-  bpss: PropTypes.object,
+  bpss: PropTypes.object.isRequired,
   ikigai: PropTypes.object,
 };
