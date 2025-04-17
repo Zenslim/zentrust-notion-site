@@ -1,30 +1,29 @@
-import React from "react";
-import styles from "../styles/chakraGlow.module.css";
+// File: components/ChakraGlow.jsx
+import React from 'react';
+import styles from './chakraGlow.module.css';
 
 export default function ChakraGlow({ bpss, ikigai }) {
-  const chakraData = [
-    { label: "Spiritual", icon: "🧘", description: "Why do I exist?", style: styles.spiritual },
-    { label: "Bio", icon: "🌻", description: "What energizes me?", style: styles.bio },
-    { label: "Psycho", icon: "🧠", description: "What inspires me?", style: styles.psycho },
-    { label: "Social", icon: "🤝", description: "Who needs me?", style: styles.social },
+  const chakraMap = [
+    { name: 'Spiritual', icon: '🧘', label: 'Why do I exist?', style: styles.spiritual },
+    { name: 'Bio', icon: '🌻', label: 'What energizes me?', style: styles.bio },
+    { name: 'Social', icon: '🤝', label: 'Who needs me?', style: styles.social },
+    { name: 'Psycho', icon: '🧠', label: 'What inspires me?', style: styles.psycho },
   ];
 
   return (
-    <div className={styles.glowContainer}>
-      {chakraData.map((chakra, idx) => (
-        <div key={idx} className={`${styles.chakra} ${chakra.style}`}>
-          <div className={styles.chakraOrb} />
-          <div className="text-center text-white text-sm">
-            <div className="text-lg">{chakra.icon} {chakra.label}</div>
-            <div className="text-xs opacity-80">{chakra.description}</div>
+    <div className={styles.cosmic}>
+      <div className={styles.ikigai}>
+        <span>❤️ Ikigai</span>
+      </div>
+      {chakraMap.map((chakra, index) => (
+        <div key={index} className={\`\${styles.chakra} \${chakra.style}\`}>
+          <div className={styles.icon}>{chakra.icon}</div>
+          <div className={styles.label}>
+            <strong>{chakra.name}</strong>
+            <div className="text-xs text-gray-300">{chakra.label}</div>
           </div>
         </div>
       ))}
-      <div className={styles.ikigai}>
-        <div className="text-pink-400 text-2xl text-center animate-pulse">
-          ❤️ Ikigai
-        </div>
-      </div>
     </div>
   );
 }
