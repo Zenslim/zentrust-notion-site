@@ -1,20 +1,7 @@
+// File: components/ZenJoystick/BreathingOrb.jsx
+
 export default function BreathingOrb() {
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: '500px',
-        height: '500px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(165, 89, 255, 0.25) 0%, rgba(0, 0, 0, 0) 80%)',
-        transform: 'translate(-50%, -50%)',
-        filter: 'blur(100px)',
-        opacity: 0.6,
-        animation: 'glowingAura 6s ease-in-out infinite',
-        zIndex: 0,
-      }}
-    />
+    <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/30 blur-[120px] animate-zenpulse z-0" />
   );
 }
