@@ -1,8 +1,9 @@
-/* File: components/chakraGlow.module.css */
+
+/* File: styles/chakraGlow.module.css */
 .cosmic {
   position: relative;
   width: 100%;
-  height: 100vh; /* full screen */
+  height: 100vh;
   background: black;
   overflow: hidden;
 }
@@ -20,15 +21,14 @@
 
 .chakra {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.05);
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   animation: pulse 3s ease-in-out infinite;
 }
 
@@ -42,18 +42,18 @@
   color: white;
 }
 
-.spiritual { top: 30%; left: 50%; transform: translate(-50%, -50%); }
-.bio       { top: 50%; left: 30%; transform: translate(-50%, -50%); }
-.social    { top: 50%; left: 70%; transform: translate(-50%, -50%); }
-.psycho    { top: 70%; left: 50%; transform: translate(-50%, -50%); }
+.spiritual { top: 20%; left: 50%; transform: translate(-50%, -50%); }
+.bio { top: 50%; left: 30%; transform: translate(-50%, -50%); }
+.social { top: 50%; left: 70%; transform: translate(-50%, -50%); }
+.psycho { top: 80%; left: 50%; transform: translate(-50%, -50%); }
 
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.15);
   }
   50% {
     transform: scale(1.15);
-    box-shadow: 0 0 25px 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.3);
   }
 }
