@@ -1,21 +1,20 @@
-
 .cosmic {
   position: relative;
   width: 100%;
-  padding-bottom: 160px;
+  height: auto;               /* ✅ Let layout grow naturally */
+  padding-bottom: 160px;      /* ✅ Space for buttons */
   background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 .ikigai {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 1.5rem;
   color: #ff66b2;
   text-align: center;
   z-index: 10;
-  margin-bottom: 40px;
 }
 
 .chakra {
@@ -33,15 +32,6 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   text-align: center;
   font-size: 0.9rem;
-}
-
-.icon {
-  font-size: 1.5rem;
-}
-
-.label {
-  margin-top: 0.25rem;
-  line-height: 1.2;
 }
 
 .spiritual {
@@ -66,6 +56,24 @@
   top: calc(50% + 120px);
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.nextStep {
+  position: absolute;
+  top: calc(50% + 200px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.buttons {
+  position: absolute;
+  top: calc(50% + 260px); /* below next step */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
 }
 
 @keyframes pulse {
