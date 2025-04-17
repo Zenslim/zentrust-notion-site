@@ -1,6 +1,6 @@
 // File: components/ChakraGlow.jsx
 import React from 'react';
-import styles from './chakraGlow.module.css';
+import styles from '../styles/chakraGlow.module.css';
 
 export default function ChakraGlow({ bpss, ikigai }) {
   const chakraMap = [
