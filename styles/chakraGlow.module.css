@@ -1,13 +1,13 @@
 .cosmic {
   position: relative;
   width: 100%;
-  min-height: 100vh;              /* Ensures full-screen layout */
+  min-height: 100vh;
   background: black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;        /* Vertically center contents */
-  padding-bottom: 160px;          /* Leaves space for buttons */
+  padding-top: 60px;           /* creates breathing room above */
+  padding-bottom: 180px;       /* ensures buttons fit below */
 }
 
 .ikigai {
@@ -72,12 +72,12 @@
 }
 
 .nextStep {
-  margin-top: 60px;
+  margin-top: 40px;
   z-index: 10;
 }
 
 .buttons {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   gap: 1rem;
   z-index: 10;
