@@ -1,13 +1,22 @@
 .cosmic {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: black;
-  padding-top: 60px;
-  padding-bottom: 100px;
-  min-height: 100vh;
+}
+
+/* ❤️ Ikigai */
+.ikigai {
   position: relative;
+  z-index: 10;
+  font-size: 1.5rem;
+  color: #ff66b2;
+  margin-bottom: 160px; /* space for orbit */
 }
 
 /* Chakra core */
@@ -22,10 +31,10 @@
   align-items: center;
   justify-content: center;
   color: white;
-  animation: pulse 3s ease-in-out infinite;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   text-align: center;
   font-size: 0.9rem;
+  animation: pulse 3s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .icon {
@@ -37,15 +46,7 @@
   line-height: 1.2;
 }
 
-.ikigai {
-  font-size: 1.5rem;
-  color: #ff66b2;
-  text-align: center;
-  margin: 180px 0 160px; /* vertical space for orbs above and below */
-  z-index: 10;
-}
-
-/* Positions of orbs using absolute layout */
+/* Orb positioning (relative to Ikigai) */
 .spiritual {
   top: calc(50% - 120px);
   left: 50%;
@@ -67,13 +68,13 @@
   transform: translate(-50%, -50%);
 }
 
-/* CTA */
+/* CTA Button */
 .nextStep {
-  margin-top: 40px;
+  margin-top: 280px; /* below orbs */
   z-index: 5;
 }
 
-/* Bottom buttons */
+/* Bottom navigation buttons */
 .buttons {
   margin-top: 24px;
   display: flex;
@@ -81,7 +82,7 @@
   z-index: 5;
 }
 
-/* Pulse Animation */
+/* Animation */
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
