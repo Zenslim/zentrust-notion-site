@@ -1,42 +1,29 @@
-
-.glowContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 4rem;
+.orbitContainer {
   position: relative;
-}
-
-.chakraCircle {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: black;
-  box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
-  z-index: 1;
+  width: 400px;
+  height: 400px;
+  margin-top: 4rem;
 }
 
 .chakra {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), rgba(255,255,255,0));
   border-radius: 50%;
-  background-color: #222;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  font-size: 0.75rem;
-  text-align: center;
+  justify-content: center;
+  font-size: 0.8rem;
   color: white;
-  animation: zenpulse 3s ease-in-out infinite;
 }
 
-.spiritual { top: -30px; left: 50%; transform: translateX(-50%); }
-.bio       { top: 50%; left: -30px; transform: translateY(-50%); }
-.psycho    { bottom: -30px; left: 50%; transform: translateX(-50%); }
-.social    { top: 50%; right: -30px; transform: translateY(-50%); }
+.spiritual { top: 0; left: 50%; transform: translateX(-50%); }
+.bio       { left: 0; top: 50%; transform: translateY(-50%); }
+.psycho    { bottom: 0; left: 50%; transform: translateX(-50%); }
+.social    { right: 0; top: 50%; transform: translateY(-50%); }
 
 .ikigai {
   position: absolute;
@@ -44,7 +31,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: #ff69b4;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   text-align: center;
-  z-index: 2;
+  z-index: 10;
 }
