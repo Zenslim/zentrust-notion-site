@@ -1,3 +1,4 @@
+
 .glowContainer {
   display: flex;
   justify-content: center;
@@ -12,6 +13,7 @@
   height: 320px;
   border-radius: 50%;
   background: radial-gradient(circle at center, #0e0f1a 20%, #000000 100%);
+  box-shadow: 0 0 80px rgba(255, 255, 255, 0.05);
   z-index: 1;
 }
 
