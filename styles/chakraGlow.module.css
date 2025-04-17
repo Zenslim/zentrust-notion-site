@@ -13,20 +13,9 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(165, 89, 255, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
   filter: blur(100px);
-  opacity: 0.7;
+  opacity: 0.6;
   animation: glowingAura 6s ease-in-out infinite;
   z-index: 0;
-}
-
-@keyframes glowingAura {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.12);
-    opacity: 0.9;
-  }
 }
 
 .chakraCircle {
@@ -61,4 +50,15 @@
   font-size: 1.4rem;
   text-align: center;
   z-index: 2;
+}
+
+@keyframes glowingAura {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.9;
+  }
 }
