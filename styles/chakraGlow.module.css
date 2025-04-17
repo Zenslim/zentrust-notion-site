@@ -1,6 +1,4 @@
 
-/* File: styles/chakraGlow.module.css */
-
 .glowContainer {
   display: flex;
   justify-content: center;
@@ -9,31 +7,30 @@
   position: relative;
 }
 
-.breathingOrb {
-  position: absolute;
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(165, 89, 255, 0.2) 0%, rgba(0, 0, 0, 0) 80%);
-  animation: auraGlow 6s ease-in-out infinite;
-  filter: blur(100px);
-  z-index: 0;
-}
-
 .chakraCircle {
   position: relative;
-  width: 360px;
-  height: 360px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #0e0f1a 30%, #000000 100%);
+  background: black;
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
   z-index: 1;
 }
 
 .chakra {
   position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
   text-align: center;
   color: white;
-  width: 100px;
+  animation: zenpulse 3s ease-in-out infinite;
 }
 
 .spiritual { top: -30px; left: 50%; transform: translateX(-50%); }
@@ -50,9 +47,4 @@
   font-size: 1.4rem;
   text-align: center;
   z-index: 2;
-}
-
-@keyframes auraGlow {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 1; }
 }
