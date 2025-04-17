@@ -6,8 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 60px;           /* creates breathing room above */
-  padding-bottom: 180px;       /* ensures buttons fit below */
+  justify-content: center; /* CENTER the chakra system vertically */
+  padding-bottom: 160px;   /* Enough space for bottom buttons */
 }
 
 .ikigai {
@@ -47,6 +47,7 @@
   line-height: 1.2;
 }
 
+/* Orb positioning */
 .spiritual {
   top: calc(50% - 120px);
   left: 50%;
@@ -71,11 +72,13 @@
   transform: translate(-50%, -50%);
 }
 
+/* NEXT STEP fixed just under chakra system */
 .nextStep {
-  margin-top: 40px;
+  margin-top: 260px; /* AFTER Psycho */
   z-index: 10;
 }
 
+/* Button row below that */
 .buttons {
   margin-top: 24px;
   display: flex;
@@ -83,6 +86,7 @@
   z-index: 10;
 }
 
+/* Chakra Pulse */
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
