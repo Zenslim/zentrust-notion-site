@@ -1,13 +1,14 @@
+
 import styles from '../styles/chakraGlow.module.css';
 
-export default function ChakraGlow() {
-  const chakraMap = [
-    { name: 'Spiritual', icon: '🧘', style: styles.spiritual, question: 'Why do I exist?' },
-    { name: 'Bio', icon: '🌻', style: styles.bio, question: 'What energizes me?' },
-    { name: 'Social', icon: '🤝', style: styles.social, question: 'Who needs me?' },
-    { name: 'Psycho', icon: '🧠', style: styles.psycho, question: 'What inspires me?' },
-  ];
+const chakraMap = [
+  { name: 'Spiritual', icon: '🧘', question: 'Why do I exist?', style: styles.spiritual },
+  { name: 'Bio', icon: '🌻', question: 'What energizes me?', style: styles.bio },
+  { name: 'Social', icon: '🤝', question: 'Who needs me?', style: styles.social },
+  { name: 'Psycho', icon: '🧠', question: 'What inspires me?', style: styles.psycho },
+];
 
+export default function ChakraGlow() {
   return (
     <div className={styles.cosmic}>
       <div className={styles.ikigai}><span>❤️ Ikigai</span></div>
