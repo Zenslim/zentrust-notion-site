@@ -67,7 +67,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+/* Next Step CTA positioning */
+.nextStep {
+  position: absolute;
+  top: calc(50% + 200px); /* Adjust this to fine-tune distance */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
 /* Animation */
 @keyframes pulse {
   0%, 100% {
