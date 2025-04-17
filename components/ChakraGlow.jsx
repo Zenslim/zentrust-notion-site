@@ -16,7 +16,7 @@ export default function ChakraGlow({ bpss, ikigai }) {
         <span>❤️ Ikigai</span>
       </div>
       {chakraMap.map((chakra, index) => (
-        <div key={index} className={\`\${styles.chakra} \${chakra.style}\`}>
+        <div key={index} className={`${styles.chakra} ${chakra.style}`}>
           <div className={styles.icon}>{chakra.icon}</div>
           <div className={styles.label}>
             <strong>{chakra.name}</strong>
