@@ -1,15 +1,16 @@
-
 .cosmic {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 600px;
   position: relative;
-  background-color: black;
+  width: 100%;
+  height: 500px;
+  background: black;
+  overflow: hidden;
 }
 
 .ikigai {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 1.5rem;
   color: #ff66b2;
   text-align: center;
@@ -20,7 +21,7 @@
   position: absolute;
   width: 100px;
   height: 100px;
-  background: rgba(0, 0, 0, 1);
+  background: black;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -28,8 +29,7 @@
   justify-content: center;
   font-size: 0.9rem;
   animation: pulse 3s ease-in-out infinite;
-  color: white;
-  text-align: center;
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.1);
 }
 
 .icon {
@@ -38,12 +38,14 @@
 
 .label {
   margin-top: 0.25rem;
+  text-align: center;
+  color: white;
 }
 
-.spiritual { top: calc(50% - 150px); left: 50%; transform: translateX(-50%); }
-.bio { left: calc(50% - 150px); top: 50%; transform: translateY(-50%); }
-.social { right: calc(50% - 150px); top: 50%; transform: translateY(-50%); }
-.psycho { bottom: calc(50% - 150px); left: 50%; transform: translateX(-50%); }
+.spiritual { top: calc(50% - 100px); left: 50%; transform: translate(-50%, -50%); }
+.bio { top: 50%; left: calc(50% - 120px); transform: translate(-50%, -50%); }
+.social { top: 50%; left: calc(50% + 120px); transform: translate(-50%, -50%); }
+.psycho { top: calc(50% + 100px); left: 50%; transform: translate(-50%, -50%); }
 
 @keyframes pulse {
   0%, 100% {
