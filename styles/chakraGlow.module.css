@@ -42,10 +42,11 @@
   color: white;
 }
 
-.spiritual { top: 0%; left: 50%; transform: translate(-50%, 0); }
-.bio { top: 50%; left: 0%; transform: translate(0, -50%); }
-.social { top: 50%; right: 0%; transform: translate(0, -50%); }
-.psycho { bottom: 0%; left: 50%; transform: translate(-50%, 0); }
+.spiritual { top: 15%; left: 50%; transform: translate(-50%, -50%); }
+.bio { top: 50%; left: 15%; transform: translate(-50%, -50%); }
+.social { top: 50%; left: 85%; transform: translate(-50%, -50%); }
+.psycho { top: 85%; left: 50%; transform: translate(-50%, -50%); }
+
 
 @keyframes pulse {
   0%, 100% {
