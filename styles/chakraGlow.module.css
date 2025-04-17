@@ -1,7 +1,8 @@
 .cosmic {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: auto; /* Let the content dictate height */
+  padding-bottom: 120px; /* enough room for buttons */
   background: black;
 }
 
