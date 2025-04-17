@@ -1,4 +1,3 @@
-
 .cosmic {
   position: relative;
   width: 100%;
@@ -20,18 +19,17 @@
 
 .chakra {
   position: absolute;
-  width: 90px;
-  height: 90px;
-  background: rgba(0, 0, 0, 0.8);
+  width: 80px;
+  height: 80px;
+  background: black;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   animation: pulse 3s ease-in-out infinite;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-  padding: 4px;
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.15);
 }
 
 .icon {
@@ -42,21 +40,20 @@
   margin-top: 0.25rem;
   text-align: center;
   color: white;
-  font-size: 0.75rem;
 }
 
-.spiritual { top: 15%; left: 50%; transform: translate(-50%, -50%); }
-.bio { top: 50%; left: 15%; transform: translate(-50%, -50%); }
-.social { top: 50%; left: 85%; transform: translate(-50%, -50%); }
-.psycho { top: 85%; left: 50%; transform: translate(-50%, -50%); }
+.spiritual { top: 5%; left: 50%; transform: translate(-50%, 0); }
+.bio { top: 50%; left: 15%; transform: translate(0, -50%); }
+.social { top: 50%; right: 15%; transform: translate(0, -50%); }
+.psycho { bottom: 5%; left: 50%; transform: translate(-50%, 0); }
 
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.15);
   }
   50% {
-    transform: scale(1.15);
-    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.25);
   }
 }
