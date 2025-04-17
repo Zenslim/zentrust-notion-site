@@ -1,7 +1,10 @@
 
-import styles from '../styles/chakraGlow.module.css';
+// File: components/ChakraGlow.jsx
 
-const ChakraGlow = () => {
+import styles from '../styles/chakraGlow.module.css';
+import NextStepButton from './ZenJoystick/NextStepButton';
+
+const ChakraGlow = ({ bp, ikigai }) => {
   const chakraMap = [
     { name: 'Spiritual', icon: '🧘', question: 'Why do I exist?', style: styles.spiritual },
     { name: 'Bio', icon: '🌻', question: 'What energizes me?', style: styles.bio },
@@ -22,6 +25,11 @@ const ChakraGlow = () => {
           </div>
         </div>
       ))}
+
+      {/* Render Next Step Button below orbs for perfect alignment */}
+      <div className={styles.nextStep}>
+        <NextStepButton bp={bp} ikigai={ikigai} />
+      </div>
     </div>
   );
 };
