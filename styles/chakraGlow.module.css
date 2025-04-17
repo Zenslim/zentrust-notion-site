@@ -1,8 +1,7 @@
 .cosmic {
   position: relative;
   width: 100%;
-  height: auto;               /* ✅ Let layout grow naturally */
-  padding-bottom: 160px;      /* ✅ Space for buttons */
+  height: 100vh;
   background: black;
 }
 
@@ -17,6 +16,7 @@
   z-index: 10;
 }
 
+/* Core orb styling */
 .chakra {
   position: absolute;
   width: 100px;
@@ -34,6 +34,16 @@
   font-size: 0.9rem;
 }
 
+.icon {
+  font-size: 1.5rem;
+}
+
+.label {
+  margin-top: 0.25rem;
+  line-height: 1.2;
+}
+
+/* Positioning each chakra */
 .spiritual {
   top: calc(50% - 120px);
   left: 50%;
@@ -58,24 +68,7 @@
   transform: translate(-50%, -50%);
 }
 
-.nextStep {
-  position: absolute;
-  top: calc(50% + 200px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-.buttons {
-  position: absolute;
-  top: calc(50% + 260px); /* below next step */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 1rem;
-  z-index: 10;
-}
-
+/* Animation */
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
