@@ -1,7 +1,7 @@
-import styles from '../styles/chakraGlow.module.css';
-import NextStepButton from './ZenJoystick/NextStepButton';
 
-const ChakraGlow = ({ bp, ikigai }) => {
+import styles from '../styles/chakraGlow.module.css';
+
+const ChakraGlow = () => {
   const chakraMap = [
     { name: 'Spiritual', icon: '🧘', question: 'Why do I exist?', style: styles.spiritual },
     { name: 'Bio', icon: '🌻', question: 'What energizes me?', style: styles.bio },
@@ -22,11 +22,6 @@ const ChakraGlow = ({ bp, ikigai }) => {
           </div>
         </div>
       ))}
-
-      {/* Next Step CTA */}
-      <div className={styles.nextStep}>
-        <NextStepButton bp={bp} ikigai={ikigai} />
-      </div>
     </div>
   );
 };
