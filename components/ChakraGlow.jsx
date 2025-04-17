@@ -1,48 +1,30 @@
-import styles from '../styles/chakraGlow.module.css';
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import React from "react";
+import styles from "../styles/chakraGlow.module.css";
 
-export default function ChakraGlow({ bpss = {}, ikigai }) {
-  const chakraList = [
-    { key: 'root', label: 'Bio', icon: '🌱', style: styles.bio },
-    { key: 'sacral', label: 'Social', icon: '🤝', style: styles.social },
-    { key: 'solar', label: 'Psycho', icon: '🧠', style: styles.psycho },
-    { key: 'third_eye', label: 'Spiritual', icon: '🕊️', style: styles.spiritual },
+export default function ChakraGlow({ bpss, ikigai }) {
+  const chakraData = [
+    { label: "Spiritual", icon: "🧘", description: "Why do I exist?", style: styles.spiritual },
+    { label: "Bio", icon: "🌻", description: "What energizes me?", style: styles.bio },
+    { label: "Psycho", icon: "🧠", description: "What inspires me?", style: styles.psycho },
+    { label: "Social", icon: "🤝", description: "Who needs me?", style: styles.social },
   ];
 
   return (
-    <div className={styles.orbitContainer}>
-      {chakraList.map((chakra) => (
-        <motion.div
-          key={chakra.key}
-          className={`${styles.chakra} ${chakra.style}`}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.6, 1, 0.6],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 2 + (bpss[chakra.key] ?? 0) * 0.2,
-            ease: 'easeInOut',
-          }}
-        >
-          <span className="text-xl">{chakra.icon}</span><br />
-          <span className="text-xs">{chakra.label}</span>
-        </motion.div>
+    <div className={styles.glowContainer}>
+      {chakraData.map((chakra, idx) => (
+        <div key={idx} className={`${styles.chakra} ${chakra.style}`}>
+          <div className={styles.chakraOrb} />
+          <div className="text-center text-white text-sm">
+            <div className="text-lg">{chakra.icon} {chakra.label}</div>
+            <div className="text-xs opacity-80">{chakra.description}</div>
+          </div>
+        </div>
       ))}
-
-      <motion.div
-        className={styles.ikigai}
-        animate={{ scale: [1, 1.12, 1], opacity: [0.8, 1, 0.8] }}
-        transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-      >
-        <span className="text-pink-400 text-xl font-bold">❤️ Ikigai</span>
-      </motion.div>
+      <div className={styles.ikigai}>
+        <div className="text-pink-400 text-2xl text-center animate-pulse">
+          ❤️ Ikigai
+        </div>
+      </div>
     </div>
   );
 }
-
-ChakraGlow.propTypes = {
-  bpss: PropTypes.object.isRequired,
-  ikigai: PropTypes.object,
-};
