@@ -1,14 +1,11 @@
+
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
-  safelist: ['animate-zenpulse'], // 👈 force it to keep this class
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       keyframes: {
         zenpulse: {
-          '0%, 100%': { transform: 'scale(1)', opacity: '0.4' },
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
           '50%': { transform: 'scale(1.2)', opacity: '1' },
         },
       },
