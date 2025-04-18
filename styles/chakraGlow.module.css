@@ -7,7 +7,6 @@
   background: black;
 }
 
-/* Centered ❤️ Ikigai */
 .ikigai {
   position: absolute;
   top: 50%;
@@ -19,7 +18,7 @@
   z-index: 10;
 }
 
-/* Core Chakra Orb Styling */
+/* Chakra Orbs */
 .chakra {
   position: absolute;
   width: 100px;
@@ -46,7 +45,7 @@
   line-height: 1.2;
 }
 
-/* Chakra Orb Positions */
+/* Chakra Positions */
 .spiritual {
   top: calc(50% - 120px);
   left: 50%;
@@ -71,7 +70,7 @@
   transform: translate(-50%, -50%);
 }
 
-/* CTA: Next Step Button */
+/* Next Step Button */
 .nextStep {
   position: absolute;
   top: calc(50% + 200px);
@@ -80,27 +79,20 @@
   z-index: 10;
 }
 
-/* Navigation Buttons: Positioned below NextStep */
+/* Navigation Buttons */
 .bottomButtons {
   position: absolute;
-  top: calc(50% + 300px);
+  top: calc(50% + 280px); /* Adjust this if needed */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.75rem;
   z-index: 10;
 }
 
-/* Mobile Responsive Adjustments */
-@media (max-width: 640px) {
-  .bottomButtons {
-    top: calc(50% + 360px);
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* Chakra Glow Animation */
+/* Chakra Pulse Animation */
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
