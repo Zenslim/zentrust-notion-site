@@ -1,11 +1,13 @@
+/* styles/chakraGlow.module.css */
 .cosmic {
   position: relative;
   width: 100%;
   height: 100vh;
   background: black;
+  overflow: hidden;
 }
 
-.ikigai {
+.centerMessage {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,19 +15,11 @@
   font-size: 1.5rem;
   color: #ff66b2;
   text-align: center;
-  z-index: 10;
-  text-align: center;
+  animation: fadeText 3s ease-in-out infinite;
+  z-index: 20;
 }
 
-.prompt {
-  font-size: 0.9rem;
-  color: #a0f0ff;
-  margin-top: 0.5rem;
-  opacity: 0.8;
-  animation: fadeInOut 4s ease-in-out infinite;
-}
-
-@keyframes fadeInOut {
+@keyframes fadeText {
   0%, 100% { opacity: 0.1; }
   50% { opacity: 1; }
 }
@@ -56,10 +50,26 @@
   line-height: 1.2;
 }
 
-.spiritual { top: calc(50% - 120px); left: 50%; transform: translate(-50%, -50%); }
-.bio { top: 50%; left: calc(50% - 120px); transform: translate(-50%, -50%); }
-.social { top: 50%; left: calc(50% + 120px); transform: translate(-50%, -50%); }
-.psycho { top: calc(50% + 120px); left: 50%; transform: translate(-50%, -50%); }
+.spiritual {
+  top: calc(50% - 120px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.bio {
+  top: 50%;
+  left: calc(50% - 120px);
+  transform: translate(-50%, -50%);
+}
+.social {
+  top: 50%;
+  left: calc(50% + 120px);
+  transform: translate(-50%, -50%);
+}
+.psycho {
+  top: calc(50% + 120px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .nextStep {
   position: absolute;
