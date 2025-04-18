@@ -32,11 +32,26 @@ const ChakraGlow = ({ bp, ikigai, setDrawer }) => {
       </div>
 
       {/* Working Drawer Buttons */}
-      <div className={styles.bottomButtons}>
-        <button onClick={() => setDrawer('timeline')} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
-        <button onClick={() => setDrawer('journal')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
-        <button onClick={() => setDrawer('radar')} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
-      </div>
+   <div className={styles.bottomButtons}>
+  <button
+    className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm"
+    onClick={() => setDrawer('timeline')}
+  >
+    🧘‍♂️ Timeline
+  </button>
+  <button
+    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm"
+    onClick={() => setDrawer('journal')}
+  >
+    📘 Journal
+  </button>
+  <button
+    className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm"
+    onClick={() => setDrawer('radar')}
+  >
+    🕸 Radar
+  </button>
+</div>
     </div>
   );
 };
