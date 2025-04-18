@@ -75,7 +75,7 @@ export default function JournalDrawer({ open, onClose }) {
             {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
               <button
                 key={emoji}
-                className={\`transition-all \${mood === emoji ? 'scale-125' : 'opacity-50'}\`}
+              className={`transition-all ${mood === emoji ? 'scale-125' : 'opacity-50'}`}
                 onClick={() => setMood(emoji)}
               >
                 {emoji}
