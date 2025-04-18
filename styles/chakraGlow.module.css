@@ -72,18 +72,20 @@
   transform: translate(-50%, -50%);
 }
 
-/* NextStep Button (green CTA) */
 .nextStep {
-  margin-top: 280px;
+  position: absolute;
+  top: calc(50% + 200px); /* just below Psycho */
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
 }
 
-/* Navigation buttons */
 .buttons {
-  margin-top: 2rem;
+  position: absolute;
+  top: calc(50% + 260px); /* just below Next Step */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 1rem;
   z-index: 10;
 }
