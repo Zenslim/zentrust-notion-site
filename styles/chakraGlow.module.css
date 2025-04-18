@@ -1,15 +1,13 @@
+/* chakraGlow.module.css */
+
 .cosmic {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 100px; /* for spacing below buttons */
 }
 
+/* Centered ❤️ Ikigai */
 .ikigai {
   position: absolute;
   top: 50%;
@@ -21,6 +19,7 @@
   z-index: 10;
 }
 
+/* Core Chakra Orb Styling */
 .chakra {
   position: absolute;
   width: 100px;
@@ -47,7 +46,7 @@
   line-height: 1.2;
 }
 
-/* Orb positioning */
+/* Chakra Orb Positions */
 .spiritual {
   top: calc(50% - 120px);
   left: 50%;
@@ -72,17 +71,19 @@
   transform: translate(-50%, -50%);
 }
 
+/* CTA: Next Step Button */
 .nextStep {
   position: absolute;
-  top: calc(50% + 200px); /* just below Psycho */
+  top: calc(50% + 200px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
 }
 
-.buttons {
+/* Navigation Buttons: Positioned below NextStep */
+.bottomButtons {
   position: absolute;
-  top: calc(50% + 260px); /* just below Next Step */
+  top: calc(50% + 300px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -90,7 +91,16 @@
   z-index: 10;
 }
 
-/* Chakra animation */
+/* Mobile Responsive Adjustments */
+@media (max-width: 640px) {
+  .bottomButtons {
+    top: calc(50% + 360px);
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Chakra Glow Animation */
 @keyframes pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
