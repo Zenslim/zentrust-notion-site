@@ -82,7 +82,7 @@
 /* Navigation Buttons */
 .bottomButtons {
   position: absolute;
-  top: calc(50% + 280px); /* Adjust this if needed */
+  top: calc(50% + 320px); /* Adjust this if needed */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
