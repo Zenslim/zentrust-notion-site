@@ -1,9 +1,9 @@
 // components/ZenJoystick/JournalDrawer.jsx
-import { useState, useEffect } from 'react'
-import { db } from '../../firebase'
-import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { useUserData } from '@/hooks/useUserData'
-import { FiMic } from 'react-icons/fi'
+import { useState, useEffect } from 'react';
+import { db } from '../../firebase';
+import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { useUserData } from '@/hooks/useUserData';
+import { FiMic } from 'react-icons/fi';
 
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
@@ -30,72 +30,79 @@ const PROMPTS = [
   "📿 What are you silently praying for?",
   "🌙 What did the night reveal?",
   "🪞 What’s your honest reflection?"
-]
+];
 
 export default function JournalDrawer({ open, onClose }) {
-  const user = useUserData()
-  const [note, setNote] = useState("")
-  const [mood, setMood] = useState("🤔 undefined")
-  const [saving, setSaving] = useState(false)
-  const [prompt, setPrompt] = useState(PROMPTS[0])
+  const user = useUserData();
+  const [note, setNote] = useState("");
+  const [mood, setMood] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [prompt, setPrompt] = useState("🧠 Speak your mind, let it go.");
+  const [showMoodPrompt, setShowMoodPrompt] = useState(false);
 
   useEffect(() => {
     if (open) {
-      const random = Math.floor(Math.random() * PROMPTS.length)
-      setPrompt(PROMPTS[random])
+      const random = Math.floor(Math.random() * PROMPTS.length);
+      setPrompt(PROMPTS[random]);
+      setShowMoodPrompt(false);
     }
-  }, [open])
+  }, [open]);
+
+  useEffect(() => {
+    if (note.trim().length > 5 && !showMoodPrompt) {
+      setShowMoodPrompt(true);
+    }
+  }, [note]);
 
   const handleSubmit = async () => {
-    if (!user?.uid || !note.trim()) return
-    setSaving(true)
+    if (!user?.uid || !note.trim()) return;
+    setSaving(true);
     try {
       await addDoc(collection(doc(db, "users", user.uid), "journal"), {
         note,
         mood: mood || "🤔 undefined",
         timestamp: serverTimestamp()
-      })
-      setNote("")
-      setMood("🤔 undefined")
-      onClose()
+      });
+      setNote("");
+      setMood(null);
+      onClose();
     } catch (e) {
-      console.error("Error saving journal:", e)
+      console.error("Error saving journal:", e);
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  };
 
   return (
-  <div className={`fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}
-
-    >
+    <div className={`fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}>
       <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
 
-      <textarea
-        className="w-full p-3 rounded bg-white text-black resize-none h-40"
-        placeholder="Speak from your heart or tap the mic..."
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-      />
-
-      {note.length > 3 && (
-        <>
-          <div className="mt-4 text-sm text-zinc-300">Would you like to tag a mood?</div>
-          <div className="mb-4 flex justify-center gap-4 text-3xl mt-2">
-            {['😡', '😔', '😐', '😊', '🤩'].map((emoji) => (
+      {showMoodPrompt && (
+        <div className="mb-4">
+          <p className="text-sm text-gray-400 mb-2">Would you like to tag a mood?</p>
+          <div className="flex justify-center gap-4 text-3xl">
+            {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
               <button
                 key={emoji}
-                className={`transform transition-all ${
-                  mood === emoji ? 'scale-125' : 'opacity-50'
-                }`}
+                className={`transition-all ${mood === emoji ? 'scale-125' : 'opacity-50'}`}
                 onClick={() => setMood(emoji)}
               >
                 {emoji}
               </button>
             ))}
           </div>
-        </>
+        </div>
       )}
+
+      <div className="mb-4 relative">
+        <textarea
+          className="w-full p-3 rounded bg-white text-black resize-none h-40"
+          placeholder="Speak from your heart or tap the mic..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
+        <FiMic className="absolute right-4 bottom-4 text-xl text-gray-500 hover:text-white cursor-pointer" />
+      </div>
 
       <div className="flex gap-3 mt-6">
         <button
@@ -103,7 +110,7 @@ export default function JournalDrawer({ open, onClose }) {
           disabled={saving}
           className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-lg"
         >
-          {saving ? 'Saving...' : 'Save Reflection'}
+          {saving ? "Saving..." : "Save Reflection"}
         </button>
         <button
           onClick={onClose}
@@ -113,5 +120,5 @@ export default function JournalDrawer({ open, onClose }) {
         </button>
       </div>
     </div>
-  )
+  );
 }
