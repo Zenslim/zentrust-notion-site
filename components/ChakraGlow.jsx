@@ -1,6 +1,7 @@
 // components/ChakraGlow.jsx
 import styles from '../styles/chakraGlow.module.css';
 import NextStepButton from './ZenJoystick/NextStepButton';
+import Link from 'next/link';
 
 const ChakraGlow = ({ bp, ikigai }) => {
   const chakraMap = [
@@ -33,9 +34,15 @@ const ChakraGlow = ({ bp, ikigai }) => {
 
       {/* Navigation Buttons */}
       <div className={styles.bottomButtons}>
-        <button className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
-        <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
+        <Link href="/timeline" passHref>
+          <a className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm text-center">🧘‍♂️ Timeline</a>
+        </Link>
+        <Link href="/journal" passHref>
+          <a className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm text-center">📘 Journal</a>
+        </Link>
+        <Link href="/radar" passHref>
+          <a className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm text-center">🕸 Radar</a>
+        </Link>
       </div>
     </div>
   );
