@@ -1,84 +1,88 @@
 
+/* styles/chakraGlow.module.css */
 .cosmic {
-  position: relative;
-  width: 100%;
-  height: 100vh;
   background: black;
+  color: white;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
-.staticRow {
+.inactiveRow {
   display: flex;
-  justify-content: center;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-.staticOrb {
-  width: 60px;
-  height: 60px;
-  background: #111;
-  border-radius: 50%;
+.inactiveOrb {
+  width: 50px;
+  height: 50px;
+  background: #222;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  opacity: 0.5;
 }
 
 .activeOrb {
-  width: 140px;
-  height: 140px;
-  background: #222;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
+  background: radial-gradient(circle at center, #4ade80, #065f46);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.3);
-  animation: pulse 3s infinite;
-  color: #ff66b2;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  animation: pulse 3s ease-in-out infinite;
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
 }
 
-.icon {
+.activeIcon {
   font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
-.reflect {
-  font-size: 1rem;
-  margin-top: 0.5rem;
+.activeQuestion {
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 150px;
 }
 
 .prompt {
-  font-size: 0.85rem;
-  color: #ccc;
-  margin-top: 1rem;
-  animation: fadeInOut 3s infinite;
-  cursor: pointer;
+  margin-top: 2rem;
 }
 
-.bottomButtons {
-  margin-top: 2rem;
-  display: flex;
-  gap: 1rem;
+.reflectBtn {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  padding: 0.7rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+  animation: fadeGlow 2s infinite ease-in-out;
 }
 
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
   }
   50% {
     transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.7);
   }
 }
 
-@keyframes fadeInOut {
+@keyframes fadeGlow {
   0%, 100% {
-    opacity: 0.2;
+    opacity: 0.8;
   }
   50% {
     opacity: 1;
