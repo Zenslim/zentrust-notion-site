@@ -1,6 +1,6 @@
 // components/ZenJoystick/JournalDrawer.jsx
 import { useState, useEffect } from 'react'
-import { db } from '@/lib/firebase'
+import { db } from '../../firebase'
 import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { useUserData } from '@/hooks/useUserData'
 import { FiMic } from 'react-icons/fi'
