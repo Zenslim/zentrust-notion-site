@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { db } from '../../firebase'
 import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { useUserData } from '@/hooks/useUserData'
@@ -34,20 +34,23 @@ const PROMPTS = [
 export default function JournalDrawer({ open, onClose }) {
   const user = useUserData()
   const [note, setNote] = useState("")
-  const [mood, setMood] = useState("🤔 undefined")
-  const [prompt, setPrompt] = useState("")
+  const [mood, setMood] = useState(null)
   const [saving, setSaving] = useState(false)
-  const [showMoodPrompt, setShowMoodPrompt] = useState(false)
+  const [prompt, setPrompt] = useState("🧠 Speak your mind, let it go.")
+  const [showMood, setShowMood] = useState(false)
 
   useEffect(() => {
     if (open) {
       const random = Math.floor(Math.random() * PROMPTS.length)
       setPrompt(PROMPTS[random])
-      setNote("")
-      setMood("🤔 undefined")
-      setShowMoodPrompt(false)
     }
   }, [open])
+
+  useEffect(() => {
+    if (note.trim().length > 5 && !showMood) {
+      setShowMood(true)
+    }
+  }, [note])
 
   const handleSubmit = async () => {
     if (!user?.uid || !note.trim()) return
@@ -55,12 +58,12 @@ export default function JournalDrawer({ open, onClose }) {
     try {
       await addDoc(collection(doc(db, "users", user.uid), "journal"), {
         note,
-        mood,
+        mood: mood || "🤔 undefined",
         timestamp: serverTimestamp()
       })
       setNote("")
-      setMood("🤔 undefined")
-      setShowMoodPrompt(false)
+      setMood(null)
+      setShowMood(false)
       onClose()
     } catch (e) {
       console.error("Error saving journal:", e)
@@ -69,53 +72,40 @@ export default function JournalDrawer({ open, onClose }) {
     }
   }
 
-  const handleNoteChange = (e) => {
-    const value = e.target.value
-    setNote(value)
-    if (value.length > 5 && !showMoodPrompt) {
-      setShowMoodPrompt(true)
-    }
-  }
-
   return (
     <div
-  className={
-    "fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 " +
-    (open ? "translate-x-0" : "translate-x-full")
-  }
->
+      className={
+        "fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 " +
+        (open ? "translate-x-0" : "translate-x-full")
+      }
+    >
       <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
 
-      {/* Mood Emoji Selector (appears after input) */}
-      {showMoodPrompt && (
-        <div className="mb-4">
-          <p className="text-sm text-gray-400 mb-2">Would you like to tag a mood?</p>
-          <div className="flex justify-center gap-4 text-3xl">
+      <textarea
+        className="w-full p-3 rounded bg-white text-black resize-none h-40"
+        placeholder="Speak from your heart or tap the mic..."
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+      />
+      <FiMic className="mt-2 text-xl text-gray-500 hover:text-white cursor-pointer" />
+
+      {showMood && (
+        <>
+          <p className="text-sm mt-4 text-gray-400">Would you like to tag a mood?</p>
+          <div className="mb-4 mt-2 flex justify-center gap-4 text-3xl">
             {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
               <button
                 key={emoji}
-                className={`transition-all ${mood === emoji ? "scale-125" : "opacity-50"}`}
+                className={`transition-all ${mood === emoji ? 'scale-125' : 'opacity-50'}`}
                 onClick={() => setMood(emoji)}
               >
                 {emoji}
               </button>
             ))}
           </div>
-        </div>
+        </>
       )}
 
-      {/* Reflection Input */}
-      <div className="mb-4 relative">
-        <textarea
-          className="w-full p-3 rounded bg-white text-black resize-none h-40"
-          placeholder="Speak from your heart or tap the mic..."
-          value={note}
-          onChange={handleNoteChange}
-        />
-        <FiMic className="absolute right-4 bottom-4 text-xl text-gray-500 hover:text-white cursor-pointer" />
-      </div>
-
-      {/* Action Buttons */}
       <div className="flex gap-3 mt-6">
         <button
           onClick={handleSubmit}
