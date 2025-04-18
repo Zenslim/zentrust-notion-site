@@ -1,9 +1,8 @@
 // components/ChakraGlow.jsx
 import styles from '../styles/chakraGlow.module.css';
 import NextStepButton from './ZenJoystick/NextStepButton';
-import Link from 'next/link';
 
-const ChakraGlow = ({ bp, ikigai }) => {
+const ChakraGlow = ({ bp, ikigai, setDrawer }) => {
   const chakraMap = [
     { name: 'Spiritual', icon: '🧘', question: 'Why do I exist?', style: styles.spiritual },
     { name: 'Bio', icon: '🌻', question: 'What energizes me?', style: styles.bio },
@@ -13,7 +12,7 @@ const ChakraGlow = ({ bp, ikigai }) => {
 
   return (
     <div className={styles.cosmic}>
-      {/* Centered Chakra Orbs */}
+      {/* Chakra Orbs and Ikigai */}
       <div className={styles.orbWrapper}>
         <div className={styles.ikigai}><span>❤️ Ikigai</span></div>
         {chakraMap.map((chakra, index) => (
@@ -32,17 +31,11 @@ const ChakraGlow = ({ bp, ikigai }) => {
         <NextStepButton bp={bp} ikigai={ikigai} />
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Working Drawer Buttons */}
       <div className={styles.bottomButtons}>
-        <Link href="/timeline" passHref>
-          <a className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm text-center">🧘‍♂️ Timeline</a>
-        </Link>
-        <Link href="/journal" passHref>
-          <a className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm text-center">📘 Journal</a>
-        </Link>
-        <Link href="/radar" passHref>
-          <a className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm text-center">🕸 Radar</a>
-        </Link>
+        <button onClick={() => setDrawer('timeline')} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
+        <button onClick={() => setDrawer('journal')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
+        <button onClick={() => setDrawer('radar')} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
       </div>
     </div>
   );
