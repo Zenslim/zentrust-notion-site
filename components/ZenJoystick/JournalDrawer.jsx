@@ -1,96 +1,111 @@
-
 // components/ZenJoystick/JournalDrawer.jsx
-import { useState, useEffect } from 'react';
-import { db } from '@/lib/firebase';
-import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { useUserData } from '@/hooks/useUserData';
+import { useState, useEffect } from 'react'
+import { db } from '@/lib/firebase'
+import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { useUserData } from '@/hooks/useUserData'
+import { FiMic } from 'react-icons/fi'
 
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
-  "🎯 What do you need most now?",
-  "🌀 What’s swirling in your mind?",
-  "🔥 What’s fueling your spirit today?",
-  "🌙 What’s quietly weighing on you?",
-  "💡 What insight has recently sparked?",
-  "🧠 What’s one thought that won’t leave you?",
-  "💬 What’s something you wish you could say?",
-  "🛤️ What path are you questioning?",
-  "🌻 What gave you energy today?",
-  "🌧️ What drained you recently?",
-  "✨ What did you notice but didn’t mention?",
-  "🔮 What feels uncertain ahead?",
-  "📌 What feels important but unspoken?",
-  "📖 What story are you telling yourself?",
-  "💞 What needs more attention in your life?",
-  "⚖️ What feels out of balance lately?",
-  "🧭 What are you moving toward?",
-  "🪞 What truth are you avoiding?",
-  "🔐 What are you keeping locked away?",
-  "🕊️ What are you ready to release?",
-  "🌅 What’s opening up in you now?",
-  "🧱 What’s feeling heavy to carry?",
-  "🌈 What feels like a quiet joy?"
-];
+  "🧘 What’s stirring inside you?",
+  "🎭 What are you holding back?",
+  "🔮 Share a glimpse of your inner world.",
+  "🧠 Speak your mind, let it go.",
+  "💔 What’s been hard lately?",
+  "🌅 What are you waking up to?",
+  "🔥 What’s lighting you up?",
+  "💤 What are you tired of?",
+  "🎯 What matters most today?",
+  "💬 What conversation’s stuck with you?",
+  "🌧️ What’s been heavy?",
+  "🌞 What gave you joy recently?",
+  "🌀 What feels uncertain?",
+  "🚪 What are you ready to release?",
+  "📣 What truth are you whispering?",
+  "🧩 What are you trying to figure out?",
+  "🎈 What would feel freeing?",
+  "💡 What insight just came to you?",
+  "👁 What are you noticing lately?",
+  "❤️ What’s your heart whispering?",
+  "📿 What are you silently praying for?",
+  "🌙 What did the night reveal?",
+  "🪞 What’s your honest reflection?"
+]
 
 export default function JournalDrawer({ open, onClose }) {
-  const user = useUserData();
-  const [rating, setRating] = useState(3);
-  const [note, setNote] = useState("");
-  const [saving, setSaving] = useState(false);
-  const [prompt, setPrompt] = useState("");
+  const user = useUserData()
+  const [note, setNote] = useState("")
+  const [mood, setMood] = useState("🙂")
+  const [saving, setSaving] = useState(false)
+  const [prompt, setPrompt] = useState("🧠 Speak your mind, let it go.")
 
   useEffect(() => {
     if (open) {
-      const randomPrompt = PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
-      setPrompt(randomPrompt);
+      const random = Math.floor(Math.random() * PROMPTS.length)
+      setPrompt(PROMPTS[random])
     }
-  }, [open]);
+  }, [open])
 
   const handleSubmit = async () => {
-    if (!user?.uid || !note.trim()) return;
-    setSaving(true);
+    if (!user?.uid || !note.trim()) return
+    setSaving(true)
     try {
       await addDoc(collection(doc(db, "users", user.uid), "journal"), {
         note,
-        rating,
+        mood,
         timestamp: serverTimestamp()
-      });
-      setNote("");
-      setRating(3);
-      onClose();
+      })
+      setNote("")
+      setMood("🙂")
+      onClose()
     } catch (e) {
-      console.error("Error saving journal:", e);
+      console.error("Error saving journal:", e)
     } finally {
-      setSaving(false);
+      setSaving(false)
     }
-  };
+  }
 
   return (
-    <div className={`fixed top-0 right-0 w-full md:w-[400px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}>
-      <h2 className="text-xl font-bold mb-4">{prompt}</h2>
-      <div className="mb-4">
-        <div className="text-2xl mb-2 text-center">
-          {["😞","😐","😊","😄","🤩"][rating - 1]}
-        </div>
-        <input type="range" min="1" max="5" value={rating} onChange={e => setRating(+e.target.value)} className="w-full" />
+    <div className={`fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}>
+      <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
+
+      <div className="mb-4 flex justify-center gap-4 text-3xl">
+        {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
+          <button
+            key={emoji}
+            className={`transform transition-all ${mood === emoji ? 'scale-125' : 'opacity-50'}`}
+            onClick={() => setMood(emoji)}
+          >
+            {emoji}
+          </button>
+        ))}
       </div>
-      <div className="mb-4">
+
+      <div className="mb-4 relative">
         <textarea
-          className="w-full p-2 rounded text-black"
-          rows="5"
-          placeholder="Write or speak your thoughts..."
+          className="w-full p-3 rounded bg-white text-black resize-none h-40"
+          placeholder="Speak from your heart or tap the mic..."
           value={note}
-          onChange={e => setNote(e.target.value)}
+          onChange={(e) => setNote(e.target.value)}
         />
+        <FiMic className="absolute right-4 bottom-4 text-xl text-gray-500 hover:text-white cursor-pointer" />
       </div>
-      <div className="flex gap-2">
-        <button onClick={handleSubmit} disabled={saving} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
+
+      <div className="flex gap-3 mt-6">
+        <button
+          onClick={handleSubmit}
+          disabled={saving}
+          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-lg"
+        >
           {saving ? "Saving..." : "Save Reflection"}
         </button>
-        <button onClick={onClose} className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded">
+        <button
+          onClick={onClose}
+          className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded text-lg"
+        >
           Cancel
         </button>
       </div>
     </div>
-  );
+  )
 }
