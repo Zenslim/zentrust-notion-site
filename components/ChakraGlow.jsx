@@ -1,59 +1,41 @@
-// components/ChakraGlow.jsx
 import { useEffect, useState } from 'react';
 import styles from '../styles/chakraGlow.module.css';
-import NextStepButton from './ZenJoystick/NextStepButton';
 
-const ChakraGlow = ({ bp, ikigai, setDrawer }) => {
-  const chakraMap = [
-    { name: 'Spiritual', icon: '🧘', question: 'Why do I exist?', style: styles.spiritual },
-    { name: 'Bio', icon: '🌻', question: 'What energizes me?', style: styles.bio },
-    { name: 'Social', icon: '🤝', question: 'Who needs me?', style: styles.social },
-    { name: 'Psycho', icon: '🧠', question: 'What inspires me?', style: styles.psycho }
-  ];
+const chakraStates = [
+  { icon: '🧘', question: 'Why do I exist?' },
+  { icon: '🌻', question: 'What energizes me?' },
+  { icon: '🤝', question: 'Who needs me?' },
+  { icon: '🧠', question: 'What inspires me?' }
+];
 
-  const questions = chakraMap.map(c => c.question);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+export default function ChakraGlow({ setDrawer }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [showPrompt, setShowPrompt] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentQuestion((prev) => (prev + 1) % questions.length);
-    }, 4000);
+      setActiveIndex((prev) => (prev + 1) % chakraStates.length);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className={styles.cosmic}>
-      {/* Animated Question Center */}
-      <div className={styles.centerMessage}>
-        <span>{questions[currentQuestion]}</span>
+      {/* Active Orb */}
+      <div className={styles.activeOrb}>
+        <div className={styles.icon}>{chakraStates[activeIndex].icon}</div>
+        <div className={styles.question}>{chakraStates[activeIndex].question}</div>
       </div>
 
-      {/* Chakra Orbs */}
-      <div className={styles.orbWrapper}>
-        {chakraMap.map((chakra, index) => (
-          <div key={index} className={`${styles.chakra} ${chakra.style}`}>
-            <div className={styles.icon}>{chakra.icon}</div>
-            <div className={styles.label}>
-              <strong>{chakra.name}</strong><br />
-              <span>{chakra.question}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Static Orbs */}
+      <div className={styles.staticOrb1}>{chakraStates[(activeIndex + 1) % 4].icon}</div>
+      <div className={styles.staticOrb2}>{chakraStates[(activeIndex + 2) % 4].icon}</div>
+      <div className={styles.staticOrb3}>{chakraStates[(activeIndex + 3) % 4].icon}</div>
 
-      {/* Next Step CTA */}
-      <div className={styles.nextStep}>
-        <NextStepButton bp={bp} ikigai={ikigai} />
-      </div>
-
-      {/* Navigation Buttons */}
-      <div className={styles.bottomButtons}>
-        <button onClick={() => setDrawer('timeline')} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm">🧘‍♂️ Timeline</button>
-        <button onClick={() => setDrawer('journal')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm">📘 Journal</button>
-        <button onClick={() => setDrawer('radar')} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm">🕸 Radar</button>
+      {/* Reflection Prompt */}
+      <div className={styles.prompt} onClick={() => setDrawer('journal')}>
+        ✨ Start with a reflection...
       </div>
     </div>
   );
-};
-
-export default ChakraGlow;
+}
