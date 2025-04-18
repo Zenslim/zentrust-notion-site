@@ -12,19 +12,19 @@ const ChakraGlow = ({ bp, ikigai }) => {
 
   return (
     <div className={styles.cosmic}>
-      {/* Ikigai Center */}
-      <div className={styles.ikigai}><span>❤️ Ikigai</span></div>
-
-      {/* BPSS Orbs */}
-      {chakraMap.map((chakra, index) => (
-        <div key={index} className={`${styles.chakra} ${chakra.style}`}>
-          <div className={styles.icon}>{chakra.icon}</div>
-          <div className={styles.label}>
-            <strong>{chakra.name}</strong><br />
-            <span>{chakra.question}</span>
+      {/* Centered Chakra Orbs */}
+      <div className={styles.orbWrapper}>
+        <div className={styles.ikigai}><span>❤️ Ikigai</span></div>
+        {chakraMap.map((chakra, index) => (
+          <div key={index} className={`${styles.chakra} ${chakra.style}`}>
+            <div className={styles.icon}>{chakra.icon}</div>
+            <div className={styles.label}>
+              <strong>{chakra.name}</strong><br />
+              <span>{chakra.question}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Next Step CTA */}
       <div className={styles.nextStep}>
