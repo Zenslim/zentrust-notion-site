@@ -66,10 +66,8 @@ export default function JournalDrawer({ open, onClose }) {
   }
 
   return (
-    <div
-      className={`fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 ${
-        open ? 'translate-x-0' : 'translate-x-full'
-      }`}
+  <div className={`fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}
+
     >
       <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
 
