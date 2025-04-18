@@ -1,21 +1,8 @@
 .cosmic {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100vh;
-  padding: 2rem 1rem;
-  background: black;
-  position: relative;
-}
-
-.orbWrapper {
   position: relative;
   width: 100%;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
+  background: black;
 }
 
 .ikigai {
@@ -27,6 +14,20 @@
   color: #ff66b2;
   text-align: center;
   z-index: 10;
+  text-align: center;
+}
+
+.prompt {
+  font-size: 0.9rem;
+  color: #a0f0ff;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+  animation: fadeInOut 4s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 1; }
 }
 
 .chakra {
@@ -56,20 +57,25 @@
 }
 
 .spiritual { top: calc(50% - 120px); left: 50%; transform: translate(-50%, -50%); }
-.bio       { top: 50%; left: calc(50% - 120px); transform: translate(-50%, -50%); }
-.social    { top: 50%; left: calc(50% + 120px); transform: translate(-50%, -50%); }
-.psycho    { top: calc(50% + 120px); left: 50%; transform: translate(-50%, -50%); }
+.bio { top: 50%; left: calc(50% - 120px); transform: translate(-50%, -50%); }
+.social { top: 50%; left: calc(50% + 120px); transform: translate(-50%, -50%); }
+.psycho { top: calc(50% + 120px); left: 50%; transform: translate(-50%, -50%); }
 
 .nextStep {
+  position: absolute;
+  top: calc(50% + 200px);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  margin-top: 2rem;
 }
 
 .bottomButtons {
+  position: absolute;
+  top: calc(50% + 260px);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
   z-index: 10;
 }
 
