@@ -1,21 +1,9 @@
-.cosmic {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100vh;
-  padding: 2rem 1rem;
-  background: black;
-  position: relative;
-}
 
-.orbWrapper {
+.cosmic {
   position: relative;
   width: 100%;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
+  background: black;
 }
 
 .ikigai {
@@ -55,21 +43,45 @@
   line-height: 1.2;
 }
 
-.spiritual { top: calc(50% - 120px); left: 50%; transform: translate(-50%, -50%); }
-.bio       { top: 50%; left: calc(50% - 120px); transform: translate(-50%, -50%); }
-.social    { top: 50%; left: calc(50% + 120px); transform: translate(-50%, -50%); }
-.psycho    { top: calc(50% + 120px); left: 50%; transform: translate(-50%, -50%); }
+.spiritual {
+  top: calc(50% - 120px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bio {
+  top: 50%;
+  left: calc(50% - 120px);
+  transform: translate(-50%, -50%);
+}
+
+.social {
+  top: 50%;
+  left: calc(50% + 120px);
+  transform: translate(-50%, -50%);
+}
+
+.psycho {
+  top: calc(50% + 120px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .nextStep {
+  position: absolute;
+  top: calc(50% + 200px);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  margin-top: 2rem;
 }
 
 .bottomButtons {
+  position: absolute;
+  top: calc(50% + 300px);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
   z-index: 10;
 }
 
