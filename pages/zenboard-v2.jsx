@@ -1,12 +1,13 @@
-import ChakraGlowV2 from '@/components/ChakraGlowV2';
-import CelestialBackground from '@/components/ZenJoystick/CelestialBackground';
+
+import CelestialBackground from '@/components/CelestialBackground';
+import PlanetMessenger from '@/components/PlanetMessenger';
 
 export default function ZenboardV2() {
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden bg-black">
       <CelestialBackground />
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen">
-        <ChakraGlowV2 />
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <PlanetMessenger />
       </div>
     </div>
   );
