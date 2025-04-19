@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 
-const messages = [
+const compliments = [
   { icon: "🌞", text: "You radiate warmth effortlessly." },
   { icon: "🌈", text: "Your presence colors the world." },
   { icon: "🌟", text: "You shine just by being you." },
@@ -30,20 +29,59 @@ const messages = [
 
 export default function PlanetMessenger() {
   const [current, setCurrent] = useState(0);
+  const [showWhisper, setShowWhisper] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % messages.length);
+    const cycle = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % compliments.length);
     }, 5000);
-    return () => clearInterval(interval);
+    return () => clearInterval(cycle);
   }, []);
 
-  const { icon, text } = messages[current];
+  useEffect(() => {
+    const whisperTimeout = setTimeout(() => {
+      setShowWhisper(true);
+    }, 10000);
+    return () => clearTimeout(whisperTimeout);
+  }, []);
+
+  const { icon, text } = compliments[current];
 
   return (
-    <div className="flex flex-col items-center justify-center text-center animate-pulse transition-all duration-700 ease-in-out">
-      <div className="text-6xl mb-4">{icon}</div>
-      <p className="text-white text-2xl sm:text-3xl max-w-md">{text}</p>
+    <div className="flex flex-col items-center justify-center text-center transition-all duration-700 ease-in-out">
+      <div
+        className="text-6xl mb-4 animate-pulse transform scale-50 opacity-0 animate-fade-in"
+        style={{ animation: 'fadeZoom 5s ease-in-out forwards' }}
+      >
+        {icon}
+      </div>
+      <p className="text-white text-2xl sm:text-3xl max-w-md animate-fade-in">{text}</p>
+
+      {showWhisper && (
+        <p className="mt-6 text-sm text-gray-400 animate-fade-in delay-1000">
+          Even noticing is enough.
+        </p>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeZoom {
+          0% {
+            opacity: 0;
+            transform: scale(0.3);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-fade-in {
+          animation: fadeZoom 5s ease-in-out forwards;
+        }
+      `}</style>
     </div>
   );
 }
