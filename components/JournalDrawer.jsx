@@ -4,6 +4,11 @@ import { doc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { useUserData } from '@/hooks/useUserData'
 import { FiMic } from 'react-icons/fi'
 
+const SpeechRecognition =
+  typeof window !== 'undefined' &&
+  (window.SpeechRecognition || window.webkitSpeechRecognition)
+const mic = SpeechRecognition ? new SpeechRecognition() : null
+
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
   "🧘 What truth are you avoiding?",
@@ -22,7 +27,7 @@ const PROMPTS = [
   "📌 What truth are you circling around?",
   "👁️ What do you see that others don’t?",
   "🫧 What are you feeling but not saying?",
-  "🚪What chapter wants to close today?",
+  "🚪 What chapter wants to close today?",
   "⛩️ What’s sacred for you right now?",
   "🫀 Where does your heart want to go?",
   "🛸 What feels out of place today?",
@@ -36,7 +41,7 @@ export default function JournalDrawer({ open, onClose }) {
   const [note, setNote] = useState("")
   const [mood, setMood] = useState(null)
   const [saving, setSaving] = useState(false)
-  const [prompt, setPrompt] = useState("")
+  const [prompt, setPrompt] = useState("🧠 Speak your mind, let it go.")
   const [showMood, setShowMood] = useState(false)
   const [isListening, setIsListening] = useState(false)
 
@@ -54,30 +59,22 @@ export default function JournalDrawer({ open, onClose }) {
   }, [note])
 
   const handleMicClick = () => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-    if (!SpeechRecognition) {
-      alert("Speech recognition not supported.")
-      return
+    if (!mic) return alert("Speech recognition not supported on this browser.")
+    mic.lang = 'en-US'
+    mic.interimResults = false
+    mic.maxAlternatives = 1
+
+    mic.onresult = (event) => {
+      const transcript = event.results[0][0].transcript
+      setNote((prev) => prev + ' ' + transcript)
     }
 
-    const recognition = new SpeechRecognition()
-    recognition.lang = 'en-US'
-    recognition.interimResults = false
-    recognition.maxAlternatives = 1
-
-    recognition.onstart = () => setIsListening(true)
-    recognition.onend = () => setIsListening(false)
-    recognition.onerror = (e) => {
+    mic.onend = () => {
       setIsListening(false)
-      console.error("Mic error:", e)
     }
 
-    recognition.onresult = (e) => {
-      const transcript = e.results[0][0].transcript
-      setNote(prev => prev + (prev && !prev.endsWith(' ') ? ' ' : '') + transcript)
-    }
-
-    recognition.start()
+    setIsListening(true)
+    mic.start()
   }
 
   const handleSubmit = async () => {
@@ -111,20 +108,24 @@ export default function JournalDrawer({ open, onClose }) {
 
       <textarea
         className="w-full p-3 rounded bg-white text-black resize-none h-40"
-        placeholder="Type or speak freely..."
+        placeholder="Type or speak freely…"
         value={note}
         onChange={(e) => setNote(e.target.value)}
       />
 
-      <div className="flex justify-end mb-4">
-        <button onClick={handleMicClick}>
-          <FiMic className={`text-2xl ${isListening ? 'text-red-400 animate-pulse' : 'text-gray-400 hover:text-white'}`} />
+      <div className="flex justify-end my-2">
+        <button onClick={handleMicClick} className="focus:outline-none">
+          <FiMic
+            className={`text-2xl ${
+              isListening ? 'text-red-400 animate-pulse' : 'text-gray-400 hover:text-white'
+            }`}
+          />
         </button>
       </div>
 
       {showMood && (
         <>
-          <p className="text-sm mt-2 text-gray-400">Would you like to tag a mood?</p>
+          <p className="text-sm mt-4 text-gray-400">Would you like to tag a mood?</p>
           <div className="mb-4 mt-2 flex justify-center gap-4 text-3xl">
             {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
               <button
