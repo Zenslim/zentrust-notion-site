@@ -1,38 +1,29 @@
+
 import React, { useEffect, useState } from 'react';
+import styles from '../styles/planetMessenger.module.css';
 
 const messages = [
-  "Your presence matters.",
-  "It’s okay to rest.",
-  "You are part of this vast dance.",
-  "The cosmos celebrates you.",
-  "Stillness holds power."
+  { icon: "🌟", text: "Your presence matters." },
+  { icon: "🪐", text: "Embrace the journey." },
+  { icon: "🌌", text: "You are part of the cosmos." },
+  { icon: "✨", text: "Light travels far—so do you." }
 ];
 
 export default function PlanetMessenger() {
-  const [index, setIndex] = useState(0);
-  const [fade, setFade] = useState(true);
+  const [current, setCurrent] = useState(messages[0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % messages.length);
-        setFade(true);
-      }, 600);
-    }, 5000);
+      const next = messages[Math.floor(Math.random() * messages.length)];
+      setCurrent(next);
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="transition-all duration-700 ease-in-out"
-         style={{
-           transform: fade ? 'scale(1.2)' : 'scale(0)',
-           opacity: fade ? 1 : 0,
-           transition: 'all 1s ease-in-out'
-         }}>
-      <div className="rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white text-xl font-semibold shadow-lg w-64 h-64 flex items-center justify-center">
-        {messages[index]}
-      </div>
+    <div className={styles.planetContainer}>
+      <div className={styles.planet}>{current.icon}</div>
+      <div className={styles.message}>{current.text}</div>
     </div>
   );
 }

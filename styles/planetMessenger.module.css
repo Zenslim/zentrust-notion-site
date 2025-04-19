@@ -1,0 +1,31 @@
+
+.planetContainer {
+  text-align: center;
+  animation: fadeInOut 7s infinite;
+}
+
+.planet {
+  font-size: 4rem;
+  transform: scale(0);
+  animation: zoomFade 7s infinite;
+}
+
+.message {
+  font-size: 1.5rem;
+  color: white;
+  margin-top: 1rem;
+}
+
+@keyframes zoomFade {
+  0% { transform: scale(0); opacity: 0; }
+  20% { transform: scale(1); opacity: 1; }
+  80% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
