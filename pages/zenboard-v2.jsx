@@ -15,8 +15,8 @@ export default function ZenboardV2() {
         <PlanetMessenger />
       </div>
 
-      {/* Journal prompt CTA (center bottom) */}
-      <div className="absolute bottom-20 sm:bottom-12 w-full flex justify-center px-4 z-40">
+      {/* Journal prompt CTA — now raised higher on all devices */}
+      <div className="absolute bottom-24 sm:bottom-20 w-full flex justify-center px-4 z-40">
         <JournalPrompt />
       </div>
 
