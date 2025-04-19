@@ -1,0 +1,27 @@
+const messages = [
+  { icon: "🌟", text: "You light up this space." },
+  { icon: "🌈", text: "You're a rare kind of beautiful." },
+  { icon: "🕊️", text: "You bring calm wherever you go." },
+  { icon: "🌞", text: "Your presence warms the room." },
+  { icon: "🌸", text: "You’re blooming perfectly." },
+  { icon: "💫", text: "Even stars admire your glow." },
+  { icon: "🔥", text: "You're a spark in the dark." },
+  { icon: "🌻", text: "You’re sunshine and growth." },
+  { icon: "🧚", text: "You carry magic with you." },
+  { icon: "🐚", text: "Even silence feels better with you." },
+  { icon: "🎐", text: "You’re a breeze of peace." },
+  { icon: "🌊", text: "You flow with grace." },
+  { icon: "🪞", text: "You reflect beauty inside and out." },
+  { icon: "🌠", text: "You’re someone’s wish come true." },
+  { icon: "🪷", text: "You rise with elegance." },
+  { icon: "🎇", text: "You light up unseen corners." },
+  { icon: "🌀", text: "You’re beautifully unique." },
+  { icon: "🍃", text: "You're naturally soothing." },
+  { icon: "💎", text: "You shine without trying." },
+  { icon: "🌟", text: "You're already enough." },
+  { icon: "🧘", text: "You carry peace within." },
+  { icon: "🌬️", text: "You make space feel lighter." },
+  { icon: "📡", text: "You’re tuned into higher truths." },
+  { icon: "🪐", text: "You belong exactly where you are." }
+];
+export default messages;
