@@ -2,76 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- Slow breathing pulse --- */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-.animate-pulse-slow {
-  animation: pulse-slow 6s ease-in-out infinite;
+@keyframes pulse-red {
+  0%, 100% { background-position: center; opacity: 0.8; }
+  50% { background-position: bottom; opacity: 1; }
 }
 
-/* --- Floating orbit animation --- */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+@keyframes mist-float {
+  0%, 100% { background-position: top; opacity: 0.9; }
+  50% { background-position: bottom; opacity: 0.95; }
 }
 
-/* --- Smooth fade-in --- */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.animate-fade-in {
-  animation: fade-in 2s ease-in-out forwards;
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
 }
 
-/* --- Slide-up entry --- */
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-slide-up {
-  animation: slide-up 1.2s ease-out forwards;
+@keyframes sparkle {
+  0%, 100% { background-position: center; }
+  50% { background-position: left; }
 }
 
-/* --- Scale-up soft pop --- */
-@keyframes scale-up {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.mood-angry {
+  background: radial-gradient(#ff6b6b, #3b0a0a);
+  animation: pulse-red 8s infinite ease-in-out;
 }
-.animate-scale-up {
-  animation: scale-up 1.3s ease-in-out forwards;
+
+.mood-sad {
+  background: radial-gradient(#5f9ea0, #1a1a40);
+  animation: mist-float 10s infinite ease-in-out;
+}
+
+.mood-neutral {
+  background: radial-gradient(#444, #111);
+}
+
+.mood-happy {
+  background: radial-gradient(#ffe066, #ffd700);
+  animation: glow-pulse 8s infinite ease-in-out;
+}
+
+.mood-joy {
+  background: radial-gradient(#b28dff, #2c0050);
+  animation: sparkle 10s infinite ease-in-out;
 }
