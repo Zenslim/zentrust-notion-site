@@ -1,15 +1,4 @@
-import { useEffect, useState } from 'react';
-
-const moonPhases = [
-  { phase: "🌑 New Moon", range: [0, 1.84566] },
-  { phase: "🌒 Waxing Crescent", range: [1.84566, 5.53699] },
-  { phase: "🌓 First Quarter", range: [5.53699, 9.22831] },
-  { phase: "🌔 Waxing Gibbous", range: [9.22831, 12.91963] },
-  { phase: "🌕 Full Moon", range: [12.91963, 16.61096] },
-  { phase: "🌖 Waning Gibbous", range: [16.61096, 20.30228] },
-  { phase: "🌗 Last Quarter", range: [20.30228, 23.99361] },
-  { phase: "🌘 Waning Crescent", range: [23.99361, 27.68493] }
-];
+import React, { useEffect, useState } from 'react';
 
 const compliments = [
   "Your radiance is fully seen.",
@@ -27,34 +16,39 @@ const compliments = [
 function getMoonPhase() {
   const now = new Date();
   const synodicMonth = 29.53058867;
-  const newMoonRef = new Date("2023-01-21T20:53:00Z").getTime();
-  const daysSinceNew = (now.getTime() - newMoonRef) / (1000 * 60 * 60 * 24);
-  const current = daysSinceNew % synodicMonth;
-  return moonPhases.find(mp => current >= mp.range[0] && current < mp.range[1])?.phase || "🌑 New Moon";
-}
+  const newMoon = new Date("2023-01-21T20:53:00Z").getTime();
+  const daysSinceNew = (now.getTime() - newMoon) / (1000 * 60 * 60 * 24);
+  const currentPhase = daysSinceNew % synodicMonth;
 
-function getSeasonReflection() {
-  const month = new Date().getMonth();
-  if (month <= 1 || month === 11) return "Rest is part of the rhythm.";
-  if (month <= 4) return "You’re allowed to bloom slowly.";
-  if (month <= 7) return "Shine without hesitation.";
-  return "Let go like autumn leaves.";
+  if (currentPhase < 1.84566) return "🌑 New Moon";
+  if (currentPhase < 5.53699) return "🌒 Waxing Crescent";
+  if (currentPhase < 9.22831) return "🌓 First Quarter";
+  if (currentPhase < 12.91963) return "🌔 Waxing Gibbous";
+  if (currentPhase < 16.61096) return "🌕 Full Moon";
+  if (currentPhase < 20.30228) return "🌖 Waning Gibbous";
+  if (currentPhase < 23.99361) return "🌗 Last Quarter";
+  if (currentPhase < 27.68493) return "🌘 Waning Crescent";
+  return "🌑 New Moon";
 }
 
 export default function MoonSync() {
-  const [phase, setPhase] = useState('');
-  const [compliment, setCompliment] = useState('');
+  const [phase, setPhase] = useState("");
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     setPhase(getMoonPhase());
-    const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
-    setCompliment(randomCompliment);
+
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % compliments.length);
+    }, 8000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="absolute top-2 right-4 text-right text-xs sm:text-sm text-gray-300 z-40">
-      <div>{phase}</div>
-      <div className="text-[11px] text-gray-400 italic">{compliment}</div>
+    <div className="text-right text-sm text-gray-400 leading-snug max-w-xs">
+      <div>{compliments[index]}</div>
+      <div className="opacity-60 text-xs mt-1">Moon phase: {phase}</div>
     </div>
   );
 }
