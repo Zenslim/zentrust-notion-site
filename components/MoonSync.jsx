@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const compliments = [
   "Your radiance is fully seen.",
   "You arrived right on time.",
-  "The moon sees you. So do we.",
+  "The moon sees you. So do the stars.",
   "Everything about you is welcome here.",
   "The stars are listening.",
   "You glow without trying.",
