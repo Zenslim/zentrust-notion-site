@@ -10,23 +10,43 @@ export default function VoiceMic({ onTranscript }) {
   const [isListening, setIsListening] = useState(false);
 
   const handleClick = () => {
-    if (!mic) return alert("Speech recognition is not supported in this browser.");
+    if (!mic) {
+      alert("Speech recognition is not supported in this browser.");
+      return;
+    }
 
-    mic.lang = 'en-US';
-    mic.interimResults = false;
-    mic.maxAlternatives = 1;
+    try {
+      mic.lang = 'en-US';
+      mic.interimResults = false;
+      mic.maxAlternatives = 1;
 
-    mic.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      onTranscript(transcript);
-    };
+      mic.onstart = () => {
+        console.log("🎙️ Mic started...");
+      };
 
-    mic.onend = () => {
-      setIsListening(false);
-    };
+      mic.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        console.log("🎤 Transcript:", transcript);
+        onTranscript(transcript);
+      };
 
-    setIsListening(true);
-    mic.start();
+      mic.onerror = (event) => {
+        console.error("🚨 Mic error:", event.error);
+        alert("Microphone error: " + event.error);
+        setIsListening(false);
+      };
+
+      mic.onend = () => {
+        console.log("🛑 Mic ended.");
+        setIsListening(false);
+      };
+
+      setIsListening(true);
+      mic.start();
+    } catch (err) {
+      console.error("⚠️ Mic failed:", err);
+      alert("Something went wrong while accessing the mic.");
+    }
   };
 
   return (
