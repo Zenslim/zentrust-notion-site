@@ -1,73 +1,46 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CelestialBackground from '@/components/CelestialBackground';
 import PlanetMessenger from '@/components/PlanetMessenger';
 import CosmicWhisper from '@/components/CosmicWhisper';
 import MoonSync from '@/components/MoonSync';
-
-const prompts = [
-  "🌠 Click to whisper something to the stars…",
-  "🤫 Click to type what you can’t say.",
-  "🕳 Click to send a thought into the void.",
-  "🏠💬 Click to give your feeling a home.",
-  "✍️✨ Click to leave a trace in the stars.",
-  "🌞 A small click could change your day.",
-  "🕊️ Tap here. Your soul knows why.",
-  "✨ Click to begin your quiet magic.",
-  "🗝️ There’s something waiting behind this click.",
-  "🎯 You showed up. That’s enough. Want to go deeper?",
-  "🌬️ Click to exhale.",
-  "🪞 Click to meet yourself.",
-  "🪷 Click to unfold what’s quietly waiting.",
-  "🚪🌙 Click to open the quiet door.",
-  "🫂 Click if you’ve ever wanted to be understood.",
-  "💡 A whisper becomes light when shared.",
-  "🧩💖 Click to feel a little more whole.",
-  "🌌 Click to drift inward.",
-  "🎐 Tap to hear your inner wind chime.",
-  "🌱 Click to plant today’s feeling.",
-  "🫧 Click to float with your thoughts.",
-  "📜 Click to write what your soul remembers.",
-  "🌀 Click to swirl inward gently.",
-  "🌈 Click to reflect a quiet truth."
-];
+import JournalPrompt from '@/components/JournalPrompt';
+import JournalDrawer from '@/components/ZenJoystick/JournalDrawer';
 
 export default function ZenboardV2() {
-  const router = useRouter();
-  const [promptIndex, setPromptIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPromptIndex((prev) => (prev + 1) % prompts.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const [isJournalOpen, setIsJournalOpen] = useState(false);
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-black overflow-hidden z-0">
-      {/* Starfield background */}
+    <div className="relative w-full h-screen overflow-hidden bg-black">
+      {/* Celestial starfield */}
       <CelestialBackground />
 
-      {/* Central message and glowing button */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+      {/* Compliment Message at Center */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
         <PlanetMessenger />
+      </div>
+
+      {/* Journal prompt CTA — visible above fold */}
+      <div className="absolute bottom-24 sm:bottom-20 w-full flex justify-center px-4 z-40">
         <button
-          onClick={() => router.push('/zenboard?journal=true')}
-          className="mt-8 bg-gradient-to-r from-indigo-600 via-purple-700 to-indigo-600 text-white px-6 py-3 rounded-full shadow-lg text-sm sm:text-base animate-pulse transition-all hover:scale-105 duration-300"
+          onClick={() => setIsJournalOpen(true)}
+          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white py-3 px-6 rounded-full text-lg sm:text-xl shadow-lg transition-all duration-300"
         >
-          {prompts[promptIndex]}
+          <JournalPrompt />
         </button>
       </div>
 
-      {/* Moon + season message */}
-      <div className="absolute bottom-3 right-4 z-30 text-right">
+      {/* Moon phase (bottom right) */}
+      <div className="absolute bottom-3 right-4 z-20">
         <MoonSync />
       </div>
 
-      {/* Whisper compliment in top right */}
-      <div className="absolute top-3 right-4 z-30 text-sm text-gray-400 italic">
+      {/* Whisper (top right) */}
+      <div className="absolute top-3 right-4 z-20">
         <CosmicWhisper />
       </div>
+
+      {/* Journal Drawer (side panel) */}
+      <JournalDrawer open={isJournalOpen} onClose={() => setIsJournalOpen(false)} />
     </div>
   );
 }
