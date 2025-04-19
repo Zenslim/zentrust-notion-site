@@ -28,16 +28,10 @@ export default function ZenboardV2() {
     <JournalPrompt />
   </button>
 </div>
-      {/* Moon phase (bottom right) */}
-      <div className="absolute bottom-3 right-4 z-20">
-        <MoonSync />
-      </div>
-
-      {/* Whisper (top right) */}
-      <div className="absolute top-3 right-4 z-20">
-        <CosmicWhisper />
-      </div>
-
+  {/* Compliment + moon phase */}
+<div className="absolute top-3 right-4 text-right z-20">
+  <MoonSync />
+</div>
       {/* Journal Drawer (side panel) */}
       <JournalDrawer open={isJournalOpen} onClose={() => setIsJournalOpen(false)} />
     </div>
