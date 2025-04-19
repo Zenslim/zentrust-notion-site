@@ -97,11 +97,18 @@ export default function JournalDrawer({ open, onClose }) {
     }
   }
 
+  const bgClass = mood === "😡" ? "bg-mood-angry"
+    : mood === "😔" ? "bg-mood-sad"
+    : mood === "😐" ? "bg-mood-neutral"
+    : mood === "😊" ? "bg-mood-happy"
+    : mood === "🤩" ? "bg-mood-joyful"
+    : ""
+
   return (
     <div
       className={
-        "fixed top-0 right-0 w-full md:w-[420px] h-full bg-zinc-900 text-white p-6 z-40 transition-transform duration-300 " +
-        (open ? "translate-x-0" : "translate-x-full")
+        "fixed top-0 right-0 w-full md:w-[420px] h-full text-white p-6 z-40 transition-transform duration-300 " +
+        (open ? "translate-x-0" : "translate-x-full") + " " + bgClass
       }
     >
       <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
@@ -114,23 +121,21 @@ export default function JournalDrawer({ open, onClose }) {
       />
 
       <div className="flex justify-end my-2">
-        <button onClick={handleMicClick} className="focus:outline-none" title="Speak your truth">
+        <button onClick={handleMicClick} className="focus:outline-none">
           <FiMic
-            className={`text-2xl transition-all ${
-              isListening ? 'text-red-400 animate-pulse' : 'text-gray-400 hover:text-white'
-            }`}
+            className={\`text-2xl \${isListening ? 'text-red-400 animate-pulse' : 'text-gray-400 hover:text-white'}\`}
           />
         </button>
       </div>
 
       {showMood && (
         <>
-          <p className="text-sm mt-4 text-gray-400">Would you like to tag a mood?</p>
+          <p className="text-sm mt-4 text-gray-200">Would you like to tag a mood?</p>
           <div className="mb-4 mt-2 flex justify-center gap-4 text-3xl">
             {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
               <button
                 key={emoji}
-                className={`transition-all ${mood === emoji ? 'scale-125' : 'opacity-50'}`}
+                className={\`transition-all \${mood === emoji ? 'scale-125' : 'opacity-50'}\`}
                 onClick={() => setMood(emoji)}
               >
                 {emoji}
