@@ -6,38 +6,44 @@ import { FiMic } from 'react-icons/fi'
 
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
-  "🧘 What’s stirring inside you?",
-  "🎭 What are you holding back?",
-  "🔮 Share a glimpse of your inner world.",
-  "🧠 Speak your mind, let it go.",
-  "💔 What’s been hard lately?",
-  "🌅 What are you waking up to?",
-  "🔥 What’s lighting you up?",
-  "💤 What are you tired of?",
-  "🎯 What matters most today?",
-  "💬 What conversation’s stuck with you?",
-  "🌧️ What’s been heavy?",
-  "🌞 What gave you joy recently?",
-  "🌀 What feels uncertain?",
-  "🚪 What are you ready to release?",
-  "📣 What truth are you whispering?",
-  "🧩 What are you trying to figure out?",
-  "🎈 What would feel freeing?",
-  "💡 What insight just came to you?",
-  "👁 What are you noticing lately?",
-  "❤️ What’s your heart whispering?",
-  "📿 What are you silently praying for?",
-  "🌙 What did the night reveal?",
-  "🪞 What’s your honest reflection?"
+  "🧘 What truth are you avoiding?",
+  "🔥 What’s burning inside today?",
+  "🌊 What are you ready to release?",
+  "✨ What made you feel alive lately?",
+  "🌙 What are you holding in silence?",
+  "💡 What insight is asking to be heard?",
+  "🕊️ What does peace look like for you?",
+  "🌱 What is quietly growing within you?",
+  "🎭 What mask are you tired of wearing?",
+  "🌀 What’s spiraling in your mind today?",
+  "💭 What’s the thought you keep revisiting?",
+  "📿 What are you being called to remember?",
+  "🌤️ What would lighten your load right now?",
+  "📌 What truth are you circling around?",
+  "👁️ What do you see that others don’t?",
+  "🫧 What are you feeling but not saying?",
+  "🚪 What chapter wants to close today?",
+  "⛩️ What’s sacred for you right now?",
+  "🫀 Where does your heart want to go?",
+  "🛸 What feels out of place today?",
+  "🗺️ What direction feels right, even if unclear?",
+  "🧬 What story are you rewriting now?",
+  "📖 What wants to be expressed today?"
 ]
+
+const SpeechRecognition = typeof window !== "undefined"
+  ? window.SpeechRecognition || window.webkitSpeechRecognition
+  : null;
+const recognition = SpeechRecognition ? new SpeechRecognition() : null;
 
 export default function JournalDrawer({ open, onClose }) {
   const user = useUserData()
   const [note, setNote] = useState("")
   const [mood, setMood] = useState(null)
   const [saving, setSaving] = useState(false)
-  const [prompt, setPrompt] = useState("🧠 Speak your mind, let it go.")
+  const [prompt, setPrompt] = useState(PROMPTS[0])
   const [showMood, setShowMood] = useState(false)
+  const [listening, setListening] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -51,6 +57,29 @@ export default function JournalDrawer({ open, onClose }) {
       setShowMood(true)
     }
   }, [note])
+
+  const startListening = () => {
+    if (!recognition) return
+    recognition.continuous = false
+    recognition.interimResults = false
+    recognition.lang = 'en-US'
+
+    recognition.onstart = () => setListening(true)
+    recognition.onend = () => setListening(false)
+    recognition.onerror = (e) => {
+      console.error("Mic error", e)
+      setListening(false)
+    }
+
+    recognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map(result => result[0].transcript)
+        .join('')
+      setNote(prev => (prev + " " + transcript).trim())
+    }
+
+    recognition.start()
+  }
 
   const handleSubmit = async () => {
     if (!user?.uid || !note.trim()) return
@@ -87,7 +116,12 @@ export default function JournalDrawer({ open, onClose }) {
         value={note}
         onChange={(e) => setNote(e.target.value)}
       />
-      <FiMic className="mt-2 text-xl text-gray-500 hover:text-white cursor-pointer" />
+      <FiMic
+        onClick={startListening}
+        className={`mt-2 text-xl cursor-pointer ${
+          listening ? "text-green-400 animate-pulse" : "text-gray-500 hover:text-white"
+        }`}
+      />
 
       {showMood && (
         <>
