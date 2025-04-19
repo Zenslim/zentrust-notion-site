@@ -16,7 +16,7 @@ export default function ZenboardV2() {
       </div>
 
       {/* Journal prompt CTA (center bottom) */}
-      <div className="absolute bottom-10 w-full flex justify-center z-20">
+      <div className="absolute bottom-20 sm:bottom-12 w-full flex justify-center px-4 z-40">
         <JournalPrompt />
       </div>
 
