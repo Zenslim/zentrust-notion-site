@@ -1,32 +1,41 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const whispers = [
   "Even noticing is enough.",
-  "You don’t need to fix anything.",
-  "Just showing up is sacred.",
-  "This moment is already whole.",
-  "You’ve arrived. That’s enough.",
-  "Presence is your gift.",
-  "No rush. No pressure.",
-  "Your breath is your anchor.",
   "Thank you for arriving.",
-  "Nothing more is needed."
-]
+  "Nothing more is needed.",
+  "This moment is whole.",
+  "No need to do anything.",
+  "You’re already here.",
+  "Presence is your gift.",
+  "You matter without effort.",
+];
 
 export default function CosmicWhisper() {
-  const [index, setIndex] = useState(0)
+  const [visible, setVisible] = useState(false);
+  const [whisper, setWhisper] = useState(whispers[0]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % whispers.length)
-    }, 12000) // rotates every 12 seconds
+    const show = setTimeout(() => {
+      setVisible(true);
+    }, 5000); // Show after 5s
 
-    return () => clearInterval(timer)
-  }, [])
+    const interval = setInterval(() => {
+      const next = Math.floor(Math.random() * whispers.length);
+      setWhisper(whispers[next]);
+    }, 7000); // Rotate every 7s
+
+    return () => {
+      clearTimeout(show);
+      clearInterval(interval);
+    };
+  }, []);
+
+  if (!visible) return null;
 
   return (
-    <div className="text-xs sm:text-sm text-gray-400 italic transition-opacity duration-1000 ease-in-out">
-      {whispers[index]}
+    <div className="mt-4 text-center text-sm text-gray-400 animate-fade-in-slow transition-opacity duration-700">
+      {whisper}
     </div>
-  )
+  );
 }
