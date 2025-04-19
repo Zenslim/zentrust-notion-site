@@ -1,30 +1,37 @@
-
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const messages = [
-  "It's okay to rest.",
   "Your presence matters.",
-  "You are stardust becoming aware.",
-  "The universe breathes with you.",
-  "There’s light in simply being."
+  "It’s okay to rest.",
+  "You are part of this vast dance.",
+  "The cosmos celebrates you.",
+  "Stillness holds power."
 ];
 
 export default function PlanetMessenger() {
   const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex(prev => (prev + 1) % messages.length);
+      setFade(false);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % messages.length);
+        setFade(true);
+      }, 600);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="text-white text-center space-y-6">
-      <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-green-400 to-indigo-600 animate-pulse shadow-2xl transition-all duration-1000 transform scale-110">
-        <div className="flex items-center justify-center h-full text-xl font-bold">
-          {messages[index]}
-        </div>
+    <div className="transition-all duration-700 ease-in-out"
+         style={{
+           transform: fade ? 'scale(1.2)' : 'scale(0)',
+           opacity: fade ? 1 : 0,
+           transition: 'all 1s ease-in-out'
+         }}>
+      <div className="rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white text-xl font-semibold shadow-lg w-64 h-64 flex items-center justify-center">
+        {messages[index]}
       </div>
     </div>
   );

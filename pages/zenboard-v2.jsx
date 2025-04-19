@@ -1,4 +1,3 @@
-
 import CelestialBackground from '@/components/CelestialBackground';
 import PlanetMessenger from '@/components/PlanetMessenger';
 
