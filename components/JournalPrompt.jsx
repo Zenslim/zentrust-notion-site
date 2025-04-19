@@ -1,6 +1,4 @@
-
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
 const prompts = [
   "✨ Click to whisper something to the stars…",
@@ -31,7 +29,6 @@ const prompts = [
 
 export default function JournalPrompt() {
   const [current, setCurrent] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,11 +38,8 @@ export default function JournalPrompt() {
   }, []);
 
   return (
-    <div
-      className="text-center text-white text-lg sm:text-xl cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-500"
-      onClick={() => router.push('/zenboard?journal=true')}
-    >
+    <span className="block text-white text-base sm:text-lg font-medium text-center">
       {prompts[current]}
-    </div>
+    </span>
   );
 }
