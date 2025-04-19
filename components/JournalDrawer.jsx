@@ -114,9 +114,9 @@ export default function JournalDrawer({ open, onClose }) {
       />
 
       <div className="flex justify-end my-2">
-        <button onClick={handleMicClick} className="focus:outline-none">
+        <button onClick={handleMicClick} className="focus:outline-none" title="Speak your truth">
           <FiMic
-            className={`text-2xl ${
+            className={`text-2xl transition-all ${
               isListening ? 'text-red-400 animate-pulse' : 'text-gray-400 hover:text-white'
             }`}
           />
