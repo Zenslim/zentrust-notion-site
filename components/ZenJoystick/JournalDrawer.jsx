@@ -136,7 +136,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
       />
 
       <div className="flex justify-end my-2">
-        <VoiceMic setNote={setNote} />
+       <VoiceMic onTranscript={(text) => setNote((prev) => prev + ' ' + text)} />
       </div>
 
       {showMood && (
