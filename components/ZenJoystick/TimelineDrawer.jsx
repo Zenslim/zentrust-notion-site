@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { format } from "date-fns";
+import styles from '@/styles/timelineDrawer.module.css';
 
 export default function TimelineDrawer({ open, onClose, uid }) {
   const [entries, setEntries] = useState([]);
