@@ -1,3 +1,4 @@
+// Force rebuild for next-pwa activation
 const path = require('path');
 const withPWA = require('next-pwa')({
   dest: 'public',
