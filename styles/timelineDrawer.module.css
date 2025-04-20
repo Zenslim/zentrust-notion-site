@@ -1,0 +1,16 @@
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 20px 5px rgba(138, 43, 226, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px 10px rgba(186, 85, 211, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px 5px rgba(138, 43, 226, 0.6);
+  }
+}
+
+.glowBorder {
+  animation: glowPulse 2s ease-in-out 1;
+  border-radius: 8px;
+}
