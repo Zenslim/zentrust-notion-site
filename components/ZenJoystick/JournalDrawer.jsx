@@ -51,7 +51,7 @@ const MIRROR_HINTS = [
   "🔮 After 3 entries, your reflection begins to glow."
 ]
 
-export default function JournalDrawer({ open, onClose }) {
+export default function JournalDrawer({ open, onClose, onNewEntry }) {
   const user = useUserData()
   const [note, setNote] = useState("")
   const [mood, setMood] = useState(null)
@@ -89,23 +89,32 @@ export default function JournalDrawer({ open, onClose }) {
   }, [])
 
   const handleSubmit = async () => {
-    if (!user?.uid || !note.trim()) return
-    setSaving(true)
-    try {
-      await addDoc(collection(doc(db, "users", user.uid), "journal"), {
-        note,
-        mood: mood || "🤔 undefined",
-        timestamp: serverTimestamp()
-      })
-      setNote("")
-      setMood(null)
-      setShowMood(false)
-      onClose()
-    } catch (e) {
-      console.error("Error saving journal:", e)
-    } finally {
-      setSaving(false)
-    }
+  if (!user?.uid || !note.trim()) return;
+  setSaving(true);
+
+  try {
+    await addDoc(collection(doc(db, "users", user.uid), "journal"), {
+      note,
+      mood: mood || "🤔 undefined",
+      timestamp: serverTimestamp()
+    });
+
+    // Fetch updated count after saving
+    const snapshot = await getDocs(collection(doc(db, "users", user.uid), "journal"));
+    const count = snapshot.size;
+
+    // Trigger parent with entry count (used in Zenboard)
+    if (onNewEntry) onNewEntry(count);
+
+    // Reset state
+    setNote("");
+    setMood(null);
+    setShowMood(false);
+    onClose();
+  } catch (e) {
+    console.error("Error saving journal:", e);
+  } finally {
+    setSaving(false);
   }
 
   return (
