@@ -1,52 +1,68 @@
-
-import { useEffect, useState } from "react"
-import { db } from "@/firebase"
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore"
+import { useEffect, useState } from "react";
+import { db } from "@/firebase";
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { format } from "date-fns";
 
 export default function TimelineDrawer({ open, onClose, uid }) {
-  const [entries, setEntries] = useState([])
+  const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    if (!uid) return
+    if (!uid) return;
 
     const fetchTimeline = async () => {
-      const entriesRef = collection(db, "bp", uid, "entries")
-      const q = query(entriesRef, orderBy("timestamp", "desc"), limit(7))
-      const snapshot = await getDocs(q)
-      const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-      setEntries(docs)
-    }
+      const entriesRef = collection(db, "bp", uid, "entries");
+      const q = query(entriesRef, orderBy("timestamp", "desc"), limit(7));
+      const snapshot = await getDocs(q);
+      const docs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setEntries(docs);
+    };
 
-    fetchTimeline()
-  }, [uid])
+    fetchTimeline();
+  }, [uid]);
 
   return (
-    <div className={`
-      fixed top-0 right-0 w-96 h-full bg-zinc-900 text-white shadow-lg transform transition-transform duration-300 z-40
-      ${open ? "translate-x-0" : "translate-x-full"}
-    `}>
-      <div className="p-4 border-b border-zinc-800 flex justify-between items-center">
-        <h2 className="text-lg font-bold">🕰️ 7-Day Reflection Timeline</h2>
-        <button onClick={onClose} className="text-sm hover:text-red-400">✖</button>
+    <div
+      className={`fixed top-0 right-0 w-full sm:w-96 h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white shadow-xl transform transition-transform duration-300 z-50 ${
+        open ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
+      <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-700">
+        <h2 className="text-xl font-semibold tracking-wide">📖 Your Living Timeline</h2>
+        <button
+          onClick={onClose}
+          className="text-sm text-zinc-400 hover:text-white transition"
+        >
+          Close ✕
+        </button>
       </div>
 
-      <div className="p-4 space-y-4 overflow-y-auto">
-        {entries.length === 0 && <p className="text-zinc-400">No entries yet...</p>}
-
-        {entries.map(entry => (
-          <div key={entry.id} className="bg-zinc-800 p-3 rounded shadow hover:bg-zinc-700">
-            <div className="text-sm text-zinc-400">
-              {new Date(entry.timestamp?.toDate?.() || Date.now()).toLocaleString()}
-            </div>
-            <div className="text-xs mt-1">
-              🕊 Spiritual: {entry.spiritual} | 🤝 Social: {entry.social} | 🧠 Psycho: {entry.psycho} | 🌞 Bio: {entry.bio}
-            </div>
-            <div className="mt-1 text-sm italic text-zinc-300">
-              “{entry.note?.slice(0, 120) || "No thoughts"}”
-            </div>
+      <div className="px-6 py-4 space-y-6 overflow-y-auto max-h-[calc(100vh-80px)]">
+        {entries.length === 0 ? (
+          <div className="text-zinc-400 italic text-center mt-20">
+            No reflections yet — your story is just beginning.
           </div>
-        ))}
+        ) : (
+          entries.map((entry) => {
+            const date = entry.timestamp?.toDate?.();
+            const formattedDate = date ? format(date, "MMMM d, yyyy • h:mm a") : "Timeless moment";
+
+            return (
+              <div
+                key={entry.id}
+                className="border border-zinc-700 p-4 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition"
+              >
+                <div className="text-sm text-zinc-400">{formattedDate}</div>
+                <div className="mt-2 text-base leading-relaxed whitespace-pre-line">
+                  {entry.text || "A quiet moment. Words unspoken, but felt."}
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
-  )
+  );
 }
