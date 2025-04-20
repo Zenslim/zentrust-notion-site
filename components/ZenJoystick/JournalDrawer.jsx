@@ -128,7 +128,7 @@ export default function JournalDrawer({ open, onClose }) {
           <p className="text-sm mt-4 text-gray-400">Would you like to tag a mood?</p>
           <div className="mb-4 mt-2 flex justify-center gap-4 text-3xl">
             {["😡", "😔", "😐", "😊", "🤩"].map((emoji) => (
-              <button key={emoji} className={\`transition-all \${mood === emoji ? 'scale-125' : 'opacity-50'}\`} onClick={() => setMood(emoji)}>
+   <button key={emoji} className={\`transition-all \${mood === emoji ? 'scale-125' : 'opacity-50'}\`} onClick={() => setMood(emoji)}>
                 {emoji}
               </button>
             ))}
