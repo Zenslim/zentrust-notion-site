@@ -56,8 +56,6 @@ export default function Home() {
       </p>
 
       {/* Begin Journey Button */}
-      // ... inside your return:
-
 <BeginJourneyButton onClick={() => {
   window.location.href = "/signin"
 }} />
