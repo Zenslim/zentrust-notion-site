@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import IntentionModal from "./IntentionModal"
 
 const phrases = [
   "🔮 You’re not here by accident.",
@@ -18,8 +19,9 @@ const phrases = [
   "🧘‍♀️ Start with presence. That’s enough.",
 ]
 
-export default function BeginJourneyButton({ onClick }) {
+export default function BeginJourneyButton() {
   const [index, setIndex] = useState(0)
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,10 +30,14 @@ export default function BeginJourneyButton({ onClick }) {
     return () => clearInterval(interval)
   }, [])
 
+  const handleComplete = () => {
+    window.location.href = "/signin"
+  }
+
   return (
     <div className="flex flex-col items-center text-center space-y-2">
       <button
-        onClick={onClick}
+        onClick={() => setModalOpen(true)}
         className="px-6 py-3 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300 rounded-full shadow-lg animate-pulse"
       >
         🌿 Begin Your Journey
@@ -39,6 +45,7 @@ export default function BeginJourneyButton({ onClick }) {
       <div className="text-sm text-zinc-300 transition-opacity duration-1000 min-h-[1.5rem]">
         {phrases[index]}
       </div>
+      <IntentionModal isOpen={modalOpen} onComplete={handleComplete} />
     </div>
   )
 }
