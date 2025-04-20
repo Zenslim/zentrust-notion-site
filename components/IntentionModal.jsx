@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { db, auth } from "@/firebase"
+import { collection, addDoc, serverTimestamp } from "firebase/firestore"
 
 export default function IntentionModal({ isOpen, onComplete }) {
   const [phase, setPhase] = useState("ask")
@@ -6,8 +8,23 @@ export default function IntentionModal({ isOpen, onComplete }) {
   useEffect(() => {
     if (!isOpen) return
     setPhase("ask")
-    const timeout = setTimeout(() => {
+
+    const timeout = setTimeout(async () => {
       setPhase("affirm")
+
+      const uid = auth?.currentUser?.uid || "guest"
+      const entryRef = collection(db, "bp", uid, "entries")
+
+      try {
+        await addDoc(entryRef, {
+          type: "intention",
+          timestamp: serverTimestamp(),
+          message: "🌿 Visitor began their journey",
+        })
+      } catch (err) {
+        console.error("Failed to write guest entry:", err)
+      }
+
       setTimeout(onComplete, 2500)
     }, 3000)
 
