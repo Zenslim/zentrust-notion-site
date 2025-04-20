@@ -158,5 +158,6 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
         </button>
       </div>
     </div>
-  )
+  );
 }
+
