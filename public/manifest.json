@@ -1,11 +1,12 @@
-// public/manifest.json
 {
   "name": "ZenTrust",
   "short_name": "ZenTrust",
+  "description": "A sacred space for reflection, regeneration, and collective awakening.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#000000",
-  "theme_color": "#00FF00",
+  "theme_color": "#4F46E5",
   "icons": [
     {
       "src": "/favicon-192x192.png",
