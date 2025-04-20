@@ -56,9 +56,7 @@ export default function Home() {
       </p>
 
       {/* Begin Journey Button */}
-      import BeginJourneyButton from "@/components/BeginJourneyButton"
-
-// ... inside your return:
+      // ... inside your return:
 
 <BeginJourneyButton onClick={() => {
   window.location.href = "/signin"
