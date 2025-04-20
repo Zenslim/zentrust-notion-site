@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 import IntentionModal from "./IntentionModal"
 
 const phrases = [
@@ -22,16 +23,20 @@ const phrases = [
 export default function BeginJourneyButton() {
   const [index, setIndex] = useState(0)
   const [modalOpen, setModalOpen] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex(prev => (prev + 1) % phrases.length)
+      setIndex((prev) => (prev + 1) % phrases.length)
     }, 7000)
     return () => clearInterval(interval)
   }, [])
 
   const handleComplete = () => {
-    window.location.href = "/signin"
+    setModalOpen(false)
+    setTimeout(() => {
+      router.push("/signin")
+    }, 200) // let state settle
   }
 
   return (
