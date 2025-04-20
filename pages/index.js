@@ -1,3 +1,4 @@
+import BeginJourneyButton from "@/components/BeginJourneyButton"
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 py-12 space-y-8">
