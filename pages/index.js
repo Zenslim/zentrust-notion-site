@@ -55,12 +55,13 @@ export default function Home() {
       </p>
 
       {/* Begin Journey Button */}
-      <a
-        href="/signin"
-        className="mt-4 px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition"
-      >
-        🧘 Begin Your Journey
-      </a>
+      import BeginJourneyButton from "@/components/BeginJourneyButton"
+
+// ... inside your return:
+
+<BeginJourneyButton onClick={() => {
+  window.location.href = "/signin"
+}} />
     </div>
   )
 }
