@@ -1,16 +1,13 @@
-// components/ZenJoystick/TimelineDrawer.jsx
-
 import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { format } from "date-fns";
-import styles from '@/styles/timelineDrawer.module.css';
 
 export default function TimelineDrawer({ open, onClose, uid }) {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    if (!uid) return;
+    if (!uid || !open) return;
 
     const fetchTimeline = async () => {
       const entriesRef = collection(db, "bp", uid, "entries");
@@ -24,20 +21,15 @@ export default function TimelineDrawer({ open, onClose, uid }) {
     };
 
     fetchTimeline();
-  }, [uid]);
+  }, [uid, open]);
 
   return (
     <div
-      className={`fixed top-0 right-0 w-full sm:w-96 h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white shadow-xl transform transition-transform duration-300 z-50 ${
-        open ? "translate-x-0" : "translate-x-full"
-      }`}
+      className={\`fixed top-0 right-0 w-full sm:w-96 h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white shadow-xl transform transition-transform duration-300 z-50 \${open ? "translate-x-0" : "translate-x-full"}\`}
     >
       <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-700">
         <h2 className="text-xl font-semibold tracking-wide">📖 Your Living Timeline</h2>
-        <button
-          onClick={onClose}
-          className="text-sm text-zinc-400 hover:text-white transition"
-        >
+        <button onClick={onClose} className="text-sm text-zinc-400 hover:text-white transition">
           Close ✕
         </button>
       </div>
@@ -51,15 +43,11 @@ export default function TimelineDrawer({ open, onClose, uid }) {
           entries.map((entry) => {
             const date = entry.timestamp?.toDate?.();
             const formattedDate = date ? format(date, "MMMM d, yyyy • h:mm a") : "Timeless moment";
-
             return (
-              <div
-                key={entry.id}
-                className="border border-zinc-700 p-4 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition"
-              >
+              <div key={entry.id} className="border border-zinc-700 p-4 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition">
                 <div className="text-sm text-zinc-400">{formattedDate}</div>
                 <div className="mt-2 text-base leading-relaxed whitespace-pre-line">
-                  {entry.text || "A quiet moment. Words unspoken, but felt."}
+                  {entry.note || entry.message || "A quiet moment. Words unspoken, but felt."}
                 </div>
               </div>
             );
