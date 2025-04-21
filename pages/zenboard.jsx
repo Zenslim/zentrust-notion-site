@@ -7,15 +7,19 @@ import JournalPrompt from '@/components/JournalPrompt';
 import JournalDrawer from '@/components/ZenJoystick/JournalDrawer';
 import TimelineDrawer from '@/components/ZenJoystick/TimelineDrawer';
 import TimelineButton from '@/components/ZenJoystick/TimelineButton';
+import GlowAudio from '@/components/GlowAudio';
 
 export default function Zenboard({ uid }) {
   const [isJournalOpen, setIsJournalOpen] = useState(false);
   const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   const [entryCount, setEntryCount] = useState(0);
   const [timelineUnlocked, setTimelineUnlocked] = useState(false);
+  const [triggerWhisper, setTriggerWhisper] = useState(false);
 
   const handleNewEntry = (newTotal) => {
     setEntryCount(newTotal);
+    setTriggerWhisper(true);
+    setTimeout(() => setTriggerWhisper(false), 500);
 
     if (newTotal === 3 && !timelineUnlocked) {
       setTimelineUnlocked(true);
@@ -55,6 +59,8 @@ export default function Zenboard({ uid }) {
 
       <TimelineDrawer open={isTimelineOpen} onClose={() => setIsTimelineOpen(false)} uid={uid} />
       <TimelineButton visible={entryCount >= 3} onClick={() => setIsTimelineOpen(true)} />
+
+      <GlowAudio triggerWhisper={triggerWhisper} />
     </div>
   );
 }
