@@ -12,13 +12,16 @@ export default function Zenboard({ uid }) {
   const [isJournalOpen, setIsJournalOpen] = useState(false);
   const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   const [entryCount, setEntryCount] = useState(0);
-  const [timelineShown, setTimelineShown] = useState(false);
+  const [timelineUnlocked, setTimelineUnlocked] = useState(false);
 
   const handleNewEntry = (newTotal) => {
     setEntryCount(newTotal);
-    if (newTotal >= 3 && !timelineShown) {
-      setTimelineShown(true);
-      setTimeout(() => setIsTimelineOpen(true), 600);
+
+    if (newTotal === 3 && !timelineUnlocked) {
+      setTimelineUnlocked(true);
+      setTimeout(() => {
+        setIsTimelineOpen(true);
+      }, 1000);
     }
   };
 
