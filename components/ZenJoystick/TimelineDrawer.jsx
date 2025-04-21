@@ -11,7 +11,8 @@ export default function TimelineDrawer({ open, onClose, uid }) {
 
     const fetchTimeline = async () => {
       try {
-        const entriesRef = collection(db, "bp", uid, "entries");
+        const entriesRef = collection(db, "users", uid, "journal")
+);
         const q = query(entriesRef, orderBy("timestamp", "desc"), limit(7));
         const snapshot = await getDocs(q);
         const docs = snapshot.docs.map((doc) => ({
