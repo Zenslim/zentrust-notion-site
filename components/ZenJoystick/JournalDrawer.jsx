@@ -181,8 +181,14 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
       </div>
 
       {entries.length > 0 && (
-  <div className="flex flex-col overflow-y-auto max-h-[38vh] mt-8 border-t border-zinc-700 pt-4 pb-24 space-y-4">
-    <div className="space-y-4">
+  <>
+    {/* Glow appears immediately */}
+    <div className="mt-8">
+      <ReflectionGlow entries={entries} />
+    </div>
+
+    {/* Reflections below in scrollable area */}
+    <div className="mt-4 space-y-4 overflow-y-auto max-h-[30vh] border-t border-zinc-700 pt-4">
       {entries.map((entry) => {
         const date = entry.timestamp?.toDate?.();
         const formattedDate = date ? format(date, "MMM d, yyyy • h:mm a") : "⏳ Timeless";
@@ -195,6 +201,9 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
           </div>
         );
       })}
+    </div>
+  </>
+)}
     </div>
     <div className="mt-6">
       <ReflectionGlow entries={entries} />
