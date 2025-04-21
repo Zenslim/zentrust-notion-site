@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react"
+
 export default function BeginJourneyButton() {
   const phrases = [
     "🔮 You’re not here by accident.",
