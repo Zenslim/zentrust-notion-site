@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import {
-  doc,
   collection,
   addDoc,
   getDocs,
-  serverTimestamp,
+  orderBy,
+  query,
+  serverTimestamp
 } from 'firebase/firestore';
 import { useUserData } from '@/hooks/useUserData';
 import VoiceMic from '@/components/VoiceMic';
+import { format } from 'date-fns';
 
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
@@ -56,7 +58,7 @@ const MIRROR_HINTS = [
   "🔮 After 3 entries, your reflection begins to glow.",
 ];
 
-export default function JournalDrawer({ open, onClose, onNewEntry }) {
+export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
   const user = useUserData();
   const [note, setNote] = useState('');
   const [mood, setMood] = useState(null);
@@ -65,11 +67,13 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
   const [showMood, setShowMood] = useState(false);
   const [saveLabel, setSaveLabel] = useState(CTA_LABELS[0]);
   const [mirrorHint, setMirrorHint] = useState(MIRROR_HINTS[0]);
+  const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     if (open) {
       const random = Math.floor(Math.random() * PROMPTS.length);
       setPrompt(PROMPTS[random]);
+      fetchEntries();  // load reflections every time it opens
     }
   }, [open]);
 
@@ -93,25 +97,33 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
     };
   }, []);
 
+  const fetchEntries = async () => {
+    if (!user?.uid) return;
+    const ref = collection(db, 'users', user.uid, 'journal');
+    const q = query(ref, orderBy('timestamp', 'desc'));
+    const snapshot = await getDocs(q);
+    const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    setEntries(docs);
+  };
+
   const handleSubmit = async () => {
     if (!user?.uid || !note.trim()) return;
     setSaving(true);
     try {
-      const journalRef = collection(db, 'bp', user.uid, 'entries');
-      await addDoc(journalRef, {
+      const ref = collection(db, 'users', user.uid, 'journal');
+      await addDoc(ref, {
         note,
         mood: mood || '🤔 undefined',
         timestamp: serverTimestamp(),
       });
 
-      const snapshot = await getDocs(journalRef);
+      const snapshot = await getDocs(ref);
       const count = snapshot.size;
-      if (onNewEntry) onNewEntry(count);
-
       setNote('');
       setMood(null);
       setShowMood(false);
-      onClose();
+      await fetchEntries();
+      if (onNewEntry) onNewEntry(count);
     } catch (e) {
       console.error('Error saving journal:', e);
     } finally {
@@ -136,7 +148,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
       />
 
       <div className="flex justify-end my-2">
-       <VoiceMic onTranscript={(text) => setNote((prev) => prev + ' ' + text)} />
+        <VoiceMic onTranscript={(text) => setNote((prev) => prev + ' ' + text)} />
       </div>
 
       {showMood && (
@@ -146,9 +158,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
             {['😡', '😔', '😐', '😊', '🤩'].map((emoji) => (
               <button
                 key={emoji}
-                className={`transition-all ${
-                  mood === emoji ? 'scale-125' : 'opacity-50'
-                }`}
+                className={\`transition-all \${mood === emoji ? 'scale-125' : 'opacity-50'}\`}
                 onClick={() => setMood(emoji)}
               >
                 {emoji}
@@ -171,6 +181,23 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
           {saving ? 'Saving...' : saveLabel}
         </button>
       </div>
+
+      {entries.length > 0 && (
+        <div className="mt-8 space-y-4 max-h-[30vh] overflow-y-auto border-t border-zinc-700 pt-4">
+          {entries.map((entry) => {
+            const date = entry.timestamp?.toDate?.();
+            const formattedDate = date ? format(date, "MMM d, yyyy • h:mm a") : "⏳ Timeless";
+            return (
+              <div key={entry.id} className="bg-zinc-800 p-3 rounded-lg shadow">
+                <div className="text-sm text-gray-400 mb-1">🗓 {formattedDate}</div>
+                <div className="whitespace-pre-line text-blue-100 text-base">
+                  {entry.note}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
