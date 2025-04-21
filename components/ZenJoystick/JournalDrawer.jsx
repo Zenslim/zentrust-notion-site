@@ -97,7 +97,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry }) {
     if (!user?.uid || !note.trim()) return;
     setSaving(true);
     try {
-      const journalRef = collection(doc(db, 'users', user.uid), 'journal');
+      const journalRef = collection(db, 'bp', user.uid, 'entries');
       await addDoc(journalRef, {
         note,
         mood: mood || '🤔 undefined',
