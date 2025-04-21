@@ -5,105 +5,67 @@ import {
   addDoc,
   getDocs,
   orderBy,
+  serverTimestamp,
   query,
-  serverTimestamp
+  Timestamp
 } from 'firebase/firestore';
 import { useUserData } from '@/hooks/useUserData';
 import VoiceMic from '@/components/VoiceMic';
 import { format } from 'date-fns';
-
-const PROMPTS = [
-  "🌿 What’s alive in you right now?",
-  "🧘 What truth are you avoiding?",
-  "🔥 What’s burning inside today?",
-  "🌊 What are you ready to release?",
-  "✨ What made you feel alive lately?",
-  "🌙 What are you holding in silence?",
-  "💡 What insight is asking to be heard?",
-  "🕊️ What does peace look like for you?",
-  "🌱 What is quietly growing within you?",
-  "🎭 What mask are you tired of wearing?",
-  "🌀 What’s spiraling in your mind today?",
-  "💭 What’s the thought you keep revisiting?",
-  "📿 What are you being called to remember?",
-  "🌤️ What would lighten your load right now?",
-  "📌 What truth are you circling around?",
-  "👁️ What do you see that others don’t?",
-  "🫧 What are you feeling but not saying?",
-  "🚪 What chapter wants to close today?",
-  "⛩️ What’s sacred for you right now?",
-  "🫀 Where does your heart want to go?",
-  "🛸 What feels out of place today?",
-  "🗺️ What direction feels right, even if unclear?",
-  "🧬 What story are you rewriting now?",
-  "📖 What wants to be expressed today?",
-];
-
-const CTA_LABELS = [
-  "🛸 Send to Your Future Self",
-  "🌌 Whisper to the Stars",
-  "🌿 Save & Feel Lighter",
-  "🎒 Carry This Forward",
-  "🪞 Reflect & Remember",
-  "🌱 Grow Into Your Purpose",
-  "💡 Reveal What Keeps You Going",
-  "✨ Awaken Your Why",
-];
-
-const MIRROR_HINTS = [
-  "🪞 Speak or type 3 reflections to meet the deeper you.",
-  "🗣️ Use voice or hand — your mirror responds at 3.",
-  "✨ 3 reflections unlock your inner mirror.",
-  "📖 Write or speak 3 times — your mirror awakens.",
-  "🔮 After 3 entries, your reflection begins to glow.",
-];
 
 export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
   const user = useUserData();
   const [note, setNote] = useState('');
   const [mood, setMood] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [prompt, setPrompt] = useState(PROMPTS[0]);
-  const [showMood, setShowMood] = useState(false);
-  const [saveLabel, setSaveLabel] = useState(CTA_LABELS[0]);
-  const [mirrorHint, setMirrorHint] = useState(MIRROR_HINTS[0]);
+  const [saveLabel, setSaveLabel] = useState("🛸 Send to Your Future Self");
   const [entries, setEntries] = useState([]);
+  const [greeting, setGreeting] = useState('');
+  const [streakMsg, setStreakMsg] = useState('');
+  const [glowSummary, setGlowSummary] = useState('');
 
   useEffect(() => {
-    if (open) {
-      const random = Math.floor(Math.random() * PROMPTS.length);
-      setPrompt(PROMPTS[random]);
-      fetchEntries();  // load reflections every time it opens
+    if (open && user?.uid) {
+      fetchEntries();
+      generateGreeting();
     }
-  }, [open]);
+  }, [open, user]);
 
-  useEffect(() => {
-    const moodTrigger = note.trim().length > 5;
-    if (moodTrigger && !showMood) setShowMood(true);
-  }, [note]);
-
-  useEffect(() => {
-    const labelInterval = setInterval(() => {
-      const next = Math.floor(Math.random() * CTA_LABELS.length);
-      setSaveLabel(CTA_LABELS[next]);
-    }, 6000);
-    const mirrorInterval = setInterval(() => {
-      const next = Math.floor(Math.random() * MIRROR_HINTS.length);
-      setMirrorHint(MIRROR_HINTS[next]);
-    }, 8000);
-    return () => {
-      clearInterval(labelInterval);
-      clearInterval(mirrorInterval);
-    };
-  }, []);
+  const generateGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      setGreeting("🌞 What energy are you carrying into today?");
+    } else if (hour >= 18 || hour < 5) {
+      setGreeting("🌙 What do you want to release before sleep?");
+    } else {
+      setGreeting("🌀 What's stirring in your mind?");
+    }
+  };
 
   const fetchEntries = async () => {
-    if (!user?.uid) return;
     const ref = collection(db, 'users', user.uid, 'journal');
-    const q = query(ref, orderBy('timestamp', 'desc'));
-    const snapshot = await getDocs(q);
-    const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const qSnap = await getDocs(query(ref, orderBy('timestamp', 'desc')));
+    const docs = qSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     setEntries(docs);
+
+    const weekAgo = Timestamp.fromDate(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000));
+    const weeklyCount = docs.filter(e => e.timestamp?.seconds >= weekAgo.seconds).length;
+
+    if (weeklyCount > 0) {
+      setStreakMsg(`🪷 This is your ${weeklyCount} reflection${weeklyCount > 1 ? 's' : ''} this week. Keep going!`);
+      if (weeklyCount % 3 === 0) {
+        setStreakMsg(prev => prev + " 🌸 Petal earned!");
+      }
+    }
+
+    if (docs.length >= 3) {
+      const allNotes = docs.map(d => d.note).join(' ');
+      if (allNotes.includes("peace") || allNotes.includes("growth")) {
+        setGlowSummary("🔮 You often write about growth, inner peace, and clarity — your why is unfolding.");
+      } else {
+        setGlowSummary("🔮 Your reflections are forming a path. Stay curious. Your ikigai is near.");
+      }
+    }
   };
 
   const handleSubmit = async () => {
@@ -117,13 +79,10 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         timestamp: serverTimestamp(),
       });
 
-      const snapshot = await getDocs(ref);
-      const count = snapshot.size;
       setNote('');
       setMood(null);
-      setShowMood(false);
       await fetchEntries();
-      if (onNewEntry) onNewEntry(count);
+      if (onNewEntry) onNewEntry(entries.length + 1);
     } catch (e) {
       console.error('Error saving journal:', e);
     } finally {
@@ -138,7 +97,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         (open ? 'translate-x-0' : 'translate-x-full')
       }
     >
-      <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
+      <h2 className="text-xl text-indigo-300 font-semibold mb-2">{greeting}</h2>
 
       <textarea
         className="w-full p-3 rounded bg-white text-black resize-none h-40"
@@ -151,7 +110,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         <VoiceMic onTranscript={(text) => setNote((prev) => prev + ' ' + text)} />
       </div>
 
-      {showMood && (
+      {note.trim().length > 5 && (
         <>
           <p className="text-sm mt-4 text-gray-400">Would you like to tag a mood?</p>
           <div className="mb-4 mt-2 flex justify-center gap-4 text-3xl">
@@ -168,9 +127,9 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         </>
       )}
 
-      <div className="text-xs text-center text-gray-400 italic mt-2">
-        {mirrorHint}
-      </div>
+      {streakMsg && (
+        <div className="text-sm text-green-400 mt-2 text-center">{streakMsg}</div>
+      )}
 
       <div className="mt-4">
         <button
@@ -183,7 +142,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
       </div>
 
       {entries.length > 0 && (
-        <div className="mt-8 space-y-4 max-h-[30vh] overflow-y-auto border-t border-zinc-700 pt-4">
+        <div className="mt-6 space-y-4 max-h-[28vh] overflow-y-auto border-t border-zinc-700 pt-4">
           {entries.map((entry) => {
             const date = entry.timestamp?.toDate?.();
             const formattedDate = date ? format(date, "MMM d, yyyy • h:mm a") : "⏳ Timeless";
@@ -196,6 +155,12 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {glowSummary && (
+        <div className="mt-6 p-4 bg-indigo-800 text-indigo-100 rounded-lg animate-pulse text-sm shadow-md">
+          {glowSummary}
         </div>
       )}
     </div>
