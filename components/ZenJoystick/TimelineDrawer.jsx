@@ -1,10 +1,7 @@
-// components/ZenJoystick/TimelineDrawer.jsx
-
 import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { format } from "date-fns";
-import styles from '@/styles/timelineDrawer.module.css';
 
 export default function TimelineDrawer({ open, onClose, uid }) {
   const [entries, setEntries] = useState([]);
@@ -59,7 +56,7 @@ export default function TimelineDrawer({ open, onClose, uid }) {
               >
                 <div className="text-sm text-zinc-400">{formattedDate}</div>
                 <div className="mt-2 text-base leading-relaxed whitespace-pre-line">
-                  {entry.text || "A quiet moment. Words unspoken, but felt."}
+                  {entry.message || entry.text || "A quiet moment. Words unspoken, but felt."}
                 </div>
               </div>
             );
