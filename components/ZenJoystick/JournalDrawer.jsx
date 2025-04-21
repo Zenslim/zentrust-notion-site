@@ -6,12 +6,12 @@ import {
   getDocs,
   orderBy,
   query,
-  serverTimestamp
+  serverTimestamp,
 } from 'firebase/firestore';
 import { useUserData } from '@/hooks/useUserData';
 import VoiceMic from '@/components/VoiceMic';
-import ReflectionGlow from '@/components/ReflectionGlow';
 import { format } from 'date-fns';
+import ReflectionGlow from '@/components/ReflectionGlow';
 
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
@@ -85,12 +85,10 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
 
   useEffect(() => {
     const labelInterval = setInterval(() => {
-      const next = Math.floor(Math.random() * CTA_LABELS.length);
-      setSaveLabel(CTA_LABELS[next]);
+      setSaveLabel(CTA_LABELS[Math.floor(Math.random() * CTA_LABELS.length)]);
     }, 6000);
     const mirrorInterval = setInterval(() => {
-      const next = Math.floor(Math.random() * MIRROR_HINTS.length);
-      setMirrorHint(MIRROR_HINTS[next]);
+      setMirrorHint(MIRROR_HINTS[Math.floor(Math.random() * MIRROR_HINTS.length)]);
     }, 8000);
     return () => {
       clearInterval(labelInterval);
@@ -117,13 +115,11 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         mood: mood || '🤔 undefined',
         timestamp: serverTimestamp(),
       });
-      const snapshot = await getDocs(ref);
-      const count = snapshot.size;
       setNote('');
       setMood(null);
       setShowMood(false);
       await fetchEntries();
-      if (onNewEntry) onNewEntry(count);
+      if (onNewEntry) onNewEntry(entries.length + 1);
     } catch (e) {
       console.error('Error saving journal:', e);
     } finally {
@@ -180,36 +176,24 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         </button>
       </div>
 
-      {entries.length > 0 && (
-  <>
-    {/* Glow appears immediately */}
-    <div className="mt-8">
-      <ReflectionGlow entries={entries} />
-    </div>
+      <div className="mt-6">
+        <ReflectionGlow entries={entries} />
+      </div>
 
-    {/* Reflections below in scrollable area */}
-    <div className="mt-4 space-y-4 overflow-y-auto max-h-[30vh] border-t border-zinc-700 pt-4">
-      {entries.map((entry) => {
-        const date = entry.timestamp?.toDate?.();
-        const formattedDate = date ? format(date, "MMM d, yyyy • h:mm a") : "⏳ Timeless";
-        return (
-          <div key={entry.id} className="bg-zinc-800 p-3 rounded-lg shadow">
-            <div className="text-sm text-gray-400 mb-1">🗓 {formattedDate}</div>
-            <div className="whitespace-pre-line text-blue-100 text-base">
-              {entry.note}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  </>
-)}
-    </div>
-    <div className="mt-6">
-      <ReflectionGlow entries={entries} />
-    </div>
-  </div>
-)}
+      {entries.length > 0 && (
+        <div className="mt-4 space-y-4 overflow-y-auto max-h-[30vh] border-t border-zinc-700 pt-4">
+          {entries.map((entry) => {
+            const date = entry.timestamp?.toDate?.();
+            const formattedDate = date ? format(date, 'MMM d, yyyy • h:mm a') : '⏳ Timeless';
+            return (
+              <div key={entry.id} className="bg-zinc-800 p-3 rounded-lg shadow">
+                <div className="text-sm text-gray-400 mb-1">🗓 {formattedDate}</div>
+                <div className="whitespace-pre-line text-blue-100 text-base">{entry.note}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
