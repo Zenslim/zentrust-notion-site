@@ -10,14 +10,19 @@ export default function TimelineDrawer({ open, onClose, uid }) {
     if (!uid || !open) return;
 
     const fetchTimeline = async () => {
-      const entriesRef = collection(db, "bp", uid, "entries");
-      const q = query(entriesRef, orderBy("timestamp", "desc"), limit(7));
-      const snapshot = await getDocs(q);
-      const docs = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setEntries(docs);
+      try {
+        const entriesRef = collection(db, "bp", uid, "entries");
+        const q = query(entriesRef, orderBy("timestamp", "desc"), limit(7));
+        const snapshot = await getDocs(q);
+        const docs = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log("🔥 Entries fetched:", docs.length); // ✅ Debug
+        setEntries(docs);
+      } catch (e) {
+        console.error("❌ Timeline fetch failed:", e);
+      }
     };
 
     fetchTimeline();
