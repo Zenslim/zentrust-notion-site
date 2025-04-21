@@ -184,7 +184,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
 
       {entries.length > 0 && (
         <>
-          <div className="mt-8 space-y-4 max-h-[30vh] overflow-y-auto border-t border-zinc-700 pt-4">
+          <div className="mt-8 space-y-4 overflow-y-auto h-[calc(100vh-320px)] border-t border-zinc-700 pt-4 pr-2 scrollbar-thin">
             {entries.map((entry) => {
               const date = entry.timestamp?.toDate?.();
               const formattedDate = date ? format(date, "MMM d, yyyy • h:mm a") : "⏳ Timeless";
