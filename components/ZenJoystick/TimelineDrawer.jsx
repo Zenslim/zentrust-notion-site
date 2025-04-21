@@ -25,7 +25,7 @@ export default function TimelineDrawer({ open, onClose, uid }) {
 
   return (
     <div
-      className={\`fixed top-0 right-0 w-full sm:w-96 h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white shadow-xl transform transition-transform duration-300 z-50 \${open ? "translate-x-0" : "translate-x-full"}\`}
+      className={`fixed top-0 right-0 w-full sm:w-96 h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white shadow-xl transform transition-transform duration-300 z-50 ${open ? "translate-x-0" : "translate-x-full"}`}
     >
       <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-700">
         <h2 className="text-xl font-semibold tracking-wide">📖 Your Living Timeline</h2>
