@@ -10,8 +10,8 @@ import {
 } from 'firebase/firestore';
 import { useUserData } from '@/hooks/useUserData';
 import VoiceMic from '@/components/VoiceMic';
-import { format } from 'date-fns';
 import ReflectionGlow from '@/components/ReflectionGlow';
+import { format } from 'date-fns';
 
 const PROMPTS = [
   "🌿 What’s alive in you right now?",
@@ -168,9 +168,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
         </>
       )}
 
-      <div className="text-xs text-center text-gray-400 italic mt-2">
-        {mirrorHint}
-      </div>
+      <div className="text-xs text-center text-gray-400 italic mt-2">{mirrorHint}</div>
 
       <div className="mt-4">
         <button
@@ -183,11 +181,11 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
       </div>
 
       {entries.length > 0 && (
-        <>
-          <div className="mt-8 space-y-4 overflow-y-auto h-[calc(100vh-320px)] border-t border-zinc-700 pt-4 pr-2 scrollbar-thin">
+        <div className="mt-8 border-t border-zinc-700 pt-4 flex flex-col gap-4 overflow-hidden">
+          <div className="overflow-y-auto max-h-[30vh] pr-2 space-y-4">
             {entries.map((entry) => {
               const date = entry.timestamp?.toDate?.();
-              const formattedDate = date ? format(date, "MMM d, yyyy • h:mm a") : "⏳ Timeless";
+              const formattedDate = date ? format(date, 'MMM d, yyyy • h:mm a') : '⏳ Timeless';
               return (
                 <div key={entry.id} className="bg-zinc-800 p-3 rounded-lg shadow">
                   <div className="text-sm text-gray-400 mb-1">🗓 {formattedDate}</div>
@@ -199,8 +197,10 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
             })}
           </div>
 
-          <ReflectionGlow entries={entries} />
-        </>
+          <div className="mt-2">
+            <ReflectionGlow entries={entries} />
+          </div>
+        </div>
       )}
     </div>
   );
