@@ -1,3 +1,4 @@
+import TextareaAutosize from 'react-textarea-autosize';
 import { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import {
@@ -136,12 +137,14 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
     >
       <h2 className="text-2xl font-semibold mb-4">{prompt}</h2>
 
-      <textarea
-        className="w-full p-3 rounded bg-white text-black resize-none h-40"
-        placeholder="Type or speak freely…"
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-      />
+      <TextareaAutosize
+  minRows={2}
+  maxRows={6}
+  className="w-full p-3 rounded bg-white text-black resize-none focus:outline-none text-base"
+  placeholder="Type or speak freely…"
+  value={note}
+  onChange={(e) => setNote(e.target.value)}
+/>
 
       <div className="flex justify-end my-2">
         <VoiceMic onTranscript={(text) => setNote((prev) => prev + ' ' + text)} />
