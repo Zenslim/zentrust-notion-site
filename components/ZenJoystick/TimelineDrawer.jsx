@@ -7,7 +7,7 @@ export default function TimelineDrawer({ open, onClose, uid }) {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    if (!uid) return;
+    if (!uid || !open) return;
 
     const fetchTimeline = async () => {
       const entriesRef = collection(db, "bp", uid, "entries");
@@ -21,7 +21,7 @@ export default function TimelineDrawer({ open, onClose, uid }) {
     };
 
     fetchTimeline();
-  }, [uid]);
+  }, [uid, open]);
 
   return (
     <div
