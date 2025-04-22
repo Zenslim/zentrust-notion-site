@@ -4,12 +4,13 @@ import {
   googleProvider,
   facebookProvider,
   twitterProvider,
-  appleProvider,
   signInWithPopup,
   sendSignInLinkToEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
   signInAnonymously,
+  setPersistence,
+  browserLocalPersistence,
 } from "../firebase"
 import { useRouter } from "next/router"
 
@@ -24,7 +25,9 @@ export default function Signin() {
       let storedEmail = localStorage.getItem("emailForSignIn")
       if (!storedEmail) storedEmail = prompt("Please provide your email")
       if (storedEmail) {
-        signInWithEmailLink(auth, storedEmail, window.location.href)
+        setPersistence(auth, browserLocalPersistence).then(() => {
+          return signInWithEmailLink(auth, storedEmail, window.location.href)
+        })
           .then(() => {
             localStorage.removeItem("emailForSignIn")
             setMessage("Signed in with magic link! Redirecting...")
@@ -40,7 +43,9 @@ export default function Signin() {
       url: window.location.href,
       handleCodeInApp: true,
     }
+
     try {
+      await setPersistence(auth, browserLocalPersistence)
       await sendSignInLinkToEmail(auth, email, actionCodeSettings)
       localStorage.setItem("emailForSignIn", email)
       setMessage("Check your inbox for a magic link ✨")
@@ -103,14 +108,6 @@ export default function Signin() {
               >
                 <span>🔑</span>
                 <span>Continue with Google</span>
-              </button>
-
-              <button
-                onClick={() => handleProviderLogin(appleProvider)}
-                className="w-full py-3 px-4 rounded-xl bg-white border text-gray-800 hover:bg-gray-100 flex items-center justify-center space-x-3 shadow"
-              >
-                <span>🍎</span>
-                <span>Continue with Apple</span>
               </button>
 
               <button
