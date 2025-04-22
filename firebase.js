@@ -1,3 +1,4 @@
+import { browserLocalPersistence, setPersistence } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -26,7 +27,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-setPersistence(auth, browserLocalPersistence); // 👈 Add this line to persist across tabs and reloads
+setPersistence(auth, browserLocalPersistence).catch(console.error);
 
 const db = getFirestore(app);
 
