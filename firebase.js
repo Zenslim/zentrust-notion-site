@@ -11,10 +11,11 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   FacebookAuthProvider,
-  TwitterAuthProvider,
+  TwitterAuthProvider
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
+// 🔐 Firebase config
 const firebaseConfig = {
   apiKey: 'AIzaSyCCGnzc1tNWcwinLnqQXKZCbcvqNn2vFfU',
   authDomain: 'zentrust-e647d.firebaseapp.com',
@@ -26,10 +27,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-setPersistence(auth, browserLocalPersistence).catch(console.error);
+
+// ✅ Make login persist across PWA sessions
+setPersistence(auth, browserLocalPersistence);
 
 const db = getFirestore(app);
 
+// 🔑 Providers
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
