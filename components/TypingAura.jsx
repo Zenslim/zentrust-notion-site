@@ -1,5 +1,5 @@
 // components/TypingAura.jsx
-import styles from './TypingAura.module.css';
+import styles from '@/styles/TypingAura.module.css';
 
 export default function TypingAura({ children }) {
   return (
