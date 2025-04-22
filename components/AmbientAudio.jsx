@@ -5,17 +5,17 @@ export default function AmbientAudio({ enabled }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-  const tryPlay = () => {
-    if (enabled && loaded && audioRef.current) {
-      audioRef.current.volume = 0.2;
-      audioRef.current.loop = true;
-      audioRef.current.play().catch(() => {});
-    }
-  };
+    const tryPlay = () => {
+      if (enabled && loaded && audioRef.current) {
+        audioRef.current.volume = 0.3;
+        audioRef.current.loop = true;
+        audioRef.current.play().catch(() => {});
+      }
+    };
 
-  document.addEventListener('click', tryPlay, { once: true });
-  return () => document.removeEventListener('click', tryPlay);
-}, [enabled, loaded]);
+    document.addEventListener('click', tryPlay, { once: true });
+    return () => document.removeEventListener('click', tryPlay);
+  }, [enabled, loaded]);
 
   return (
     <audio
