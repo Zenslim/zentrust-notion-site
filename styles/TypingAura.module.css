@@ -1,0 +1,11 @@
+/* components/TypingAura.module.css */
+@keyframes auraPulse {
+  0% { box-shadow: 0 0 4px rgba(147, 197, 253, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(147, 197, 253, 0.8); }
+  100% { box-shadow: 0 0 4px rgba(147, 197, 253, 0.3); }
+}
+
+.typingAura {
+  animation: auraPulse 2.5s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
