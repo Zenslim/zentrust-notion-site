@@ -199,6 +199,7 @@ export default function JournalDrawer({ open, onClose, onNewEntry, uid }) {
               </div>
             );
           })}
+          <GlowSummaryBox entries={entries} />
         </div>
       )}
     </div>
