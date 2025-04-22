@@ -1,3 +1,4 @@
+import AmbientAudio from '@/components/AmbientAudio';
 import { useState } from 'react';
 import CelestialBackground from '@/components/CelestialBackground';
 import PlanetMessenger from '@/components/PlanetMessenger';
@@ -61,6 +62,7 @@ export default function Zenboard({ uid }) {
       <TimelineButton visible={entryCount >= 3} onClick={() => setIsTimelineOpen(true)} />
 
       <GlowAudio triggerWhisper={triggerWhisper} />
+      <AmbientAudio enabled />
     </div>
   );
 }
