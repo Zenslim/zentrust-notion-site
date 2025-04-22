@@ -1,17 +1,13 @@
 @keyframes auraPulse {
-  0% {
-    box-shadow: 0 0 4px rgba(147, 197, 253, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 12px rgba(147, 197, 253, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 4px rgba(147, 197, 253, 0.4);
-  }
+  0% { box-shadow: 0 0 8px rgba(99, 179, 237, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(147, 197, 253, 0.8); }
+  100% { box-shadow: 0 0 8px rgba(99, 179, 237, 0.3); }
 }
 
 .typingAura {
   animation: auraPulse 2.5s ease-in-out infinite;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: 0.25rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  transition: box-shadow 0.3s ease;
 }
