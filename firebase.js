@@ -29,7 +29,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 // ✅ Make login persist across PWA sessions
-setPersistence(auth, browserLocalPersistence);
+setPersistence(auth, browserLocalPersistence).catch((error) => {
+  console.error('❌ Firebase persistence failed:', error);
+});
 
 const db = getFirestore(app);
 
